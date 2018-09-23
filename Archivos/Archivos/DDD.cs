@@ -47,20 +47,46 @@ namespace Archivos
                 //int i = 0;
                 try
                 {
-                    while (reader.PeekChar() >= -1)
+                    while (reader.PeekChar() != -1)
                     {
                         string nomb = "";
-                        long dir_ent;//, dir_atr, dir_dat, dir_sig;
+                        long dir;//, dir_atr, dir_dat, dir_sig;
                         char[] nombre = reader.ReadChars(30);
                         foreach (char n in nombre)
                         {
                             nomb += n;
                         }
                         
-                        dir_ent = reader.ReadInt64();
+                        dir = reader.ReadInt64();
                         Console.WriteLine(reader.PeekChar().GetType());
-                        list_insercion.Add(leeEntidad(reader, nomb, dir_ent));
-                        list_entidades.Add(list_insercion.Last());
+                        if (reader.PeekChar() == 65533)
+                        {
+                            list_insercion.Add(leeEntidad(reader, nomb, dir));
+                            list_entidades.Add(list_insercion.Last());
+                            obj.Add(list_insercion.Last());
+                        }
+                        else
+                        {
+                            Atributo n = leeAtributo(reader, nomb, Convert.ToInt64(dir));
+                            foreach (Entidad ent in list_insercion)
+                            {
+                                obj.Add(n);
+                                if(ent.Dir_Entidad != -1)
+                                {
+                                    if (ent.Dir_Atributos == n.DirAtributo)
+                                        ent.Atrib.Add(n);
+                                    else
+                                        foreach (Atributo a in ent.Atrib)
+                                        {
+                                            if (a.DirSig == n.DirAtributo)
+                                            {
+                                                ent.Atrib.Add(n);
+                                                break;
+                                            }
+                                        }
+                                }
+                            }
+                        }
                     }
                 }
                 catch { }
@@ -76,21 +102,39 @@ namespace Archivos
                 //int i = 0;
                 try
                 {
-                    while (reader.PeekChar() >= -1)
+                    while (reader.PeekChar() != -1)
                     {
-                        string nomb = "", dir_ent, dir_atr, dir_dat, dir_sig;
+                        string nomb = "", dir, dir_atr, dir_dat, dir_sig;
                         char[] nombre = reader.ReadChars(30);
                         foreach (char c in nombre)
                         {
                             nomb += c;
                         }
-                        dir_ent = reader.ReadInt64().ToString();
-                        dir_atr = reader.ReadInt64().ToString();
-                        dir_dat = reader.ReadInt64().ToString();
-                        dir_sig = reader.ReadInt64().ToString();
-                        Entidad n = new Entidad(nombre, Convert.ToInt64(dir_ent), Convert.ToInt64( dir_atr), Convert.ToInt64(dir_dat), Convert.ToInt64(dir_sig));
-                        Console.WriteLine("{0}, {1}, {2}, {3}, {4}", nomb, dir_ent, dir_atr, dir_dat, dir_sig);
-                        e.Add(n);
+                        dir = reader.ReadInt64().ToString();
+                        Console.WriteLine(reader.PeekChar());
+                        Console.WriteLine(reader.PeekChar().GetType());
+                        
+                        if(reader.PeekChar() == 65533)
+                        {
+                            dir_atr = reader.ReadInt64().ToString();
+
+                            dir_dat = reader.ReadInt64().ToString();
+                            //Console.WriteLine(reader.PeekChar().GetType());
+                            dir_sig = reader.ReadInt64().ToString();
+                            Entidad n = new Entidad(nombre, Convert.ToInt64(dir), Convert.ToInt64(dir_atr), Convert.ToInt64(dir_dat), Convert.ToInt64(dir_sig));
+                            Console.WriteLine("{0}, {1}, {2}, {3}, {4}", nomb, dir, dir_atr, dir_dat, dir_sig);
+                            e.Add(n);
+                        }
+                        else
+                        {
+                            
+                            Atributo n = leeAtributo(reader, nomb, Convert.ToInt64(dir));
+                            foreach(Entidad ent in e)
+                            {
+                                if (ent.Dir_Atributos == n.DirAtributo)
+                                    ent.Atrib.Add(n);
+                            }
+                        }
                     }
                 }
                 catch { }
@@ -140,6 +184,7 @@ namespace Archivos
                 Console.WriteLine(nomb + entidad.Dir_Entidad.ToString() + entidad.Dir_sig.ToString());
                 list_insercion.Add(entidad);
                 list_entidades.Add(entidad);
+                obj.Add(entidad);
                 //Ordena las entidades
                 list_entidades = list_entidades.OrderBy(o => o.sNombre).ToList();
 
@@ -148,7 +193,8 @@ namespace Archivos
 
                 guardaEntidad(entidad); //Se guarda la nueva entidad.
                 ordena();
-                sobreescribEntidades();
+                //sobreescribEntidades();
+                sobreescribe_archivo();
             }
             catch (Exception e)
             {
@@ -165,9 +211,11 @@ namespace Archivos
                     list_insercion[i].Dir_sig = -1;
                     list_entidades[j].Dir_sig = ds;
                     list_entidades.Remove(list_insercion[i]);
+                    sobreescribEntidad(list_insercion[i]);
+                    sobreescribEntidad(list_entidades[j]);
                 }
             }
-            sobreescribEntidades();
+            //sobreescribEntidades();
             
         }
 
@@ -212,6 +260,19 @@ namespace Archivos
                 }
             }
         }
+
+        public void sobreescribEntidad(Entidad e)
+        {
+            using (BinaryWriter writer = new BinaryWriter(File.Open(Fullname, FileMode.Open)))
+            {
+                writer.Seek(Convert.ToInt32(e.Dir_Entidad),  SeekOrigin.Begin);
+                writer.Write(e.NombreEntidad);
+                writer.Write(e.Dir_Entidad);
+                writer.Write(e.Dir_Atributos);
+                writer.Write(e.Dir_Datos);
+                writer.Write(e.Dir_sig);
+            }
+        }
         #endregion
 
         #region atributos
@@ -220,7 +281,11 @@ namespace Archivos
             Atributo nuevo = new Atributo(nombre, Longitud, tipo, longi, 0, -1, -1);
             list_entidades[iEnt].nuevoA(nuevo);
             guardaAtrib(nuevo);
-            sobreescribAtributos(list_entidades[iEnt]);
+            obj.Add(nuevo);
+            ordena();
+            sobreescribe_archivo();
+            //sobreescribEntidades();
+            //sobreescribAtributos(list_entidades[iEnt]);
             return list_entidades[iEnt];
         }
         public void guardaAtrib(Atributo a)
@@ -236,7 +301,7 @@ namespace Archivos
                 writer.Write(a.DirSig);
             }
         }
-        public void sobreescribAtributos(Entidad e)
+        /*public void sobreescribAtributos(Entidad e)
         {
             using (BinaryWriter writer = new BinaryWriter(File.Open(Fullname, FileMode.Open)))
             {
@@ -252,14 +317,70 @@ namespace Archivos
                     writer.Write(a.DirSig);
                 }
             }
-        }
-        public void leeAtributo()
+        }*/
+        public void sobreescribAtributo(Atributo a)
         {
-
+            using (BinaryWriter writer = new BinaryWriter(File.Open(Fullname, FileMode.Open)))
+            {
+                writer.Seek(Convert.ToInt32(a.DirAtributo), SeekOrigin.Begin);
+                writer.Write(a.Nombre);
+                writer.Write(a.DirAtributo);
+                writer.Write(a.Tipo);
+                writer.Write(a.Longitud);
+                writer.Write(a.TipoIndice);
+                writer.Write(a.DirIndice);
+                writer.Write(a.DirSig);
+            }
         }
 
+        public void sobreescribe_archivo()
+        {
+            foreach(Object o in obj)
+            {
+                if (o.GetType() == typeof(Entidad))
+                    sobreescribEntidad((Entidad)o);
+                else
+                    sobreescribAtributo((Atributo)o);
+            }
+        }
+        public Atributo leeAtributo(BinaryReader reader, string name, long dir)
+        {
+            char tipo;
+            long dirIn, dirsig;
+            int l, tipoI;
+
+            tipo = reader.ReadChar();
+            l = reader.ReadInt32();
+            tipoI = reader.ReadInt32();
+            dirIn = reader.ReadInt64();
+            dirsig = reader.ReadInt64();
+
+            Console.WriteLine("{0}, {1}, {2}, {3}, {4}, {5}, {6}", name, dir, tipo, l, tipoI, dirIn, dirsig);
+            return new Atributo(name, dir, tipo, l, tipoI, dirIn, dirsig);
+        }
+        public void eliminaAtributo(string e, int i)
+        {
+            Entidad ent = list_insercion.Find(x => x.sNombre.Contains(e));
+            long ds = ent.Atrib[i].DirSig;
+            if(i > 0)// no es el primer elemento
+            {
+                ent.Atrib[i - 1].DirSig = ds;
+                ent.Atrib[i].DirSig = -1;
+            }
+            else // si es el primer elemento
+            {
+                if (ent.Atrib.Count == 1) //y solo tiene ese elemento
+                    ent.Dir_Atributos = -1;
+                else
+                    ent.Dir_Atributos = ent.Atrib[i + 1].DirAtributo;
+                ent.Atrib[i].DirSig = -1;
+
+            }
+            ent.Atrib.RemoveAt(i);
+            sobreescribe_archivo();
+        }
         #endregion
 
-        
+
     }
 }

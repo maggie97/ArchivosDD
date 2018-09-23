@@ -55,6 +55,7 @@ namespace Archivos
                     ddd.lee();
                     //Actualiza DataGrid
                     actualizaEnt();
+                    dgAtributos.Rows.Clear();
                 }
             }
         }
@@ -87,8 +88,12 @@ namespace Archivos
         {
             Entidad eMod = ddd.Entidades[e.RowIndex];//list_entidades[e.RowIndex];
             string newName = Microsoft.VisualBasic.Interaction.InputBox("Modifica la entidad : " + eMod.sNombre + " " + e.RowIndex, "Modificar", eMod.sNombre, -1, -1);
-            eMod.NombreEntidad = (newName == "" ) ? eMod.NombreEntidad : newName.ToCharArray(0, 30);
-            ddd.sobreescribEntidades();
+            if(newName != "")
+            {
+                while (newName.Length < 30) newName += ' ';
+                eMod.NombreEntidad = newName.ToCharArray(0, 30);
+            }
+            ddd.sobreescribEntidad(eMod);
             actualizaEnt();
         }
 
@@ -110,18 +115,91 @@ namespace Archivos
             NuevoAtributo nuevo = new NuevoAtributo(ddd.EntidadesOrden);
             if (nuevo.ShowDialog() == DialogResult.OK)
             {
-                
+                Entidad ent = ddd.nuevoAtributo(nuevo.Nombre_atributo, nuevo.Tipo, nuevo.Long, nuevo.Index);
                 //Cabecera = atrb.nuevoAtrib(vEnt.List_entidades[nuevo.Index].Atrib.Last(), Convert.ToInt64(txtLong.Text));
-                AtribEnt(ddd.nuevoAtributo(nuevo.Nombre_atributo, nuevo.Tipo, nuevo.Long, nuevo.Index));
+                AtribEnt(ent);
+                lblEntidad.Text = ent.sNombre;
+                actualizaEnt();
             }
         }
         private void AtribEnt(Entidad e)
         {
             dgAtributos.Rows.Clear();
-
             foreach (Atributo a in e.Atrib)//ddd.Entidades)
             {
                 dgAtributos.Rows.Add(a.sNombre, a.DirAtributo, a.Tipo, a.Longitud, a.TipoIndice, a.DirIndice, a.DirSig);
+            }
+        }
+        private void AtribEnt(string ent)
+        {
+            dgAtributos.Rows.Clear();
+            Entidad e = ddd.Entidades.Find(o => o.sNombre.Contains(ent));
+            foreach (Atributo a in e.Atrib)
+            {
+                dgAtributos.Rows.Add(a.sNombre, a.DirAtributo, a.Tipo, a.Longitud, a.TipoIndice, a.DirIndice, a.DirSig);
+            }
+        }
+        private void Principal_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Principal_Paint(object sender, PaintEventArgs e)
+        {
+            Longitud();
+        }
+        private void Longitud()
+        {
+            if (ddd != null)
+                txtLong.Text = ddd.Longitud.ToString();
+        }
+
+        private void dgEntidades_CellMouseDown(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            Entidad ent = ddd.Entidades[e.RowIndex];
+            AtribEnt(ent);
+            lblEntidad.Text = ent.sNombre;
+        }
+
+        /// <summary>
+        /// Modifica atributo al darle doble click en el datagrid de atributos
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void dgAtributos_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            Entidad ent = null;
+            for (int i = 0; i < ddd.Entidades.Count && (ent = ddd.Entidades[i]).sNombre != lblEntidad.Text; i++) ;
+            //Entidad eMod = ent;//list_entidades[e.RowIndex];
+            if (ent != null)
+            {
+                Atributo aMod = ent.Atrib[e.RowIndex]; 
+                string newName = Microsoft.VisualBasic.Interaction.InputBox("Modifica la entidad : " + aMod.sNombre + " " + e.RowIndex, "Modificar", aMod.sNombre, -1, -1);
+                if (newName != "")
+                {
+                    while (newName.Length < 30) newName += ' ';
+                    aMod.Nombre = newName.ToCharArray(0, 30);
+                    //ent.NombreEntidad = 
+                }
+                ddd.sobreescribAtributo(aMod);
+                AtribEnt(ent);
+                //ddd.sobreescribEntidad(ent);
+                //actualizaEnt();
+
+            }
+        }
+
+        private void eliminaAtributoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            foreach (DataGridViewRow r in dgAtributos.SelectedRows)
+            {
+                if (!r.IsNewRow)
+                {
+                    int i = dgAtributos.Rows.IndexOf(r);
+                    ddd.eliminaAtributo(lblEntidad.Text, i);
+                    actualizaEnt();
+                    AtribEnt(lblEntidad.Text);
+                }
             }
         }
     }

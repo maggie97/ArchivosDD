@@ -24,6 +24,7 @@ namespace Archivos
                     this.nombre[i] = ' ';
             }
             this.dirAtributo = dirAtributo;
+            this.tipo = (char)tipo;
             switch (tipo)
             {
                 case 0:
@@ -36,7 +37,6 @@ namespace Archivos
                     this.tipo = 'F';
                     break;
             }
-            //this.tipo = tipo;
             this.longitud = longitud;
             this.tipoIndice = tipoIndice;
             this.dirIndice = dirIndice;
