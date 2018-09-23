@@ -52,7 +52,8 @@ namespace Archivos
 
         public void nuevoA(Atributo a)
         {
-            dir_Atributos = (atrib.Count > 0) ? a.DirAtributo : dir_Atributos;
+            dir_Atributos = (atrib.Count == 0) ? a.DirAtributo : dir_Atributos;
+            atrib.Last().DirSig = a.DirAtributo;
             atrib.Add(a);
         }
 

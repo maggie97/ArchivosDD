@@ -170,8 +170,9 @@
             // nuevoAtributoToolStripMenuItem
             // 
             this.nuevoAtributoToolStripMenuItem.Name = "nuevoAtributoToolStripMenuItem";
-            this.nuevoAtributoToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
+            this.nuevoAtributoToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.nuevoAtributoToolStripMenuItem.Text = "Nuevo Atributo";
+            this.nuevoAtributoToolStripMenuItem.Click += new System.EventHandler(this.nuevoAtributoToolStripMenuItem_Click);
             // 
             // eliminaAtributoToolStripMenuItem
             // 

@@ -24,7 +24,7 @@ namespace Archivos
 
         public string Nombre_atributo { get => txt_Nombre.Text; }
         public int Long { get => Convert.ToInt32(txt_Long.Text); }
-        public string Tipo { get => cmbTipo.SelectedItem.ToString(); }
+        public int Tipo { get => cmbTipo.SelectedIndex; }
         public string Entidad { get => cmb_Entidad.SelectedItem.ToString(); }
         public int Index { get => cmb_Entidad.SelectedIndex; }
     }

@@ -33,7 +33,7 @@ namespace Archivos
             List<Object> obj = new List<object>();
             List<Entidad> entidades = new List<Entidad>();
             List<Entidad> entidadesOrden = new List<Entidad>();
-            long Cab = -1;
+            //long Cab = -1;
 
             lee();
         }
@@ -44,13 +44,13 @@ namespace Archivos
             {
                 cab = reader.ReadInt64();
                 Console.WriteLine(cab);
-                int i = 0;
+                //int i = 0;
                 try
                 {
                     while (reader.PeekChar() >= -1)
                     {
                         string nomb = "";
-                        long dir_ent, dir_atr, dir_dat, dir_sig;
+                        long dir_ent;//, dir_atr, dir_dat, dir_sig;
                         char[] nombre = reader.ReadChars(30);
                         foreach (char n in nombre)
                         {
@@ -73,7 +73,7 @@ namespace Archivos
             {
                 long cab = reader.ReadInt64();
                 Console.WriteLine(cab);
-                int i = 0;
+                //int i = 0;
                 try
                 {
                     while (reader.PeekChar() >= -1)
@@ -97,6 +97,26 @@ namespace Archivos
             }
             return e;
         }
+        public void sobreescribeCab()
+        {
+            using (BinaryWriter writer = new BinaryWriter(File.Open(Fullname, FileMode.Open)))
+            {
+                writer.Seek(0, SeekOrigin.Begin);
+                writer.Write(cab);
+            }
+        }
+
+        public void leeCab()
+        {
+            using (BinaryReader reader = new BinaryReader(File.Open(Fullname, FileMode.Open)))
+            {
+                cab = reader.ReadInt64();
+                Console.WriteLine("Cabecera: " + cab);
+            }/**/
+        }
+
+        #region entidades
+
         public Entidad leeEntidad(BinaryReader reader, string name, long dir)
         {
             long dir_atr, dir_dat, dir_sig;
@@ -149,21 +169,18 @@ namespace Archivos
             }
             sobreescribEntidades();
             
-            
-            /*long ds = list_entidades[i].Dir_sig;
-            //if (list_entidades.Count > i) list_entidades[i + 1].Dir_sig = ds;
-            for (int j = 0; j < list_insercion.Count; j++)
-            {
-                if (list_insercion[j].Dir_sig == list_entidades[i].Dir_Entidad)
-                {
-                    list_insercion[j].Dir_sig = ds;
-                    int ind = list_insercion.IndexOf(list_entidades[i]);
-                    list_insercion[i].Dir_sig = -1;
-                }
-            }
+        }
 
-            list_entidades.RemoveAt(i);
-            Console.WriteLine(i);*/
+        public void guardaEntidad(Entidad e)
+        {
+            using (BinaryWriter writer = new BinaryWriter(File.Open(base.Fullname, FileMode.Append)))
+            {
+                writer.Write(e.NombreEntidad);
+                writer.Write(e.Dir_Entidad);
+                writer.Write(e.Dir_Atributos);
+                writer.Write(e.Dir_Datos);
+                writer.Write(e.Dir_sig);
+            }
         }
         public void ordena()
         {
@@ -195,39 +212,54 @@ namespace Archivos
                 }
             }
         }
+        #endregion
 
-        public void sobreescribeCab()
+        #region atributos
+        public Entidad nuevoAtributo(string nombre, int tipo, int longi, int iEnt)
+        {
+            Atributo nuevo = new Atributo(nombre, Longitud, tipo, longi, 0, -1, -1);
+            list_entidades[iEnt].nuevoA(nuevo);
+            guardaAtrib(nuevo);
+            sobreescribAtributos(list_entidades[iEnt]);
+            return list_entidades[iEnt];
+        }
+        public void guardaAtrib(Atributo a)
+        {
+            using (BinaryWriter writer = new BinaryWriter(File.Open(Fullname, FileMode.Append)))
+            {
+                writer.Write(a.Nombre);
+                writer.Write(a.DirAtributo);
+                writer.Write(a.Tipo);
+                writer.Write(a.Longitud);
+                writer.Write(a.TipoIndice);
+                writer.Write(a.DirIndice);
+                writer.Write(a.DirSig);
+            }
+        }
+        public void sobreescribAtributos(Entidad e)
         {
             using (BinaryWriter writer = new BinaryWriter(File.Open(Fullname, FileMode.Open)))
             {
-                writer.Seek(0, SeekOrigin.Begin);
-                writer.Write(cab);
+                writer.Seek(Convert.ToInt32(e.Atrib.First().DirAtributo), SeekOrigin.Begin);
+                foreach (Atributo a in e.Atrib)
+                {
+                    writer.Write(a.Nombre);
+                    writer.Write(a.DirAtributo);
+                    writer.Write(a.Tipo);
+                    writer.Write(a.Longitud);
+                    writer.Write(a.TipoIndice);
+                    writer.Write(a.DirIndice);
+                    writer.Write(a.DirSig);
+                }
             }
-        }
-
-        public void leeCab()
-        {
-            using (BinaryReader reader = new BinaryReader(File.Open(Fullname, FileMode.Open)))
-            {
-                cab = reader.ReadInt64();
-                Console.WriteLine("Cabecera: " + cab);
-            }/**/
         }
         public void leeAtributo()
         {
 
         }
 
-        public void guardaEntidad( Entidad e)
-        {
-            using (BinaryWriter writer = new BinaryWriter(File.Open(base.Fullname, FileMode.Append)))
-            {
-                writer.Write(e.NombreEntidad);
-                writer.Write(e.Dir_Entidad);
-                writer.Write(e.Dir_Atributos);
-                writer.Write(e.Dir_Datos);
-                writer.Write(e.Dir_sig);
-            }
-        }
+        #endregion
+
+        
     }
 }

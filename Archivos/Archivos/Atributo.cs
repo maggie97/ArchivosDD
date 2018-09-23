@@ -10,11 +10,11 @@ namespace Archivos
     {
         char[] nombre = new char[30];
         long dirAtributo = -1, dirSig = -1, dirIndice = -1;
-        string tipo;
+        char tipo;
         int longitud;
         int tipoIndice = 0;
 
-        public Atributo(string nombre, long dirAtributo, string tipo, int longitud, int tipoIndice, long dirIndice, long dirs)
+        public Atributo(string nombre, long dirAtributo, int tipo, int longitud, int tipoIndice, long dirIndice, long dirs)
         {
             for (int i = 0; i < 30; i++)
             {
@@ -24,7 +24,19 @@ namespace Archivos
                     this.nombre[i] = ' ';
             }
             this.dirAtributo = dirAtributo;
-            this.tipo = tipo;
+            switch (tipo)
+            {
+                case 0:
+                    this.tipo = 'C';
+                    break;
+                case 1:
+                    this.tipo = 'E';
+                    break;
+                case 2:
+                    this.tipo = 'F';
+                    break;
+            }
+            //this.tipo = tipo;
             this.longitud = longitud;
             this.tipoIndice = tipoIndice;
             this.dirIndice = dirIndice;
@@ -33,7 +45,7 @@ namespace Archivos
 
         public char[] Nombre { get => nombre; set => nombre = value; }
         public long DirAtributo { get => dirAtributo; set => dirAtributo = value; }
-        public string Tipo { get => tipo; set => tipo = value; }
+        public char Tipo { get => tipo; set => tipo = value; }
         public int Longitud { get => longitud; set => longitud = value; }
         public int TipoIndice { get => tipoIndice; set => tipoIndice = value; }
 

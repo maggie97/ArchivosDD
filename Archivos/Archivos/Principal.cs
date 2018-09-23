@@ -13,7 +13,7 @@ namespace Archivos
     public partial class Principal : Form
     {
         DDD ddd;
-        List<Archivo> datos;
+        //List<Archivo> datos;
         public Principal()
         {
             InitializeComponent();
@@ -89,6 +89,7 @@ namespace Archivos
             string newName = Microsoft.VisualBasic.Interaction.InputBox("Modifica la entidad : " + eMod.sNombre + " " + e.RowIndex, "Modificar", eMod.sNombre, -1, -1);
             eMod.NombreEntidad = (newName == "" ) ? eMod.NombreEntidad : newName.ToCharArray(0, 30);
             ddd.sobreescribEntidades();
+            actualizaEnt();
         }
 
         private void eliminaEntidadToolStripMenuItem_Click(object sender, EventArgs e)
@@ -99,9 +100,28 @@ namespace Archivos
                 {
                     int i = dgEntidades.Rows.IndexOf(r);
                     ddd.eliminaEntidad(i);
-                    
-                    Console.WriteLine(i);
+                    actualizaEnt();
                 }
+            }
+        }
+
+        private void nuevoAtributoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            NuevoAtributo nuevo = new NuevoAtributo(ddd.EntidadesOrden);
+            if (nuevo.ShowDialog() == DialogResult.OK)
+            {
+                
+                //Cabecera = atrb.nuevoAtrib(vEnt.List_entidades[nuevo.Index].Atrib.Last(), Convert.ToInt64(txtLong.Text));
+                AtribEnt(ddd.nuevoAtributo(nuevo.Nombre_atributo, nuevo.Tipo, nuevo.Long, nuevo.Index));
+            }
+        }
+        private void AtribEnt(Entidad e)
+        {
+            dgAtributos.Rows.Clear();
+
+            foreach (Atributo a in e.Atrib)//ddd.Entidades)
+            {
+                dgAtributos.Rows.Add(a.sNombre, a.DirAtributo, a.Tipo, a.Longitud, a.TipoIndice, a.DirIndice, a.DirSig);
             }
         }
     }
