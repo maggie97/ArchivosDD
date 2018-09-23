@@ -56,14 +56,11 @@ namespace Archivos
                         {
                             nomb += n;
                         }
-                        Console.WriteLine(reader.PeekChar().GetType());
+                        
                         dir_ent = reader.ReadInt64();
+                        Console.WriteLine(reader.PeekChar().GetType());
                         list_insercion.Add(leeEntidad(reader, nomb, dir_ent));
                         list_entidades.Add(list_insercion.Last());
-                        /*dir_atr = reader.ReadInt64().ToString();
-                        dir_dat = reader.ReadInt64().ToString();
-                        dir_sig = reader.ReadInt64().ToString();/*
-                        Console.WriteLine("{0}, {1}, {2}, {3}, {4}", nomb, dir_ent, dir_atr, dir_dat, dir_sig);*/
                     }
                 }
                 catch { }
@@ -91,7 +88,7 @@ namespace Archivos
                         dir_atr = reader.ReadInt64().ToString();
                         dir_dat = reader.ReadInt64().ToString();
                         dir_sig = reader.ReadInt64().ToString();
-                        Entidad n = new Entidad(nombre, Convert.ToInt64(dir_ent), Convert.ToInt64( dir_atr), Convert.ToInt64(dir_dat));
+                        Entidad n = new Entidad(nombre, Convert.ToInt64(dir_ent), Convert.ToInt64( dir_atr), Convert.ToInt64(dir_dat), Convert.ToInt64(dir_sig));
                         Console.WriteLine("{0}, {1}, {2}, {3}, {4}", nomb, dir_ent, dir_atr, dir_dat, dir_sig);
                         e.Add(n);
                     }
@@ -138,7 +135,36 @@ namespace Archivos
                 Console.WriteLine("causo una excepcion: ", e);
             }
         }
+        public void eliminaEntidad(int i)
+        {
+            long ds = list_insercion[i].Dir_sig;
+            for(int j = 0; j< list_entidades.Count; j++)
+            {
+                if(list_entidades[j].Dir_sig == list_insercion[i].Dir_Entidad)
+                {
+                    list_insercion[i].Dir_sig = -1;
+                    list_entidades[j].Dir_sig = ds;
+                    list_entidades.Remove(list_insercion[i]);
+                }
+            }
+            sobreescribEntidades();
+            
+            
+            /*long ds = list_entidades[i].Dir_sig;
+            //if (list_entidades.Count > i) list_entidades[i + 1].Dir_sig = ds;
+            for (int j = 0; j < list_insercion.Count; j++)
+            {
+                if (list_insercion[j].Dir_sig == list_entidades[i].Dir_Entidad)
+                {
+                    list_insercion[j].Dir_sig = ds;
+                    int ind = list_insercion.IndexOf(list_entidades[i]);
+                    list_insercion[i].Dir_sig = -1;
+                }
+            }
 
+            list_entidades.RemoveAt(i);
+            Console.WriteLine(i);*/
+        }
         public void ordena()
         {
             list_entidades = list_entidades.OrderBy(o => o.sNombre).ToList();
@@ -159,7 +185,7 @@ namespace Archivos
             using (BinaryWriter writer = new BinaryWriter(File.Open(Fullname, FileMode.Open)))
             {
                 writer.Seek(8, SeekOrigin.Begin);
-                foreach (Entidad e in list_entidades)
+                foreach (Entidad e in list_insercion)
                 {
                     writer.Write(e.NombreEntidad);
                     writer.Write(e.Dir_Entidad);

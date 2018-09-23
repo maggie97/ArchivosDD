@@ -57,6 +57,7 @@
             this.dgReg = new System.Windows.Forms.DataGridView();
             this.Dir_Dato = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel5 = new System.Windows.Forms.Panel();
+            this.label1 = new System.Windows.Forms.Label();
             this.pAtributos = new System.Windows.Forms.Panel();
             this.dgAtributos = new System.Windows.Forms.DataGridView();
             this.Nom_Atrib = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -68,7 +69,6 @@
             this.Dir_SigAtrib = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.pTituloAtrib = new System.Windows.Forms.Panel();
             this.lblAtrib = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
             this.pEntidades.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgEntidades)).BeginInit();
@@ -110,7 +110,7 @@
             this.nuevoToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.nuevoToolStripMenuItem.Name = "nuevoToolStripMenuItem";
             this.nuevoToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.N)));
-            this.nuevoToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.nuevoToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.nuevoToolStripMenuItem.Text = "&Nuevo";
             this.nuevoToolStripMenuItem.Click += new System.EventHandler(this.nuevoToolStripMenuItem_Click);
             // 
@@ -120,19 +120,19 @@
             this.abrirToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.abrirToolStripMenuItem.Name = "abrirToolStripMenuItem";
             this.abrirToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.O)));
-            this.abrirToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.abrirToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.abrirToolStripMenuItem.Text = "&Abrir";
             this.abrirToolStripMenuItem.Click += new System.EventHandler(this.abrirToolStripMenuItem_Click);
             // 
             // toolStripSeparator
             // 
             this.toolStripSeparator.Name = "toolStripSeparator";
-            this.toolStripSeparator.Size = new System.Drawing.Size(177, 6);
+            this.toolStripSeparator.Size = new System.Drawing.Size(149, 6);
             // 
             // salirToolStripMenuItem
             // 
             this.salirToolStripMenuItem.Name = "salirToolStripMenuItem";
-            this.salirToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.salirToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.salirToolStripMenuItem.Text = "&Salir";
             // 
             // entidadesToolStripMenuItem
@@ -156,6 +156,7 @@
             this.eliminaEntidadToolStripMenuItem.Name = "eliminaEntidadToolStripMenuItem";
             this.eliminaEntidadToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.eliminaEntidadToolStripMenuItem.Text = "Elimina Entidad";
+            this.eliminaEntidadToolStripMenuItem.Click += new System.EventHandler(this.eliminaEntidadToolStripMenuItem_Click);
             // 
             // atributosToolStripMenuItem
             // 
@@ -322,6 +323,17 @@
             this.panel5.Size = new System.Drawing.Size(286, 33);
             this.panel5.TabIndex = 1;
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(6, 3);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(139, 31);
+            this.label1.TabIndex = 1;
+            this.label1.Text = "Registros";
+            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // pAtributos
             // 
             this.pAtributos.Controls.Add(this.dgAtributos);
@@ -415,24 +427,13 @@
             // lblAtrib
             // 
             this.lblAtrib.AutoSize = true;
-            this.lblAtrib.Font = new System.Drawing.Font("Modern No. 20", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblAtrib.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblAtrib.Location = new System.Drawing.Point(45, 3);
             this.lblAtrib.Name = "lblAtrib";
-            this.lblAtrib.Size = new System.Drawing.Size(125, 29);
+            this.lblAtrib.Size = new System.Drawing.Size(131, 31);
             this.lblAtrib.TabIndex = 0;
             this.lblAtrib.Text = "Atributos";
             this.lblAtrib.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Modern No. 20", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(6, 3);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(122, 29);
-            this.label1.TabIndex = 1;
-            this.label1.Text = "Registros";
-            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // Principal
             // 

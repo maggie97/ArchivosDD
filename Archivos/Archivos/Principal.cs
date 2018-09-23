@@ -87,8 +87,23 @@ namespace Archivos
         {
             Entidad eMod = ddd.Entidades[e.RowIndex];//list_entidades[e.RowIndex];
             string newName = Microsoft.VisualBasic.Interaction.InputBox("Modifica la entidad : " + eMod.sNombre + " " + e.RowIndex, "Modificar", eMod.sNombre, -1, -1);
-            eMod.NombreEntidad = (newName == "" ) ? newName.ToCharArray(0, 30) : eMod.NombreEntidad ;
+            eMod.NombreEntidad = (newName == "" ) ? eMod.NombreEntidad : newName.ToCharArray(0, 30);
             ddd.sobreescribEntidades();
+        }
+
+        private void eliminaEntidadToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            foreach (DataGridViewRow r in dgEntidades.SelectedRows)
+            {
+                if (!r.IsNewRow)
+                {
+                    int i = dgEntidades.Rows.IndexOf(r);
+                    ddd.eliminaEntidad(i);
+                    
+                    Console.WriteLine(i);
+                }
+            }
         }
     }
 }
+
