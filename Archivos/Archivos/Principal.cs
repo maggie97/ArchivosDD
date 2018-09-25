@@ -30,7 +30,7 @@ namespace Archivos
             abrirDD();
             
         }
-
+        `
         private void nuevoDD()
         {
             using (nuevoArchivo n = new nuevoArchivo())
@@ -96,7 +96,7 @@ namespace Archivos
         /// </summary>
         private void dgEntidades_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            Entidad eMod = ddd.EntidadesInser[e.RowIndex];//list_entidades[e.RowIndex];
+            Entidad eMod = ddd.EntidadesOrden[e.RowIndex];//list_entidades[e.RowIndex];
             string newName = Microsoft.VisualBasic.Interaction.InputBox("Modifica la entidad : " + eMod.sNombre + " " + e.RowIndex, "Modificar", eMod.sNombre, -1, -1);
             if(newName != "")
             {
@@ -124,7 +124,7 @@ namespace Archivos
 
         private void nuevoAtributoToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            NuevoAtributo nuevo = new NuevoAtributo(ddd.EntidadesInser);
+            NuevoAtributo nuevo = new NuevoAtributo(ddd.EntidadesOrden);
             if (nuevo.ShowDialog() == DialogResult.OK)
             {
                 Entidad ent = ddd.nuevoAtributo(nuevo.Nombre_atributo, nuevo.Tipo, nuevo.Long, nuevo.Index);
@@ -144,7 +144,7 @@ namespace Archivos
         private void AtribEnt(string ent)
         {
             dgAtributos.Rows.Clear();
-            Entidad e = ddd.EntidadesInser.Find(o => o.sNombre.Contains(ent));
+            Entidad e = ddd.EntidadesOrden.Find(o => o.sNombre.Contains(ent));
             foreach (Atributo a in e.Atrib)
             {
                 dgAtributos.Rows.Add(a.sNombre, a.DirAtributo, a.Tipo, a.Longitud, a.TipoIndice, a.DirIndice, a.DirSig);
@@ -167,7 +167,7 @@ namespace Archivos
 
         private void dgEntidades_CellMouseDown(object sender, DataGridViewCellMouseEventArgs e)
         {
-            Entidad ent = ddd.EntidadesInser[e.RowIndex];
+            Entidad ent = ddd.EntidadesOrden[e.RowIndex];
             AtribEnt(ent);
             lblEntidad.Text = ent.sNombre;
         }
@@ -180,7 +180,7 @@ namespace Archivos
         private void dgAtributos_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             Entidad ent = null;
-            for (int i = 0; i < ddd.EntidadesInser.Count && (ent = ddd.EntidadesInser[i]).sNombre != lblEntidad.Text; i++) ;
+            for (int i = 0; i < ddd.EntidadesOrden.Count && (ent = ddd.EntidadesOrden[i]).sNombre != lblEntidad.Text; i++) ;
             //Entidad eMod = ent;//list_entidades[e.RowIndex];
             if (ent != null)
             {

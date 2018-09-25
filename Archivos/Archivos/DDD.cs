@@ -215,6 +215,10 @@ namespace Archivos
                     //sobreescribEntidad(list_entidades[j]);
                     sobreescribe_archivo();
                 }
+                else
+                {
+                    list_entidades.Remove(ent);
+                }
             }/*
                 for(int j = 0; j< list_entidades.Count; j++)
                 { 

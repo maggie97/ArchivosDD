@@ -53,11 +53,6 @@
             this.txtCab = new System.Windows.Forms.ToolStripTextBox();
             this.longitudArchivoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.txtLong = new System.Windows.Forms.ToolStripTextBox();
-            this.pDatos = new System.Windows.Forms.Panel();
-            this.dgReg = new System.Windows.Forms.DataGridView();
-            this.Dir_Dato = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.panel5 = new System.Windows.Forms.Panel();
-            this.label1 = new System.Windows.Forms.Label();
             this.pAtributos = new System.Windows.Forms.Panel();
             this.dgAtributos = new System.Windows.Forms.DataGridView();
             this.Nom_Atrib = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -68,15 +63,15 @@
             this.Dir_Indice = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Dir_SigAtrib = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.pTituloAtrib = new System.Windows.Forms.Panel();
-            this.lbltextoA = new System.Windows.Forms.Label();
             this.lblEntidad = new System.Windows.Forms.Label();
+            this.lbltextoA = new System.Windows.Forms.Label();
+            this.registroToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.insertaRegistroToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.eliminaRegistroToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.pEntidades.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgEntidades)).BeginInit();
             this.menuStrip2.SuspendLayout();
-            this.pDatos.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgReg)).BeginInit();
-            this.panel5.SuspendLayout();
             this.pAtributos.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgAtributos)).BeginInit();
             this.pTituloAtrib.SuspendLayout();
@@ -87,10 +82,11 @@
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.archivoToolStripMenuItem,
             this.entidadesToolStripMenuItem,
-            this.atributosToolStripMenuItem});
+            this.atributosToolStripMenuItem,
+            this.registroToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(800, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(786, 24);
             this.menuStrip1.TabIndex = 1;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -111,7 +107,7 @@
             this.nuevoToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.nuevoToolStripMenuItem.Name = "nuevoToolStripMenuItem";
             this.nuevoToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.N)));
-            this.nuevoToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.nuevoToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.nuevoToolStripMenuItem.Text = "&Nuevo";
             this.nuevoToolStripMenuItem.Click += new System.EventHandler(this.nuevoToolStripMenuItem_Click);
             // 
@@ -121,19 +117,19 @@
             this.abrirToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.abrirToolStripMenuItem.Name = "abrirToolStripMenuItem";
             this.abrirToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.O)));
-            this.abrirToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.abrirToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.abrirToolStripMenuItem.Text = "&Abrir";
             this.abrirToolStripMenuItem.Click += new System.EventHandler(this.abrirToolStripMenuItem_Click);
             // 
             // toolStripSeparator
             // 
             this.toolStripSeparator.Name = "toolStripSeparator";
-            this.toolStripSeparator.Size = new System.Drawing.Size(177, 6);
+            this.toolStripSeparator.Size = new System.Drawing.Size(149, 6);
             // 
             // salirToolStripMenuItem
             // 
             this.salirToolStripMenuItem.Name = "salirToolStripMenuItem";
-            this.salirToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.salirToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.salirToolStripMenuItem.Text = "&Salir";
             // 
             // entidadesToolStripMenuItem
@@ -148,14 +144,14 @@
             // nuevaEntidadToolStripMenuItem
             // 
             this.nuevaEntidadToolStripMenuItem.Name = "nuevaEntidadToolStripMenuItem";
-            this.nuevaEntidadToolStripMenuItem.Size = new System.Drawing.Size(156, 22);
+            this.nuevaEntidadToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.nuevaEntidadToolStripMenuItem.Text = "Nueva Entidad";
             this.nuevaEntidadToolStripMenuItem.Click += new System.EventHandler(this.nuevaEntidadToolStripMenuItem_Click);
             // 
             // eliminaEntidadToolStripMenuItem
             // 
             this.eliminaEntidadToolStripMenuItem.Name = "eliminaEntidadToolStripMenuItem";
-            this.eliminaEntidadToolStripMenuItem.Size = new System.Drawing.Size(156, 22);
+            this.eliminaEntidadToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.eliminaEntidadToolStripMenuItem.Text = "Elimina Entidad";
             this.eliminaEntidadToolStripMenuItem.Click += new System.EventHandler(this.eliminaEntidadToolStripMenuItem_Click);
             // 
@@ -171,14 +167,14 @@
             // nuevoAtributoToolStripMenuItem
             // 
             this.nuevoAtributoToolStripMenuItem.Name = "nuevoAtributoToolStripMenuItem";
-            this.nuevoAtributoToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.nuevoAtributoToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
             this.nuevoAtributoToolStripMenuItem.Text = "Nuevo Atributo";
             this.nuevoAtributoToolStripMenuItem.Click += new System.EventHandler(this.nuevoAtributoToolStripMenuItem_Click);
             // 
             // eliminaAtributoToolStripMenuItem
             // 
             this.eliminaAtributoToolStripMenuItem.Name = "eliminaAtributoToolStripMenuItem";
-            this.eliminaAtributoToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.eliminaAtributoToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
             this.eliminaAtributoToolStripMenuItem.Text = "Elimina Atributo";
             this.eliminaAtributoToolStripMenuItem.Click += new System.EventHandler(this.eliminaAtributoToolStripMenuItem_Click);
             // 
@@ -189,7 +185,7 @@
             this.pEntidades.Dock = System.Windows.Forms.DockStyle.Top;
             this.pEntidades.Location = new System.Drawing.Point(0, 24);
             this.pEntidades.Name = "pEntidades";
-            this.pEntidades.Size = new System.Drawing.Size(800, 208);
+            this.pEntidades.Size = new System.Drawing.Size(786, 208);
             this.pEntidades.TabIndex = 2;
             // 
             // dgEntidades
@@ -208,7 +204,7 @@
             this.dgEntidades.Location = new System.Drawing.Point(0, 27);
             this.dgEntidades.Name = "dgEntidades";
             this.dgEntidades.ReadOnly = true;
-            this.dgEntidades.Size = new System.Drawing.Size(800, 181);
+            this.dgEntidades.Size = new System.Drawing.Size(786, 181);
             this.dgEntidades.TabIndex = 4;
             this.dgEntidades.CellContentDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgEntidades_CellContentDoubleClick);
             this.dgEntidades.CellMouseDown += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgEntidades_CellMouseDown);
@@ -258,7 +254,7 @@
             this.txtLong});
             this.menuStrip2.Location = new System.Drawing.Point(0, 0);
             this.menuStrip2.Name = "menuStrip2";
-            this.menuStrip2.Size = new System.Drawing.Size(800, 27);
+            this.menuStrip2.Size = new System.Drawing.Size(786, 27);
             this.menuStrip2.TabIndex = 2;
             this.menuStrip2.Text = "menuStrip2";
             // 
@@ -288,65 +284,14 @@
             this.txtLong.Name = "txtLong";
             this.txtLong.Size = new System.Drawing.Size(100, 23);
             // 
-            // pDatos
-            // 
-            this.pDatos.Controls.Add(this.dgReg);
-            this.pDatos.Controls.Add(this.panel5);
-            this.pDatos.Dock = System.Windows.Forms.DockStyle.Right;
-            this.pDatos.Location = new System.Drawing.Point(514, 232);
-            this.pDatos.Name = "pDatos";
-            this.pDatos.Size = new System.Drawing.Size(286, 218);
-            this.pDatos.TabIndex = 3;
-            // 
-            // dgReg
-            // 
-            this.dgReg.AllowUserToAddRows = false;
-            this.dgReg.AllowUserToDeleteRows = false;
-            this.dgReg.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgReg.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.Dir_Dato});
-            this.dgReg.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgReg.Location = new System.Drawing.Point(0, 33);
-            this.dgReg.Name = "dgReg";
-            this.dgReg.ReadOnly = true;
-            this.dgReg.Size = new System.Drawing.Size(286, 185);
-            this.dgReg.TabIndex = 4;
-            // 
-            // Dir_Dato
-            // 
-            this.Dir_Dato.HeaderText = "Direccion";
-            this.Dir_Dato.Name = "Dir_Dato";
-            this.Dir_Dato.ReadOnly = true;
-            // 
-            // panel5
-            // 
-            this.panel5.BackColor = System.Drawing.SystemColors.Control;
-            this.panel5.Controls.Add(this.label1);
-            this.panel5.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel5.Location = new System.Drawing.Point(0, 0);
-            this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(286, 33);
-            this.panel5.TabIndex = 1;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(6, 3);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(139, 31);
-            this.label1.TabIndex = 1;
-            this.label1.Text = "Registros";
-            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
             // pAtributos
             // 
             this.pAtributos.Controls.Add(this.dgAtributos);
             this.pAtributos.Controls.Add(this.pTituloAtrib);
-            this.pAtributos.Dock = System.Windows.Forms.DockStyle.Top;
+            this.pAtributos.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pAtributos.Location = new System.Drawing.Point(0, 232);
             this.pAtributos.Name = "pAtributos";
-            this.pAtributos.Size = new System.Drawing.Size(514, 426);
+            this.pAtributos.Size = new System.Drawing.Size(786, 329);
             this.pAtributos.TabIndex = 4;
             // 
             // dgAtributos
@@ -369,7 +314,7 @@
             this.dgAtributos.Location = new System.Drawing.Point(0, 33);
             this.dgAtributos.Name = "dgAtributos";
             this.dgAtributos.ReadOnly = true;
-            this.dgAtributos.Size = new System.Drawing.Size(514, 393);
+            this.dgAtributos.Size = new System.Drawing.Size(786, 296);
             this.dgAtributos.TabIndex = 4;
             this.dgAtributos.CellContentDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgAtributos_CellContentDoubleClick);
             this.dgAtributos.Paint += new System.Windows.Forms.PaintEventHandler(this.Principal_Paint);
@@ -429,19 +374,8 @@
             this.pTituloAtrib.Dock = System.Windows.Forms.DockStyle.Top;
             this.pTituloAtrib.Location = new System.Drawing.Point(0, 0);
             this.pTituloAtrib.Name = "pTituloAtrib";
-            this.pTituloAtrib.Size = new System.Drawing.Size(514, 33);
+            this.pTituloAtrib.Size = new System.Drawing.Size(786, 33);
             this.pTituloAtrib.TabIndex = 1;
-            // 
-            // lbltextoA
-            // 
-            this.lbltextoA.AutoSize = true;
-            this.lbltextoA.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbltextoA.Location = new System.Drawing.Point(58, 2);
-            this.lbltextoA.Name = "lbltextoA";
-            this.lbltextoA.Size = new System.Drawing.Size(179, 31);
-            this.lbltextoA.TabIndex = 0;
-            this.lbltextoA.Text = "Atributos de ";
-            this.lbltextoA.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // lblEntidad
             // 
@@ -454,13 +388,44 @@
             this.lblEntidad.Text = "<Entidad>";
             this.lblEntidad.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
+            // lbltextoA
+            // 
+            this.lbltextoA.AutoSize = true;
+            this.lbltextoA.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbltextoA.Location = new System.Drawing.Point(58, 2);
+            this.lbltextoA.Name = "lbltextoA";
+            this.lbltextoA.Size = new System.Drawing.Size(179, 31);
+            this.lbltextoA.TabIndex = 0;
+            this.lbltextoA.Text = "Atributos de ";
+            this.lbltextoA.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // registroToolStripMenuItem
+            // 
+            this.registroToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.insertaRegistroToolStripMenuItem,
+            this.eliminaRegistroToolStripMenuItem});
+            this.registroToolStripMenuItem.Name = "registroToolStripMenuItem";
+            this.registroToolStripMenuItem.Size = new System.Drawing.Size(62, 20);
+            this.registroToolStripMenuItem.Text = "Registro";
+            // 
+            // insertaRegistroToolStripMenuItem
+            // 
+            this.insertaRegistroToolStripMenuItem.Name = "insertaRegistroToolStripMenuItem";
+            this.insertaRegistroToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.insertaRegistroToolStripMenuItem.Text = "Inserta Registro";
+            // 
+            // eliminaRegistroToolStripMenuItem
+            // 
+            this.eliminaRegistroToolStripMenuItem.Name = "eliminaRegistroToolStripMenuItem";
+            this.eliminaRegistroToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.eliminaRegistroToolStripMenuItem.Text = "Elimina Registro";
+            // 
             // Principal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(786, 561);
             this.Controls.Add(this.pAtributos);
-            this.Controls.Add(this.pDatos);
             this.Controls.Add(this.pEntidades);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
@@ -475,10 +440,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgEntidades)).EndInit();
             this.menuStrip2.ResumeLayout(false);
             this.menuStrip2.PerformLayout();
-            this.pDatos.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dgReg)).EndInit();
-            this.panel5.ResumeLayout(false);
-            this.panel5.PerformLayout();
             this.pAtributos.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgAtributos)).EndInit();
             this.pTituloAtrib.ResumeLayout(false);
@@ -502,9 +463,6 @@
         private System.Windows.Forms.ToolStripTextBox txtCab;
         private System.Windows.Forms.ToolStripMenuItem longitudArchivoToolStripMenuItem;
         private System.Windows.Forms.ToolStripTextBox txtLong;
-        private System.Windows.Forms.Panel pDatos;
-        private System.Windows.Forms.DataGridView dgReg;
-        private System.Windows.Forms.Panel panel5;
         private System.Windows.Forms.Panel pAtributos;
         private System.Windows.Forms.DataGridView dgAtributos;
         private System.Windows.Forms.Panel pTituloAtrib;
@@ -516,7 +474,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Tipo_Indice;
         private System.Windows.Forms.DataGridViewTextBoxColumn Dir_Indice;
         private System.Windows.Forms.DataGridViewTextBoxColumn Dir_SigAtrib;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Dir_Dato;
         private System.Windows.Forms.DataGridViewTextBoxColumn Nom_Entidad;
         private System.Windows.Forms.DataGridViewTextBoxColumn Dir_Ent;
         private System.Windows.Forms.DataGridViewTextBoxColumn Dir_Atributos;
@@ -528,9 +485,11 @@
         private System.Windows.Forms.ToolStripMenuItem atributosToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem nuevoAtributoToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem eliminaAtributoToolStripMenuItem;
-        private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label lbltextoA;
         private System.Windows.Forms.Label lblEntidad;
+        private System.Windows.Forms.ToolStripMenuItem registroToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem insertaRegistroToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem eliminaRegistroToolStripMenuItem;
     }
 }
 
