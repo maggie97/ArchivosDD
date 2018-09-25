@@ -244,7 +244,7 @@ namespace Archivos
                 list_insercion[i] = e;
             }
         }
-
+        
         public void sobreescribEntidades()
         {
             using (BinaryWriter writer = new BinaryWriter(File.Open(Fullname, FileMode.Open)))
@@ -274,7 +274,16 @@ namespace Archivos
             }
         }
         #endregion
-
+        public void sobreescribe_archivo()
+        {
+            foreach (Object o in obj)
+            {
+                if (o.GetType() == typeof(Entidad))
+                    sobreescribEntidad((Entidad)o);
+                else
+                    sobreescribAtributo((Atributo)o);
+            }
+        }
         #region atributos
         public Entidad nuevoAtributo(string nombre, int tipo, int longi, int iEnt)
         {
@@ -333,16 +342,7 @@ namespace Archivos
             }
         }
 
-        public void sobreescribe_archivo()
-        {
-            foreach(Object o in obj)
-            {
-                if (o.GetType() == typeof(Entidad))
-                    sobreescribEntidad((Entidad)o);
-                else
-                    sobreescribAtributo((Atributo)o);
-            }
-        }
+        
         public Atributo leeAtributo(BinaryReader reader, string name, long dir)
         {
             char tipo;

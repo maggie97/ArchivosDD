@@ -28,6 +28,7 @@ namespace Archivos
         private void abrirToolStripMenuItem_Click(object sender, EventArgs e)
         {
             abrirDD();
+            txtCab.Text = ddd.Cab.ToString();
         }
 
         private void nuevoDD()
@@ -63,6 +64,7 @@ namespace Archivos
         private void nuevaEntidadToolStripMenuItem_Click(object sender, EventArgs e)
         {
             nuevaEnt();
+            txtCab.Text = ddd.Cab.ToString();
         }
 
         private void nuevaEnt()
@@ -93,7 +95,9 @@ namespace Archivos
                 while (newName.Length < 30) newName += ' ';
                 eMod.NombreEntidad = newName.ToCharArray(0, 30);
             }
+            ddd.ordena();
             ddd.sobreescribEntidad(eMod);
+            ddd.sobreescribe_archivo();
             actualizaEnt();
         }
 
@@ -173,16 +177,25 @@ namespace Archivos
             //Entidad eMod = ent;//list_entidades[e.RowIndex];
             if (ent != null)
             {
-                Atributo aMod = ent.Atrib[e.RowIndex]; 
-                string newName = Microsoft.VisualBasic.Interaction.InputBox("Modifica la entidad : " + aMod.sNombre + " " + e.RowIndex, "Modificar", aMod.sNombre, -1, -1);
-                if (newName != "")
+                Atributo aMod = ent.Atrib[e.RowIndex];
+                //string newName = Microsoft.VisualBasic.Interaction.InputBox("Modifica la entidad : " + aMod.sNombre + " " + e.RowIndex, "Modificar", aMod.sNombre, -1, -1);
+                using (NuevoAtributo n = new NuevoAtributo(aMod.sNombre, aMod.Tipo, aMod.Longitud, aMod.TipoIndice, ent))
                 {
-                    while (newName.Length < 30) newName += ' ';
-                    aMod.Nombre = newName.ToCharArray(0, 30);
-                    //ent.NombreEntidad = 
+                    if(n.ShowDialog() == DialogResult.OK)
+                    {
+                        string nomb = n.Nombre_atributo;
+                        if (nomb != "")
+                        {
+                            while (nomb.Length < 30) nomb += ' ';
+                            aMod.Nombre = nomb.ToCharArray(0, 30);
+                        }
+                        aMod.Tipo = (n.Tipo==0)? 'C': 'E';
+                        aMod.Longitud = n.Long;
+                        ddd.sobreescribAtributo(aMod);
+                        AtribEnt(ent);
+                    }
                 }
-                ddd.sobreescribAtributo(aMod);
-                AtribEnt(ent);
+                    
                 //ddd.sobreescribEntidad(ent);
                 //actualizaEnt();
 

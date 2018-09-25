@@ -39,12 +39,14 @@
             this.label4 = new System.Windows.Forms.Label();
             this.cmb_Entidad = new System.Windows.Forms.ComboBox();
             this.cmbTipo = new System.Windows.Forms.ComboBox();
+            this.cmbIndice = new System.Windows.Forms.ComboBox();
+            this.label5 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // btn_Cancelar
             // 
             this.btn_Cancelar.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btn_Cancelar.Location = new System.Drawing.Point(89, 191);
+            this.btn_Cancelar.Location = new System.Drawing.Point(89, 209);
             this.btn_Cancelar.Name = "btn_Cancelar";
             this.btn_Cancelar.Size = new System.Drawing.Size(75, 23);
             this.btn_Cancelar.TabIndex = 0;
@@ -54,7 +56,7 @@
             // btn_Aceptar
             // 
             this.btn_Aceptar.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.btn_Aceptar.Location = new System.Drawing.Point(293, 191);
+            this.btn_Aceptar.Location = new System.Drawing.Point(293, 209);
             this.btn_Aceptar.Name = "btn_Aceptar";
             this.btn_Aceptar.Size = new System.Drawing.Size(75, 23);
             this.btn_Aceptar.TabIndex = 2;
@@ -109,7 +111,7 @@
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(46, 140);
+            this.label4.Location = new System.Drawing.Point(46, 154);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(54, 16);
             this.label4.TabIndex = 9;
@@ -118,7 +120,7 @@
             // cmb_Entidad
             // 
             this.cmb_Entidad.FormattingEnabled = true;
-            this.cmb_Entidad.Location = new System.Drawing.Point(158, 140);
+            this.cmb_Entidad.Location = new System.Drawing.Point(158, 154);
             this.cmb_Entidad.Name = "cmb_Entidad";
             this.cmb_Entidad.Size = new System.Drawing.Size(257, 21);
             this.cmb_Entidad.TabIndex = 10;
@@ -127,13 +129,36 @@
             // 
             this.cmbTipo.FormattingEnabled = true;
             this.cmbTipo.Items.AddRange(new object[] {
-            "Char",
-            "Int",
-            "Float"});
+            "C",
+            "E"});
             this.cmbTipo.Location = new System.Drawing.Point(158, 71);
             this.cmbTipo.Name = "cmbTipo";
             this.cmbTipo.Size = new System.Drawing.Size(257, 21);
             this.cmbTipo.TabIndex = 11;
+            // 
+            // cmbIndice
+            // 
+            this.cmbIndice.FormattingEnabled = true;
+            this.cmbIndice.Items.AddRange(new object[] {
+            "0",
+            "1",
+            "2",
+            "3"});
+            this.cmbIndice.Location = new System.Drawing.Point(158, 127);
+            this.cmbIndice.Name = "cmbIndice";
+            this.cmbIndice.Size = new System.Drawing.Size(257, 21);
+            this.cmbIndice.TabIndex = 13;
+            this.cmbIndice.TabStop = false;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.Location = new System.Drawing.Point(46, 128);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(44, 16);
+            this.label5.TabIndex = 12;
+            this.label5.Text = "Indice";
             // 
             // NuevoAtributo
             // 
@@ -141,7 +166,9 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btn_Cancelar;
-            this.ClientSize = new System.Drawing.Size(463, 230);
+            this.ClientSize = new System.Drawing.Size(463, 244);
+            this.Controls.Add(this.cmbIndice);
+            this.Controls.Add(this.label5);
             this.Controls.Add(this.cmbTipo);
             this.Controls.Add(this.cmb_Entidad);
             this.Controls.Add(this.label4);
@@ -171,5 +198,7 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.ComboBox cmb_Entidad;
         private System.Windows.Forms.ComboBox cmbTipo;
+        private System.Windows.Forms.ComboBox cmbIndice;
+        private System.Windows.Forms.Label label5;
     }
 }
