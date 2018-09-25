@@ -28,7 +28,7 @@ namespace Archivos
         private void abrirToolStripMenuItem_Click(object sender, EventArgs e)
         {
             abrirDD();
-            txtCab.Text = ddd.Cab.ToString();
+            
         }
 
         private void nuevoDD()
@@ -50,14 +50,19 @@ namespace Archivos
         {
             using (OpenFileDialog open = new OpenFileDialog())
             {
+                open.Filter = "Diccionario de Datos (*.dd)| *.dd";
+                ///open.InitialDirectory = Directory.GetParent(ddd.Fullname).ToString();
+                open.Title = "Seleciona un Diccionario de datos";
                 if (open.ShowDialog() == DialogResult.OK)
-                {
+                { 
                     ddd = new DDD(open.FileName);
                     ddd.lee();
+ 
                     //Actualiza DataGrid
                     actualizaEnt();
                     dgAtributos.Rows.Clear();
-                }
+                    txtCab.Text = ddd.Cab.ToString();
+                } 
             }
         }
 
@@ -78,14 +83,17 @@ namespace Archivos
         }
         private void actualizaEnt()
         {
-            dgEntidades.Rows.Clear();
-            
+            txtCab.Text = ddd.Cab.ToString();
+            dgEntidades.Rows.Clear(); 
             foreach(Entidad e in ddd.RefreshGrid())//ddd.Entidades)
             {
                 dgEntidades.Rows.Add(e.sNombre, e.Dir_Entidad, e.Dir_Atributos, e.Dir_Datos, e.Dir_sig);
             }
         }
 
+        /// <summary>
+        /// Modifica las entidades al darle doble click en la data grid
+        /// </summary>
         private void dgEntidades_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             Entidad eMod = ddd.Entidades[e.RowIndex];//list_entidades[e.RowIndex];
@@ -116,11 +124,10 @@ namespace Archivos
 
         private void nuevoAtributoToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            NuevoAtributo nuevo = new NuevoAtributo(ddd.EntidadesOrden);
+            NuevoAtributo nuevo = new NuevoAtributo(ddd.Entidades);
             if (nuevo.ShowDialog() == DialogResult.OK)
             {
                 Entidad ent = ddd.nuevoAtributo(nuevo.Nombre_atributo, nuevo.Tipo, nuevo.Long, nuevo.Index);
-                //Cabecera = atrb.nuevoAtrib(vEnt.List_entidades[nuevo.Index].Atrib.Last(), Convert.ToInt64(txtLong.Text));
                 AtribEnt(ent);
                 lblEntidad.Text = ent.sNombre;
                 actualizaEnt();

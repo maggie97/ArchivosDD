@@ -39,7 +39,7 @@ namespace Archivos
         }
         public new void lee()
         {
-            long cab;
+            //long cab;
             using (BinaryReader reader = new BinaryReader(File.Open(base.Fullname, FileMode.Open)))
             {
                 cab = reader.ReadInt64();
@@ -47,6 +47,7 @@ namespace Archivos
                 //int i = 0;
                 try
                 {
+                    Console.WriteLine(reader.PeekChar());
                     while (reader.PeekChar() != -1)
                     {
                         string nomb = "";
@@ -58,8 +59,8 @@ namespace Archivos
                         }
                         
                         dir = reader.ReadInt64();
-                        Console.WriteLine(reader.PeekChar().GetType());
-                        if (reader.PeekChar() == 65533)
+                        Console.WriteLine(reader.PeekChar()); 
+                        if (reader.PeekChar() > 70 || reader.PeekChar()<60)
                         {
                             list_insercion.Add(leeEntidad(reader, nomb, dir));
                             list_entidades.Add(list_insercion.Last());
@@ -87,6 +88,7 @@ namespace Archivos
                                 }
                             }
                         }
+                        Console.WriteLine(reader.PeekChar());
                     }
                 }
                 catch { }
@@ -114,16 +116,18 @@ namespace Archivos
                         dir = reader.ReadInt64().ToString();
                         Console.WriteLine(reader.PeekChar());
                         
-                        if(reader.PeekChar() == 65533)
+                        if(reader.PeekChar() > 70 || reader.PeekChar() < 60)
                         {
-                            dir_atr = reader.ReadInt64().ToString();
+
+                            /*dir_atr = reader.ReadInt64().ToString();
 
                             dir_dat = reader.ReadInt64().ToString();
                             //Console.WriteLine(reader.PeekChar().GetType());
                             dir_sig = reader.ReadInt64().ToString();
                             Entidad n = new Entidad(nombre, Convert.ToInt64(dir), Convert.ToInt64(dir_atr), Convert.ToInt64(dir_dat), Convert.ToInt64(dir_sig));
                             Console.WriteLine("{0}, {1}, {2}, {3}, {4}", nomb, dir, dir_atr, dir_dat, dir_sig);
-                            e.Add(n);
+                            e.Add(n);*/
+                            e.Add(leeEntidad(reader, nomb, Convert.ToInt64(dir)));
                         }
                         else
                         {
@@ -234,6 +238,7 @@ namespace Archivos
         public void ordena()
         {
             list_entidades = list_entidades.OrderBy(o => o.sNombre).ToList();
+            cab = list_entidades.FirstOrDefault().Dir_Entidad;
             for (int i = 0; i < list_entidades.Count - 1; i++)
             {
                 list_entidades[i].Dir_sig = list_entidades[i + 1].Dir_Entidad;
@@ -266,6 +271,7 @@ namespace Archivos
         {
             using (BinaryWriter writer = new BinaryWriter(File.Open(Fullname, FileMode.Open)))
             {
+                Console.WriteLine(e.sNombre + "  " + e.Dir_Entidad + " " + e.Dir_Atributos);
                 writer.Seek(Convert.ToInt32(e.Dir_Entidad),  SeekOrigin.Begin);
                 writer.Write(e.NombreEntidad);
                 writer.Write(e.Dir_Entidad);
@@ -292,7 +298,7 @@ namespace Archivos
         {
             Atributo nuevo = new Atributo(nombre, Longitud, tipo, longi, 0, -1, -1);
             list_entidades[iEnt].nuevoA(nuevo);
-            guardaAtrib(nuevo);
+            //guardaAtrib(nuevo);
             obj.Add(nuevo);
             ordena();
             sobreescribe_archivo();
@@ -335,6 +341,7 @@ namespace Archivos
         {
             using (BinaryWriter writer = new BinaryWriter(File.Open(Fullname, FileMode.Open)))
             {
+                Console.WriteLine(a.sNombre + "  " + a.DirAtributo);
                 writer.Seek(Convert.ToInt32(a.DirAtributo), SeekOrigin.Begin);
                 writer.Write(a.Nombre);
                 writer.Write(a.DirAtributo);
