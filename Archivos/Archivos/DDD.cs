@@ -102,6 +102,7 @@ namespace Archivos
                 //int i = 0;
                 try
                 {
+                    Console.WriteLine("Refresh");
                     while (reader.PeekChar() != -1)
                     {
                         string nomb = "", dir, dir_atr, dir_dat, dir_sig;
@@ -112,7 +113,6 @@ namespace Archivos
                         }
                         dir = reader.ReadInt64().ToString();
                         Console.WriteLine(reader.PeekChar());
-                        Console.WriteLine(reader.PeekChar().GetType());
                         
                         if(reader.PeekChar() == 65533)
                         {
@@ -135,6 +135,7 @@ namespace Archivos
                                     ent.Atrib.Add(n);
                             }
                         }
+                        Console.WriteLine(reader.PeekChar());
                     }
                 }
                 catch { }
@@ -272,6 +273,8 @@ namespace Archivos
                 writer.Write(e.Dir_Datos);
                 writer.Write(e.Dir_sig);
             }
+
+
         }
         #endregion
         public void sobreescribe_archivo()
@@ -301,6 +304,7 @@ namespace Archivos
         {
             using (BinaryWriter writer = new BinaryWriter(File.Open(Fullname, FileMode.Append)))
             {
+                //writer.Seek(Convert.ToInt32( a.DirAtributo), SeekOrigin.Begin);
                 writer.Write(a.Nombre);
                 writer.Write(a.DirAtributo);
                 writer.Write(a.Tipo);
@@ -340,6 +344,7 @@ namespace Archivos
                 writer.Write(a.DirIndice);
                 writer.Write(a.DirSig);
             }
+            
         }
 
         

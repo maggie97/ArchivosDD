@@ -195,7 +195,6 @@ namespace Archivos
                         AtribEnt(ent);
                     }
                 }
-                    
                 //ddd.sobreescribEntidad(ent);
                 //actualizaEnt();
 
