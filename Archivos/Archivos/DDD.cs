@@ -13,7 +13,7 @@ namespace Archivos
         List<Entidad> list_entidades = new List<Entidad>();
         long cab = -1;
 
-        public List<Entidad> Entidades { get => list_insercion; set => list_insercion = value; }
+        public List<Entidad> EntidadesInser { get => list_insercion; set => list_insercion = value; }
         public List<Entidad> EntidadesOrden { get => list_entidades; set => list_entidades = value; }
         public long Cab { get => cab; set => cab = value; }
 
@@ -87,8 +87,7 @@ namespace Archivos
                                         }
                                 }
                             }
-                        }
-                        Console.WriteLine(reader.PeekChar());
+                        } 
                     }
                 }
                 catch { }
@@ -118,28 +117,15 @@ namespace Archivos
                         
                         if(reader.PeekChar() > 70 || reader.PeekChar() < 60)
                         {
-
-                            /*dir_atr = reader.ReadInt64().ToString();
-
-                            dir_dat = reader.ReadInt64().ToString();
-                            //Console.WriteLine(reader.PeekChar().GetType());
-                            dir_sig = reader.ReadInt64().ToString();
-                            Entidad n = new Entidad(nombre, Convert.ToInt64(dir), Convert.ToInt64(dir_atr), Convert.ToInt64(dir_dat), Convert.ToInt64(dir_sig));
-                            Console.WriteLine("{0}, {1}, {2}, {3}, {4}", nomb, dir, dir_atr, dir_dat, dir_sig);
-                            e.Add(n);*/
                             e.Add(leeEntidad(reader, nomb, Convert.ToInt64(dir)));
                         }
                         else
-                        {
-                            
+                        { 
                             Atributo n = leeAtributo(reader, nomb, Convert.ToInt64(dir));
                             foreach(Entidad ent in e)
-                            {
                                 if (ent.Dir_Atributos == n.DirAtributo)
-                                    ent.Atrib.Add(n);
-                            }
-                        }
-                        Console.WriteLine(reader.PeekChar());
+                                    ent.Atrib.Add(n); 
+                        } 
                     }
                 }
                 catch { }
@@ -206,22 +192,44 @@ namespace Archivos
                 Console.WriteLine("causo una excepcion: ", e);
             }
         }
-        public void eliminaEntidad(int i)
+        public void eliminaEntidad(string s)
         {
-            long ds = list_insercion[i].Dir_sig;
-            for(int j = 0; j< list_entidades.Count; j++)
+            Entidad ent = list_entidades.Find(o => o.sNombre.Contains(s));
+            long ds = ent.Dir_sig;
+            if(cab == ent.Dir_Entidad)
             {
-                if(list_entidades[j].Dir_sig == list_insercion[i].Dir_Entidad)
-                {
-                    list_insercion[i].Dir_sig = -1;
-                    list_entidades[j].Dir_sig = ds;
-                    list_entidades.Remove(list_insercion[i]);
-                    sobreescribEntidad(list_insercion[i]);
-                    sobreescribEntidad(list_entidades[j]);
-                }
+                ent.Dir_sig = -1;
+                cab = ds;
+                list_entidades.Remove(ent);
+                sobreescribe_archivo();
             }
+            else
+            {
+                Entidad aux = list_entidades.Find(o => o.Dir_sig.Equals(ent.Dir_Entidad));
+                if(aux != null)
+                {
+                    ent.Dir_sig = -1;
+                    aux.Dir_sig = ds;
+                    list_entidades.Remove(ent);
+                    //sobreescribEntidad(list_insercion[i]);
+                    //sobreescribEntidad(list_entidades[j]);
+                    sobreescribe_archivo();
+                }
+            }/*
+                for(int j = 0; j< list_entidades.Count; j++)
+                { 
+                    if(list_entidades[j].Dir_sig == ent.Dir_Entidad)
+                    {
+                        ent.Dir_sig = -1;
+                        list_entidades[j].Dir_sig = ds;
+                        list_entidades.Remove(ent);
+                        //sobreescribEntidad(list_insercion[i]);
+                        //sobreescribEntidad(list_entidades[j]);
+                        sobreescribe_archivo();
+                    }
+                }
             //sobreescribEntidades();
-            
+            */
         }
 
         public void guardaEntidad(Entidad e)
@@ -244,29 +252,13 @@ namespace Archivos
                 list_entidades[i].Dir_sig = list_entidades[i + 1].Dir_Entidad;
             }
             list_entidades.Last().Dir_sig = -1;
-            foreach (Entidad e in list_entidades)
+            /*foreach (Entidad e in list_entidades)
             {
                 int i = list_insercion.IndexOf(e);
                 list_insercion[i] = e;
-            }
+            }*/
         }
-        
-        public void sobreescribEntidades()
-        {
-            using (BinaryWriter writer = new BinaryWriter(File.Open(Fullname, FileMode.Open)))
-            {
-                writer.Seek(8, SeekOrigin.Begin);
-                foreach (Entidad e in list_insercion)
-                {
-                    writer.Write(e.NombreEntidad);
-                    writer.Write(e.Dir_Entidad);
-                    writer.Write(e.Dir_Atributos);
-                    writer.Write(e.Dir_Datos);
-                    writer.Write(e.Dir_sig);
-                }
-            }
-        }
-
+         
         public void sobreescribEntidad(Entidad e)
         {
             using (BinaryWriter writer = new BinaryWriter(File.Open(Fullname, FileMode.Open)))
@@ -279,12 +271,11 @@ namespace Archivos
                 writer.Write(e.Dir_Datos);
                 writer.Write(e.Dir_sig);
             }
-
-
         }
         #endregion
         public void sobreescribe_archivo()
         {
+            sobreescribeCab();
             foreach (Object o in obj)
             {
                 if (o.GetType() == typeof(Entidad))
@@ -319,24 +310,7 @@ namespace Archivos
                 writer.Write(a.DirIndice);
                 writer.Write(a.DirSig);
             }
-        }
-        /*public void sobreescribAtributos(Entidad e)
-        {
-            using (BinaryWriter writer = new BinaryWriter(File.Open(Fullname, FileMode.Open)))
-            {
-                writer.Seek(Convert.ToInt32(e.Atrib.First().DirAtributo), SeekOrigin.Begin);
-                foreach (Atributo a in e.Atrib)
-                {
-                    writer.Write(a.Nombre);
-                    writer.Write(a.DirAtributo);
-                    writer.Write(a.Tipo);
-                    writer.Write(a.Longitud);
-                    writer.Write(a.TipoIndice);
-                    writer.Write(a.DirIndice);
-                    writer.Write(a.DirSig);
-                }
-            }
-        }*/
+        } 
         public void sobreescribAtributo(Atributo a)
         {
             using (BinaryWriter writer = new BinaryWriter(File.Open(Fullname, FileMode.Open)))
@@ -353,7 +327,6 @@ namespace Archivos
             }
             
         }
-
         
         public Atributo leeAtributo(BinaryReader reader, string name, long dir)
         {
@@ -392,7 +365,5 @@ namespace Archivos
             sobreescribe_archivo();
         }
         #endregion
-
-
     }
 }
