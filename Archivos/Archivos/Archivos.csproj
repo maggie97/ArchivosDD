@@ -47,10 +47,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Archivo.cs" />
-    <Compile Include="Atributo.cs" />
-    <Compile Include="DDD.cs" />
-    <Compile Include="Entidad.cs" />
+    <Compile Include="Controladores\Archivo.cs" />
+    <Compile Include="Controladores\Atributo.cs" />
+    <Compile Include="Controladores\DDD.cs" />
+    <Compile Include="Controladores\Entidad.cs" />
     <Compile Include="NuevaEntidad.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -83,7 +83,7 @@
     <Compile Include="AltaRegistros.Designer.cs">
       <DependentUpon>AltaRegistros.cs</DependentUpon>
     </Compile>
-    <Compile Include="Registro.cs" />
+    <Compile Include="Controladores\Registro.cs" />
     <Compile Include="Registros.cs">
       <SubType>Form</SubType>
     </Compile>

@@ -236,6 +236,11 @@ namespace Archivos
             */
         }
 
+        public void nuevoReg(Entidad e)
+        {
+            e.nuevoReg();
+        }
+
         public void guardaEntidad(Entidad e)
         {
             using (BinaryWriter writer = new BinaryWriter(File.Open(base.Fullname, FileMode.Append)))

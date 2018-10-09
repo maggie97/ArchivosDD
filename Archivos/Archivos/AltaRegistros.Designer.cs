@@ -31,7 +31,7 @@
             this.dgEntidad = new System.Windows.Forms.DataGridView();
             this.button1 = new System.Windows.Forms.Button();
             this.lblNomEntidad = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
+            this.lblReg = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dgEntidad)).BeginInit();
             this.SuspendLayout();
             // 
@@ -61,21 +61,21 @@
             this.lblNomEntidad.TabIndex = 3;
             this.lblNomEntidad.Text = "<Entidad>";
             // 
-            // label1
+            // lblReg
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(217, 23);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(119, 13);
-            this.label1.TabIndex = 4;
-            this.label1.Text = "Registros de la Entidad ";
+            this.lblReg.AutoSize = true;
+            this.lblReg.Location = new System.Drawing.Point(217, 23);
+            this.lblReg.Name = "lblReg";
+            this.lblReg.Size = new System.Drawing.Size(119, 13);
+            this.lblReg.TabIndex = 4;
+            this.lblReg.Text = "Registros de la Entidad ";
             // 
             // AltaRegistros
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(737, 213);
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.lblReg);
             this.Controls.Add(this.lblNomEntidad);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.dgEntidad);
@@ -93,6 +93,6 @@
         private System.Windows.Forms.DataGridView dgEntidad;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Label lblNomEntidad;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label lblReg;
     }
 }

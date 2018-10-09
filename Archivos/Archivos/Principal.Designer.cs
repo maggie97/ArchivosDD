@@ -41,6 +41,9 @@
             this.atributosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.nuevoAtributoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.eliminaAtributoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.registroToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.insertaRegistroToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.eliminaRegistroToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pEntidades = new System.Windows.Forms.Panel();
             this.dgEntidades = new System.Windows.Forms.DataGridView();
             this.Nom_Entidad = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -65,9 +68,6 @@
             this.pTituloAtrib = new System.Windows.Forms.Panel();
             this.lblEntidad = new System.Windows.Forms.Label();
             this.lbltextoA = new System.Windows.Forms.Label();
-            this.registroToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.insertaRegistroToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.eliminaRegistroToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.pEntidades.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgEntidades)).BeginInit();
@@ -144,14 +144,14 @@
             // nuevaEntidadToolStripMenuItem
             // 
             this.nuevaEntidadToolStripMenuItem.Name = "nuevaEntidadToolStripMenuItem";
-            this.nuevaEntidadToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.nuevaEntidadToolStripMenuItem.Size = new System.Drawing.Size(156, 22);
             this.nuevaEntidadToolStripMenuItem.Text = "Nueva Entidad";
             this.nuevaEntidadToolStripMenuItem.Click += new System.EventHandler(this.nuevaEntidadToolStripMenuItem_Click);
             // 
             // eliminaEntidadToolStripMenuItem
             // 
             this.eliminaEntidadToolStripMenuItem.Name = "eliminaEntidadToolStripMenuItem";
-            this.eliminaEntidadToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.eliminaEntidadToolStripMenuItem.Size = new System.Drawing.Size(156, 22);
             this.eliminaEntidadToolStripMenuItem.Text = "Elimina Entidad";
             this.eliminaEntidadToolStripMenuItem.Click += new System.EventHandler(this.eliminaEntidadToolStripMenuItem_Click);
             // 
@@ -177,6 +177,28 @@
             this.eliminaAtributoToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
             this.eliminaAtributoToolStripMenuItem.Text = "Elimina Atributo";
             this.eliminaAtributoToolStripMenuItem.Click += new System.EventHandler(this.eliminaAtributoToolStripMenuItem_Click);
+            // 
+            // registroToolStripMenuItem
+            // 
+            this.registroToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.insertaRegistroToolStripMenuItem,
+            this.eliminaRegistroToolStripMenuItem});
+            this.registroToolStripMenuItem.Name = "registroToolStripMenuItem";
+            this.registroToolStripMenuItem.Size = new System.Drawing.Size(62, 20);
+            this.registroToolStripMenuItem.Text = "Registro";
+            // 
+            // insertaRegistroToolStripMenuItem
+            // 
+            this.insertaRegistroToolStripMenuItem.Name = "insertaRegistroToolStripMenuItem";
+            this.insertaRegistroToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.insertaRegistroToolStripMenuItem.Text = "Inserta Registro";
+            this.insertaRegistroToolStripMenuItem.Click += new System.EventHandler(this.insertaRegistroToolStripMenuItem_Click);
+            // 
+            // eliminaRegistroToolStripMenuItem
+            // 
+            this.eliminaRegistroToolStripMenuItem.Name = "eliminaRegistroToolStripMenuItem";
+            this.eliminaRegistroToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.eliminaRegistroToolStripMenuItem.Text = "Elimina Registro";
             // 
             // pEntidades
             // 
@@ -398,27 +420,6 @@
             this.lbltextoA.TabIndex = 0;
             this.lbltextoA.Text = "Atributos de ";
             this.lbltextoA.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // registroToolStripMenuItem
-            // 
-            this.registroToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.insertaRegistroToolStripMenuItem,
-            this.eliminaRegistroToolStripMenuItem});
-            this.registroToolStripMenuItem.Name = "registroToolStripMenuItem";
-            this.registroToolStripMenuItem.Size = new System.Drawing.Size(62, 20);
-            this.registroToolStripMenuItem.Text = "Registro";
-            // 
-            // insertaRegistroToolStripMenuItem
-            // 
-            this.insertaRegistroToolStripMenuItem.Name = "insertaRegistroToolStripMenuItem";
-            this.insertaRegistroToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.insertaRegistroToolStripMenuItem.Text = "Inserta Registro";
-            // 
-            // eliminaRegistroToolStripMenuItem
-            // 
-            this.eliminaRegistroToolStripMenuItem.Name = "eliminaRegistroToolStripMenuItem";
-            this.eliminaRegistroToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.eliminaRegistroToolStripMenuItem.Text = "Elimina Registro";
             // 
             // Principal
             // 

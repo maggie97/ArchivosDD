@@ -8,12 +8,10 @@ namespace Archivos
 {
     class Registro : Archivo
     {
+        public long firstReg = 0;
         public Registro(string fullname) : base(fullname)
         {
         }
 
-        public Registro(string filename, string extencion, string direccion) : base(filename, extencion, direccion)
-        {
-        }
     }
 }

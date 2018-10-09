@@ -24,13 +24,16 @@ namespace Archivos
         private void nuevoToolStripMenuItem_Click(object sender, EventArgs e)
         {
             nuevoDD();
+            dgAtributos.Rows.Clear();
+            dgEntidades.Rows.Clear();
+
         }
         private void abrirToolStripMenuItem_Click(object sender, EventArgs e)
         {
             abrirDD();
             
         }
-        `
+        
         private void nuevoDD()
         {
             using (nuevoArchivo n = new nuevoArchivo())
@@ -220,6 +223,21 @@ namespace Archivos
                     AtribEnt(lblEntidad.Text);
                 }
             }
+        }
+
+        private void insertaRegistroToolStripMenuItem_Click(object sender, EventArgs e)
+        { 
+            foreach (DataGridViewCell r in dgEntidades.SelectedCells)
+            {
+                AltaRegistros nuevo = new AltaRegistros(ddd.EntidadesOrden.Find(o => o.sNombre.Contains(lblEntidad.Text)));
+                if (nuevo.ShowDialog() == DialogResult.OK)
+                {
+                    ddd.nuevoReg();
+                }
+                actualizaEnt(); 
+                AtribEnt(lblEntidad.Text); 
+            }
+            
         }
     }
 }
