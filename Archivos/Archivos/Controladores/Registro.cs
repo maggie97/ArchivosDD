@@ -6,11 +6,13 @@ using System.Threading.Tasks;
 
 namespace Archivos
 {
-    class Registro : Archivo
+    class ArchivoRegistros : Archivo
     {
         public long firstReg = 0;
-        public Registro(string fullname) : base(fullname)
+        List<List<Object>> registros;
+        public ArchivoRegistros(string fullname) : base(fullname)
         {
+
         }
 
     }

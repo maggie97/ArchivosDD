@@ -14,7 +14,7 @@ namespace Archivos
         long dir_Datos = -1;
         long dir_sig = -1;
         List<Atributo> atrib;
-        List<Registro> Registros;
+        List<ArchivoRegistros> Registros;
 
         public Entidad(char[] nombreEntidad, long dir_Entidad, long dir_Atributos, long dir_Datos)
         {
@@ -31,7 +31,7 @@ namespace Archivos
             this.dir_Atributos = dir_Atributos;
             this.dir_Datos = dir_Datos;
             atrib = new List<Atributo>();
-            Registros = new List<Registro>();
+            Registros = new List<ArchivoRegistros>();
         }
         public Entidad(char[] nombreEntidad, long dir_Entidad, long dir_Atributos, long dir_Datos, long dir_Sig)
         {
@@ -82,8 +82,12 @@ namespace Archivos
 
         internal void nuevoReg()
         {
-            Registro reg = new Registro(sNombre);
+            if(Registros.Count == 0)
+            {
 
+            }
+            ArchivoRegistros reg = new ArchivoRegistros(sNombre);
+            Registros.Add(reg);
         }
     }
 }

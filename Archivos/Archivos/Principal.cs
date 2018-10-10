@@ -232,7 +232,8 @@ namespace Archivos
                 AltaRegistros nuevo = new AltaRegistros(ddd.EntidadesOrden.Find(o => o.sNombre.Contains(lblEntidad.Text)));
                 if (nuevo.ShowDialog() == DialogResult.OK)
                 {
-                    ddd.nuevoReg();
+                    ddd.nuevoReg(lblEntidad);
+
                 }
                 actualizaEnt(); 
                 AtribEnt(lblEntidad.Text); 

@@ -210,34 +210,19 @@ namespace Archivos
                 {
                     ent.Dir_sig = -1;
                     aux.Dir_sig = ds;
-                    list_entidades.Remove(ent);
-                    //sobreescribEntidad(list_insercion[i]);
-                    //sobreescribEntidad(list_entidades[j]);
+                    list_entidades.Remove(ent); 
                     sobreescribe_archivo();
                 }
                 else
                 {
                     list_entidades.Remove(ent);
                 }
-            }/*
-                for(int j = 0; j< list_entidades.Count; j++)
-                { 
-                    if(list_entidades[j].Dir_sig == ent.Dir_Entidad)
-                    {
-                        ent.Dir_sig = -1;
-                        list_entidades[j].Dir_sig = ds;
-                        list_entidades.Remove(ent);
-                        //sobreescribEntidad(list_insercion[i]);
-                        //sobreescribEntidad(list_entidades[j]);
-                        sobreescribe_archivo();
-                    }
-                }
-            //sobreescribEntidades();
-            */
+            }
         }
 
-        public void nuevoReg(Entidad e)
+        public void nuevoReg(string nomb)
         {
+            Entidad e = list_entidades.Find(o => o.sNombre.Contains("nomb"));
             e.nuevoReg();
         }
 

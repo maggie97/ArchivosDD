@@ -12,7 +12,7 @@ namespace Archivos
             InitializeComponent();
             lblNomEntidad.Text = entidad.sNombre; 
             ent = entidad;
-            a = new Registro(ent.sNombre + ".dat");
+            a = new ArchivoRegistros(ent.sNombre + ".dat");
         }
 
         private void AltaRegistros_Load(object sender, EventArgs e)
