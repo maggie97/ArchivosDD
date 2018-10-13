@@ -31,9 +31,9 @@
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.insertaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.eliminaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.dgVReg = new System.Windows.Forms.DataGridView();
             this.menuStrip1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgVReg)).BeginInit();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -52,6 +52,7 @@
             this.insertaToolStripMenuItem.Name = "insertaToolStripMenuItem";
             this.insertaToolStripMenuItem.Size = new System.Drawing.Size(54, 20);
             this.insertaToolStripMenuItem.Text = "Inserta";
+            this.insertaToolStripMenuItem.Click += new System.EventHandler(this.insertaToolStripMenuItem_Click);
             // 
             // eliminaToolStripMenuItem
             // 
@@ -59,28 +60,28 @@
             this.eliminaToolStripMenuItem.Size = new System.Drawing.Size(58, 20);
             this.eliminaToolStripMenuItem.Text = "Elimina";
             // 
-            // dataGridView1
+            // dgVReg
             // 
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dataGridView1.Location = new System.Drawing.Point(0, 24);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(556, 355);
-            this.dataGridView1.TabIndex = 1;
+            this.dgVReg.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgVReg.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgVReg.Location = new System.Drawing.Point(0, 24);
+            this.dgVReg.Name = "dgVReg";
+            this.dgVReg.Size = new System.Drawing.Size(556, 355);
+            this.dgVReg.TabIndex = 1;
             // 
             // Registros
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(556, 379);
-            this.Controls.Add(this.dataGridView1);
+            this.Controls.Add(this.dgVReg);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "Registros";
             this.Text = "Registros";
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgVReg)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -91,6 +92,6 @@
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem insertaToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem eliminaToolStripMenuItem;
-        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.DataGridView dgVReg;
     }
 }

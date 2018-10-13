@@ -29,9 +29,12 @@
         private void InitializeComponent()
         {
             this.dgEntidad = new System.Windows.Forms.DataGridView();
-            this.button1 = new System.Windows.Forms.Button();
+            this.btnAceptar = new System.Windows.Forms.Button();
             this.lblNomEntidad = new System.Windows.Forms.Label();
             this.lblReg = new System.Windows.Forms.Label();
+            this.btn_Cancelar = new System.Windows.Forms.Button();
+            this.btn_Insert = new System.Windows.Forms.Button();
+            this.lblDato = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dgEntidad)).BeginInit();
             this.SuspendLayout();
             // 
@@ -42,15 +45,18 @@
             this.dgEntidad.Name = "dgEntidad";
             this.dgEntidad.Size = new System.Drawing.Size(658, 80);
             this.dgEntidad.TabIndex = 0;
+            this.dgEntidad.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgEntidad_CellEndEdit);
+            this.dgEntidad.RowLeave += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgEntidad_RowLeave);
             // 
-            // button1
+            // btnAceptar
             // 
-            this.button1.Location = new System.Drawing.Point(595, 166);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 2;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = true;
+            this.btnAceptar.DialogResult = System.Windows.Forms.DialogResult.OK;
+            this.btnAceptar.Location = new System.Drawing.Point(596, 178);
+            this.btnAceptar.Name = "btnAceptar";
+            this.btnAceptar.Size = new System.Drawing.Size(75, 23);
+            this.btnAceptar.TabIndex = 2;
+            this.btnAceptar.Text = "Aceptar";
+            this.btnAceptar.UseVisualStyleBackColor = true;
             // 
             // lblNomEntidad
             // 
@@ -70,14 +76,47 @@
             this.lblReg.TabIndex = 4;
             this.lblReg.Text = "Registros de la Entidad ";
             // 
+            // btn_Cancelar
+            // 
+            this.btn_Cancelar.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.btn_Cancelar.Location = new System.Drawing.Point(37, 178);
+            this.btn_Cancelar.Name = "btn_Cancelar";
+            this.btn_Cancelar.Size = new System.Drawing.Size(75, 23);
+            this.btn_Cancelar.TabIndex = 5;
+            this.btn_Cancelar.Text = "Cancelar";
+            this.btn_Cancelar.UseVisualStyleBackColor = true;
+            // 
+            // btn_Insert
+            // 
+            this.btn_Insert.DialogResult = System.Windows.Forms.DialogResult.Yes;
+            this.btn_Insert.Location = new System.Drawing.Point(474, 178);
+            this.btn_Insert.Name = "btn_Insert";
+            this.btn_Insert.Size = new System.Drawing.Size(75, 23);
+            this.btn_Insert.TabIndex = 6;
+            this.btn_Insert.Text = "Insertar";
+            this.btn_Insert.UseVisualStyleBackColor = true;
+            this.btn_Insert.Click += new System.EventHandler(this.btn_Insert_Click);
+            // 
+            // lblDato
+            // 
+            this.lblDato.AutoSize = true;
+            this.lblDato.Location = new System.Drawing.Point(448, 23);
+            this.lblDato.Name = "lblDato";
+            this.lblDato.Size = new System.Drawing.Size(42, 13);
+            this.lblDato.TabIndex = 7;
+            this.lblDato.Text = "<Dato>";
+            // 
             // AltaRegistros
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(737, 213);
+            this.Controls.Add(this.lblDato);
+            this.Controls.Add(this.btn_Insert);
+            this.Controls.Add(this.btn_Cancelar);
             this.Controls.Add(this.lblReg);
             this.Controls.Add(this.lblNomEntidad);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.btnAceptar);
             this.Controls.Add(this.dgEntidad);
             this.Name = "AltaRegistros";
             this.Text = "Alta de Registro";
@@ -91,8 +130,11 @@
         #endregion
 
         private System.Windows.Forms.DataGridView dgEntidad;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btnAceptar;
         private System.Windows.Forms.Label lblNomEntidad;
         private System.Windows.Forms.Label lblReg;
+        private System.Windows.Forms.Button btn_Cancelar;
+        private System.Windows.Forms.Button btn_Insert;
+        private System.Windows.Forms.Label lblDato;
     }
 }

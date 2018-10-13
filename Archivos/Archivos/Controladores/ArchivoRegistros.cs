@@ -9,9 +9,11 @@ namespace Archivos
     class ArchivoRegistros : Archivo
     {
         public long firstReg = 0;
-        List<List<Object>> registros;
-        public ArchivoRegistros(string fullname) : base(fullname)
+        List<List<string>> registros;
+        public ArchivoRegistros(string fullname, Entidad e ) : base(fullname)
         {
+            nuevoArch();
+            
 
         }
 

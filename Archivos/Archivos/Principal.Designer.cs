@@ -35,13 +35,13 @@
             this.abrirToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator = new System.Windows.Forms.ToolStripSeparator();
             this.salirToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.entidadesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.btn_Entidades = new System.Windows.Forms.ToolStripMenuItem();
             this.nuevaEntidadToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.eliminaEntidadToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.atributosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.btn_Atributos = new System.Windows.Forms.ToolStripMenuItem();
             this.nuevoAtributoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.eliminaAtributoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.registroToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.btn_Registro = new System.Windows.Forms.ToolStripMenuItem();
             this.insertaRegistroToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.eliminaRegistroToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pEntidades = new System.Windows.Forms.Panel();
@@ -81,9 +81,9 @@
             // 
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.archivoToolStripMenuItem,
-            this.entidadesToolStripMenuItem,
-            this.atributosToolStripMenuItem,
-            this.registroToolStripMenuItem});
+            this.btn_Entidades,
+            this.btn_Atributos,
+            this.btn_Registro});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(786, 24);
@@ -107,7 +107,7 @@
             this.nuevoToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.nuevoToolStripMenuItem.Name = "nuevoToolStripMenuItem";
             this.nuevoToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.N)));
-            this.nuevoToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.nuevoToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.nuevoToolStripMenuItem.Text = "&Nuevo";
             this.nuevoToolStripMenuItem.Click += new System.EventHandler(this.nuevoToolStripMenuItem_Click);
             // 
@@ -129,63 +129,64 @@
             // salirToolStripMenuItem
             // 
             this.salirToolStripMenuItem.Name = "salirToolStripMenuItem";
-            this.salirToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.salirToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.salirToolStripMenuItem.Text = "&Salir";
+            this.salirToolStripMenuItem.Click += new System.EventHandler(this.salirToolStripMenuItem_Click);
             // 
-            // entidadesToolStripMenuItem
+            // btn_Entidades
             // 
-            this.entidadesToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.btn_Entidades.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.nuevaEntidadToolStripMenuItem,
             this.eliminaEntidadToolStripMenuItem});
-            this.entidadesToolStripMenuItem.Name = "entidadesToolStripMenuItem";
-            this.entidadesToolStripMenuItem.Size = new System.Drawing.Size(73, 20);
-            this.entidadesToolStripMenuItem.Text = "Entidades ";
+            this.btn_Entidades.Name = "btn_Entidades";
+            this.btn_Entidades.Size = new System.Drawing.Size(73, 20);
+            this.btn_Entidades.Text = "Entidades ";
             // 
             // nuevaEntidadToolStripMenuItem
             // 
             this.nuevaEntidadToolStripMenuItem.Name = "nuevaEntidadToolStripMenuItem";
-            this.nuevaEntidadToolStripMenuItem.Size = new System.Drawing.Size(156, 22);
+            this.nuevaEntidadToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.nuevaEntidadToolStripMenuItem.Text = "Nueva Entidad";
             this.nuevaEntidadToolStripMenuItem.Click += new System.EventHandler(this.nuevaEntidadToolStripMenuItem_Click);
             // 
             // eliminaEntidadToolStripMenuItem
             // 
             this.eliminaEntidadToolStripMenuItem.Name = "eliminaEntidadToolStripMenuItem";
-            this.eliminaEntidadToolStripMenuItem.Size = new System.Drawing.Size(156, 22);
+            this.eliminaEntidadToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.eliminaEntidadToolStripMenuItem.Text = "Elimina Entidad";
             this.eliminaEntidadToolStripMenuItem.Click += new System.EventHandler(this.eliminaEntidadToolStripMenuItem_Click);
             // 
-            // atributosToolStripMenuItem
+            // btn_Atributos
             // 
-            this.atributosToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.btn_Atributos.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.nuevoAtributoToolStripMenuItem,
             this.eliminaAtributoToolStripMenuItem});
-            this.atributosToolStripMenuItem.Name = "atributosToolStripMenuItem";
-            this.atributosToolStripMenuItem.Size = new System.Drawing.Size(68, 20);
-            this.atributosToolStripMenuItem.Text = "Atributos";
+            this.btn_Atributos.Name = "btn_Atributos";
+            this.btn_Atributos.Size = new System.Drawing.Size(68, 20);
+            this.btn_Atributos.Text = "Atributos";
             // 
             // nuevoAtributoToolStripMenuItem
             // 
             this.nuevoAtributoToolStripMenuItem.Name = "nuevoAtributoToolStripMenuItem";
-            this.nuevoAtributoToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
+            this.nuevoAtributoToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.nuevoAtributoToolStripMenuItem.Text = "Nuevo Atributo";
             this.nuevoAtributoToolStripMenuItem.Click += new System.EventHandler(this.nuevoAtributoToolStripMenuItem_Click);
             // 
             // eliminaAtributoToolStripMenuItem
             // 
             this.eliminaAtributoToolStripMenuItem.Name = "eliminaAtributoToolStripMenuItem";
-            this.eliminaAtributoToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
+            this.eliminaAtributoToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.eliminaAtributoToolStripMenuItem.Text = "Elimina Atributo";
             this.eliminaAtributoToolStripMenuItem.Click += new System.EventHandler(this.eliminaAtributoToolStripMenuItem_Click);
             // 
-            // registroToolStripMenuItem
+            // btn_Registro
             // 
-            this.registroToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.btn_Registro.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.insertaRegistroToolStripMenuItem,
             this.eliminaRegistroToolStripMenuItem});
-            this.registroToolStripMenuItem.Name = "registroToolStripMenuItem";
-            this.registroToolStripMenuItem.Size = new System.Drawing.Size(62, 20);
-            this.registroToolStripMenuItem.Text = "Registro";
+            this.btn_Registro.Name = "btn_Registro";
+            this.btn_Registro.Size = new System.Drawing.Size(62, 20);
+            this.btn_Registro.Text = "Registro";
             // 
             // insertaRegistroToolStripMenuItem
             // 
@@ -480,15 +481,15 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Dir_Atributos;
         private System.Windows.Forms.DataGridViewTextBoxColumn Dir_Datos;
         private System.Windows.Forms.DataGridViewTextBoxColumn Dir_SigEnt;
-        private System.Windows.Forms.ToolStripMenuItem entidadesToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem btn_Entidades;
         private System.Windows.Forms.ToolStripMenuItem nuevaEntidadToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem eliminaEntidadToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem atributosToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem btn_Atributos;
         private System.Windows.Forms.ToolStripMenuItem nuevoAtributoToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem eliminaAtributoToolStripMenuItem;
         private System.Windows.Forms.Label lbltextoA;
         private System.Windows.Forms.Label lblEntidad;
-        private System.Windows.Forms.ToolStripMenuItem registroToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem btn_Registro;
         private System.Windows.Forms.ToolStripMenuItem insertaRegistroToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem eliminaRegistroToolStripMenuItem;
     }

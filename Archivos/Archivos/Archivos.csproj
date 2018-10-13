@@ -83,7 +83,7 @@
     <Compile Include="AltaRegistros.Designer.cs">
       <DependentUpon>AltaRegistros.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controladores\Registro.cs" />
+    <Compile Include="Controladores\ArchivoRegistros.cs" />
     <Compile Include="Registros.cs">
       <SubType>Form</SubType>
     </Compile>

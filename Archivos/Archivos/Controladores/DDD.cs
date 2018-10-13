@@ -220,10 +220,10 @@ namespace Archivos
             }
         }
 
-        public void nuevoReg(string nomb)
+        public void nuevoReg(string nomb, List<string> nuevoReg)
         {
             Entidad e = list_entidades.Find(o => o.sNombre.Contains("nomb"));
-            e.nuevoReg();
+            e.nuevoReg(nuevoReg);
         }
 
         public void guardaEntidad(Entidad e)
@@ -359,5 +359,6 @@ namespace Archivos
             sobreescribe_archivo();
         }
         #endregion
+ 
     }
 }
