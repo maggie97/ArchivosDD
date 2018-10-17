@@ -83,13 +83,15 @@ namespace Archivos
         private void insertaRegistroToolStripMenuItem_Click(object sender, EventArgs e)
         {
 
-            if (!Enable_Entidades_Atributos()) 
+            if (Enable_Entidades_Atributos()) 
             {
-                if(MessageBox.Show("Al ingresar un registro a este Diccionario de Datos " +
+                if (MessageBox.Show("Al ingresar un registro a este Diccionario de Datos " +
                     "ya no podras ingresar ninguna Entidad o Atributo. \n ¿Estas seguro de que deseas continuar?",
                     "Registros", MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button1,
-                    MessageBoxOptions.ServiceNotification) == DialogResult.No) 
+                    MessageBoxOptions.ServiceNotification) == DialogResult.No)
                     return;
+                else
+                    Enable_Entidades_Atributos(false);
             }
             if (lblEntidad.Text != "<Entidad>")
             {

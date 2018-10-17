@@ -4,48 +4,74 @@ using System.Windows.Forms;
 
 namespace Archivos
 {
+    delegate bool avisa();
     public partial class AltaRegistros : Form
     {
         Entidad ent;
         String[] reg;
-        List<List<string>> conjunto;
+        //List<string> reg;
+        //List<List<string>> conjunto;
         int regAct = 0 ;
         int lenght = 0;
-        Registros registros;
+        long DirReg;
+        //Registros registros;
         //Archivo a;
-        public AltaRegistros(Entidad entidad, Registros r)
+        public AltaRegistros(Entidad entidad, Registros r, long dir)
         {
             InitializeComponent();
             lblNomEntidad.Text = entidad.sNombre; 
             ent = entidad;
             lenght = ent.Atrib.Count;
-            reg = new string[lenght];
+            reg =  new string[lenght + 2];
+            DirReg = dir;
 
-            registros = r;
-            reg.Initialize();
-            registros.Show();
+
+            foreach (Atributo a in Ent.Atrib)
+            {
+                dgEntidad.Columns.Add("clm_" + a.sNombre, a.sNombre);
+            }
+            //registros = r;
+            //reg.Initialize();
+            //reg[0] = dir.ToString();
+            //reg.Add(dir.ToString());
+            //registros.Show();
         }
 
         public Entidad Ent { get => ent; /*set => ent = value;*/ }
         public List<string> UltimoReg { get => new List<string>(reg); /*set => reg = value;*/ }
-        public List<List<string>> ConjuntoReg { get => conjunto; }
+
+
+        //public List<List<string>> ConjuntoReg { get => conjunto; }
 
         private void AltaRegistros_Load(object sender, EventArgs e)
+
         {
-            foreach(Atributo a in Ent.Atrib)
+            //dgEntidad.Columns.Add("clm_DirReg", "Direccion del Registro");
+            for (int i = 1; i < lenght; i++)
             {
-                dgEntidad.Columns.Add("clm_" + a.sNombre, a.sNombre);
+                for (int j = 0; j < ent.Atrib[i].Longitud; j++)
+                    switch (ent.Atrib[i].Tipo)
+                    {
+                        case 'C':
+                            reg[i] += " ";
+                            break;
+                        case 'E':
+                            reg[i] += "0";
+                            break;
+                    }
             }
+            dgEntidad.Rows.Add()
+            //dgEntidad.CurrentCell.Value = reg[0];
+            //dgEntidad.Columns.Add("clm_DirSig", "Direccion del Sig Reg");
         }
 
         private void dgEntidad_CellEndEdit(object sender, DataGridViewCellEventArgs e)
         {
             if (dgEntidad.CurrentCell == null) return;
-            lblDato.Text = dgEntidad.CurrentCell.Value.ToString();
-            
+            lblDato.Text = dgEntidad.CurrentCell.Value.ToString(); 
             if ( regAct == dgEntidad.CurrentRow.Index)
             { 
-                reg[dgEntidad.CurrentCell.ColumnIndex] = dgEntidad.CurrentCell.Value.ToString();
+                reg[dgEntidad.CurrentCell.ColumnIndex+1] = dgEntidad.CurrentCell.Value.ToString();
                 //reg.Add(dgEntidad.CurrentCell.Value.ToString());
                 //regAct = dgEntidad.CurrentRow.Index;
                 regAct = (dgEntidad.CurrentCell.ColumnIndex == ent.Atrib.Count-1) ?  -1: regAct; 
@@ -63,7 +89,7 @@ namespace Archivos
         {
             bool cont = true;
 
-            for (int i = 0; i < lenght && cont; i++)
+            for (int i = 1; i < lenght && cont; i++)
             {
                 cont = ((reg[i] != null) && !(reg[i].Equals(""))) ? true : false;
             }
@@ -76,9 +102,14 @@ namespace Archivos
             else
             {
                 regAct = dgEntidad.CurrentRow.Index;
-                registros.Add(UltimoReg); //añade un nuevo registro
-                reg = new string[lenght];
+                reg[lenght + 1] = "-1" ;
+                reg[0] = DirReg.ToString();
+                ent.nuevoReg(UltimoReg);
+                //DirReg += ent.Peso;
+                //registros.Add(UltimoReg); //añade un nuevo registro
+                reg = new string[lenght + 2];
                 dgEntidad.Rows.Clear();
+
             }
         }
     }

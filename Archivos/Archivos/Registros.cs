@@ -19,10 +19,12 @@ namespace Archivos
             entidad = e;
             //dgVReg.Columns.Add("dirReg", "Direccion del Registro");
             //define las columnas del datagried de los registros 
+            dgVReg.Columns.Add("dir_Reg", "Direccion del registro");
             for (int i = 0; i < e.Atrib.Count; i++)
             {
                 dgVReg.Columns.Add(e.Atrib[i].sNombre, e.Atrib[i].sNombre);
             }
+            dgVReg.Columns.Add("dir_SigReg", "Direccion del siguiente registro");
         }
 
         internal void Add(List<string> reg)
@@ -43,11 +45,11 @@ namespace Archivos
 
         private void insertaToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            AltaRegistros alta = new AltaRegistros(entidad, this);
-            if(alta.ShowDialog() == DialogResult.Yes)
+            AltaRegistros alta = new AltaRegistros(entidad, this, 0);
+            if(alta.ShowDialog() == DialogResult.OK)
             {
-
-            }
+                actualiza();
+            } 
         }
     }
 }

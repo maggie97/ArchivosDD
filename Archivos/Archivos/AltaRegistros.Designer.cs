@@ -88,7 +88,6 @@
             // 
             // btn_Insert
             // 
-            this.btn_Insert.DialogResult = System.Windows.Forms.DialogResult.Yes;
             this.btn_Insert.Location = new System.Drawing.Point(474, 178);
             this.btn_Insert.Name = "btn_Insert";
             this.btn_Insert.Size = new System.Drawing.Size(75, 23);
