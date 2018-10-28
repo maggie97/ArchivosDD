@@ -10,9 +10,12 @@ using System.Windows.Forms;
 
 namespace Archivos
 {
+   
+    
     public partial class Principal : Form
     {
         DDD ddd;
+       
         //List<Archivo> datos;
         public Principal()
         {
@@ -80,7 +83,7 @@ namespace Archivos
             }
         }
 
-        private void insertaRegistroToolStripMenuItem_Click(object sender, EventArgs e)
+        private void insertaRegistro_Click(object sender, EventArgs e)
         {
 
             if (Enable_Entidades_Atributos()) 
@@ -97,6 +100,8 @@ namespace Archivos
             {
                 Entidad ent = ddd.EntidadesOrden.Find(o => o.sNombre.Contains(lblEntidad.Text));
                 Registros ventanaReg = new Registros(ent);
+                ventanaReg.actualizado += new Registros.Actualiza(actualizaEnt);
+                ventanaReg.actualizado += new Registros.Actualiza(ddd.sobreescribe_archivo);
                 ventanaReg.Show();
                 actualizaEnt();
                 AtribEnt(lblEntidad.Text);
@@ -106,26 +111,8 @@ namespace Archivos
                 MessageBox.Show("Selecciona una entidad", "Sin Entidades", MessageBoxButtons.OK, MessageBoxIcon.Error,
                     MessageBoxDefaultButton.Button1, MessageBoxOptions.ServiceNotification);
             }
-        
-           //each (DataGridViewCell r in dgEntidades.SelectedCells)
-            //{
-            /*if (dgEntidades.CurrentCell != null)
-            {
-                if (lblEntidad.Text != "<Entidad>")
-                {
-                    //AltaRegistros nuevo = new AltaRegistros(ddd.EntidadesOrden.Find(o => o.sNombre.Contains(lblEntidad.Text)));
-                    //nuevo.Show();
-                    
-                }
-                else
-                {
-                    MessageBox.Show("Selecciona una entidad", "Sin Entidades", MessageBoxButtons.OK, MessageBoxIcon.Error,
-                        MessageBoxDefaultButton.Button1, MessageBoxOptions.ServiceNotification);
-                }
-            }*/
-            //}
 
-        }
+        } 
         #endregion
         private void nuevoDD()
         {
@@ -138,6 +125,7 @@ namespace Archivos
                     {
                         writer.Write(ddd.Cab);
                         txtCab.Text = ddd.Cab.ToString();
+                        Enable_Entidades_Atributos(true);
                     }
                 }
             }

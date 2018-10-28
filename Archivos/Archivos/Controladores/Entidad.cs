@@ -86,7 +86,20 @@ namespace Archivos
 
         internal void nuevoReg(List<string> atributos)
         {
-            if (Registros == null) registros = new List<List<string>>();
+            if (Registros == null)
+            {
+                registros = new List<List<string>>();
+                dir_Datos = Convert.ToInt64(atributos[0]);
+            }
+            else if (!atrib.Exists(o => o.TipoIndice == 0))
+            {
+                //ordena
+                Console.Write("holi ordena");
+            }
+            else
+            {
+                registros.Last()[atributos.Count - 1] = atributos.First();
+            }
             registros.Add(atributos);
         }
     }

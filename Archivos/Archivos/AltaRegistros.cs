@@ -4,11 +4,14 @@ using System.Windows.Forms;
 
 namespace Archivos
 {
-    delegate bool avisa();
     public partial class AltaRegistros : Form
     {
+        public event Actualiza actualizado;
+        public delegate void Actualiza();
+
         Entidad ent;
         String[] reg;
+
         //List<string> reg;
         //List<List<string>> conjunto;
         int regAct = 0 ;
@@ -16,30 +19,38 @@ namespace Archivos
         long DirReg;
         //Registros registros;
         //Archivo a;
-        public AltaRegistros(Entidad entidad, Registros r, long dir)
+        public AltaRegistros(Entidad entidad, Archivo r)
         {
             InitializeComponent();
             lblNomEntidad.Text = entidad.sNombre; 
             ent = entidad;
             lenght = ent.Atrib.Count;
             reg =  new string[lenght + 2];
-            DirReg = dir;
+            DirReg = 0;
 
 
             foreach (Atributo a in Ent.Atrib)
             {
                 dgEntidad.Columns.Add("clm_" + a.sNombre, a.sNombre);
             }
-            //registros = r;
-            //reg.Initialize();
-            //reg[0] = dir.ToString();
-            //reg.Add(dir.ToString());
-            //registros.Show();
+            
         }
 
         public Entidad Ent { get => ent; /*set => ent = value;*/ }
         public List<string> UltimoReg { get => new List<string>(reg); /*set => reg = value;*/ }
+        private int longitud
+        {
+            get
+            {
+                int longReg = 0;
+                foreach (Atributo a in ent.Atrib)
+                {
+                    longReg += a.Longitud;
+                }
 
+                return longReg;
+            }
+        }
 
         //public List<List<string>> ConjuntoReg { get => conjunto; }
 
@@ -60,7 +71,7 @@ namespace Archivos
                             break;
                     }
             }
-            dgEntidad.Rows.Add()
+            dgEntidad.Rows.Add();
             //dgEntidad.CurrentCell.Value = reg[0];
             //dgEntidad.Columns.Add("clm_DirSig", "Direccion del Sig Reg");
         }
@@ -101,6 +112,7 @@ namespace Archivos
             }
             else
             {
+                DirReg = (ent.Registros == null) ? 0 : ent.Registros.Count * longitud + 16;
                 regAct = dgEntidad.CurrentRow.Index;
                 reg[lenght + 1] = "-1" ;
                 reg[0] = DirReg.ToString();
@@ -109,7 +121,7 @@ namespace Archivos
                 //registros.Add(UltimoReg); //añade un nuevo registro
                 reg = new string[lenght + 2];
                 dgEntidad.Rows.Clear();
-
+                actualizado();
             }
         }
     }

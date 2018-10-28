@@ -42,8 +42,6 @@
             this.nuevoAtributoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.eliminaAtributoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.btn_Registro = new System.Windows.Forms.ToolStripMenuItem();
-            this.insertaRegistroToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.eliminaRegistroToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pEntidades = new System.Windows.Forms.Panel();
             this.dgEntidades = new System.Windows.Forms.DataGridView();
             this.Nom_Entidad = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -107,7 +105,7 @@
             this.nuevoToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.nuevoToolStripMenuItem.Name = "nuevoToolStripMenuItem";
             this.nuevoToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.N)));
-            this.nuevoToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.nuevoToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.nuevoToolStripMenuItem.Text = "&Nuevo";
             this.nuevoToolStripMenuItem.Click += new System.EventHandler(this.nuevoToolStripMenuItem_Click);
             // 
@@ -129,7 +127,7 @@
             // salirToolStripMenuItem
             // 
             this.salirToolStripMenuItem.Name = "salirToolStripMenuItem";
-            this.salirToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.salirToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.salirToolStripMenuItem.Text = "&Salir";
             this.salirToolStripMenuItem.Click += new System.EventHandler(this.salirToolStripMenuItem_Click);
             // 
@@ -145,14 +143,14 @@
             // nuevaEntidadToolStripMenuItem
             // 
             this.nuevaEntidadToolStripMenuItem.Name = "nuevaEntidadToolStripMenuItem";
-            this.nuevaEntidadToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.nuevaEntidadToolStripMenuItem.Size = new System.Drawing.Size(156, 22);
             this.nuevaEntidadToolStripMenuItem.Text = "Nueva Entidad";
             this.nuevaEntidadToolStripMenuItem.Click += new System.EventHandler(this.nuevaEntidadToolStripMenuItem_Click);
             // 
             // eliminaEntidadToolStripMenuItem
             // 
             this.eliminaEntidadToolStripMenuItem.Name = "eliminaEntidadToolStripMenuItem";
-            this.eliminaEntidadToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.eliminaEntidadToolStripMenuItem.Size = new System.Drawing.Size(156, 22);
             this.eliminaEntidadToolStripMenuItem.Text = "Elimina Entidad";
             this.eliminaEntidadToolStripMenuItem.Click += new System.EventHandler(this.eliminaEntidadToolStripMenuItem_Click);
             // 
@@ -168,38 +166,23 @@
             // nuevoAtributoToolStripMenuItem
             // 
             this.nuevoAtributoToolStripMenuItem.Name = "nuevoAtributoToolStripMenuItem";
-            this.nuevoAtributoToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.nuevoAtributoToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
             this.nuevoAtributoToolStripMenuItem.Text = "Nuevo Atributo";
             this.nuevoAtributoToolStripMenuItem.Click += new System.EventHandler(this.nuevoAtributoToolStripMenuItem_Click);
             // 
             // eliminaAtributoToolStripMenuItem
             // 
             this.eliminaAtributoToolStripMenuItem.Name = "eliminaAtributoToolStripMenuItem";
-            this.eliminaAtributoToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.eliminaAtributoToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
             this.eliminaAtributoToolStripMenuItem.Text = "Elimina Atributo";
             this.eliminaAtributoToolStripMenuItem.Click += new System.EventHandler(this.eliminaAtributoToolStripMenuItem_Click);
             // 
             // btn_Registro
             // 
-            this.btn_Registro.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.insertaRegistroToolStripMenuItem,
-            this.eliminaRegistroToolStripMenuItem});
             this.btn_Registro.Name = "btn_Registro";
             this.btn_Registro.Size = new System.Drawing.Size(62, 20);
             this.btn_Registro.Text = "Registro";
-            // 
-            // insertaRegistroToolStripMenuItem
-            // 
-            this.insertaRegistroToolStripMenuItem.Name = "insertaRegistroToolStripMenuItem";
-            this.insertaRegistroToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.insertaRegistroToolStripMenuItem.Text = "Inserta Registro";
-            this.insertaRegistroToolStripMenuItem.Click += new System.EventHandler(this.insertaRegistroToolStripMenuItem_Click);
-            // 
-            // eliminaRegistroToolStripMenuItem
-            // 
-            this.eliminaRegistroToolStripMenuItem.Name = "eliminaRegistroToolStripMenuItem";
-            this.eliminaRegistroToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.eliminaRegistroToolStripMenuItem.Text = "Elimina Registro";
+            this.btn_Registro.Click += new System.EventHandler(this.insertaRegistro_Click);
             // 
             // pEntidades
             // 
@@ -490,8 +473,6 @@
         private System.Windows.Forms.Label lbltextoA;
         private System.Windows.Forms.Label lblEntidad;
         private System.Windows.Forms.ToolStripMenuItem btn_Registro;
-        private System.Windows.Forms.ToolStripMenuItem insertaRegistroToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem eliminaRegistroToolStripMenuItem;
     }
 }
 

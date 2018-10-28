@@ -6,7 +6,7 @@ using System.IO;
 
 namespace Archivos
 {
-    class Archivo
+    public class Archivo
     {
 
         string fullname;
