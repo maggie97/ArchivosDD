@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,33 +11,79 @@ namespace Archivos
     {
         public long firstReg = 0;
         List<List<string>> registros;
+        Entidad entidad;
+        
+
         public ArchivoRegistros(string fullname, Entidad e ) : base(fullname)
         {
-            nuevoArch();
             registros = new List<List<string>>();
+            entidad = e;
+            if (!File.Exists(fullname))
+                nuevoArch();
+            else
+                leerArch();
+            
+            
         }
         public void sobreescribirArch()
         {
-            foreach(List<string> reg in registros)
-            {
-                foreach(string val in reg)
-                { 
-                    long l;
-                    int num;
-
-                    if(Int64.TryParse(val, out l))
+            foreach(List<string> reg in entidad.Registros)
+            { 
+                using (BinaryWriter writer = new BinaryWriter(File.Open(base.Fullname, FileMode.Open)))
+                {
+                    long var = Convert.ToInt64(reg[0]);
+                    writer.Seek(Convert.ToInt32(var), SeekOrigin.Begin);
+                    writer.Write(var);
+                    for (int i = 1; i < reg.Count - 1; i++)
                     {
-                        
+                        if (entidad.Atrib[i -1].Tipo == 'E')
+                        {
+                            while(reg[i].Length <= entidad.Atrib[i - 1].Longitud) { reg[i].Insert(0, "0"); }
+                            int val = Convert.ToInt32(reg[i]);
+                            writer.Write(val);
+                        }
+                        else
+                        {
+                            while (reg[i].Length <= entidad.Atrib[i - 1].Longitud) { reg[i] += " "; }
+                            writer.Write(reg[i]);
+                        }
                     }
-                    else if(Int32.TryParse(val, out num))
+                    var = Convert.ToInt64(reg.Last());
+                    writer.Write(var);
+                } 
+            }
+        }
+        public void leerArch()
+        {
+            entidad.Registros = new List<List<string>>(); 
+            using(BinaryReader reader = new BinaryReader(File.Open(base.Fullname, FileMode.Open)))
+            {                
+                try
+                {
+                    Console.WriteLine(reader.PeekChar());
+                    while (reader.PeekChar() != -1)
                     {
-
-                    }
-                    else
-                    {
-
+                        List<string> r = new List<string>();
+                        r.Add(reader.ReadInt64().ToString());
+                        foreach (var atrib in entidad.Atrib)
+                        {
+                            if (atrib.Tipo == 'C')
+                            {
+                                var a = reader.ReadChars(atrib.Longitud);
+                                string s = "";
+                                foreach(char c in a) { s += c; }
+                                r.Add(s);
+                            }
+                            else
+                            {
+                                r.Add(reader.ReadInt32().ToString());
+                            }
+                        }
+                        r.Add(reader.ReadInt64().ToString());
+                        entidad.Registros.Add(r);
                     }
                 }
+                catch { }
             }
         }
     }

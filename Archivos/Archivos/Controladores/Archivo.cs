@@ -41,6 +41,9 @@ namespace Archivos
             }
         }
 
-        public void lee() { }       
+        public void elimina()
+        {
+            File.Delete(fullname);
+        }       
     }
 }

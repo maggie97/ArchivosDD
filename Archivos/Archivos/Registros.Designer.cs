@@ -65,8 +65,11 @@
             // 
             this.dgVReg.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgVReg.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgVReg.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnF2;
             this.dgVReg.Location = new System.Drawing.Point(0, 24);
+            this.dgVReg.MultiSelect = false;
             this.dgVReg.Name = "dgVReg";
+            this.dgVReg.ReadOnly = true;
             this.dgVReg.Size = new System.Drawing.Size(556, 355);
             this.dgVReg.TabIndex = 1;
             // 

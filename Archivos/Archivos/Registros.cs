@@ -47,6 +47,7 @@ namespace Archivos
             {
                 dgVReg.Rows.Add(reg.ToArray()); 
             }
+            archivo.sobreescribirArch();
         }
 
         private void insertaToolStripMenuItem_Click(object sender, EventArgs e)
@@ -58,17 +59,33 @@ namespace Archivos
 
         private void eliminaToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if(dgVReg.CurrentCell.RowIndex == 0 && entidad.Atrib.Count > 0)
+            if(dgVReg.CurrentCell.RowIndex == entidad.Dir_Datos && dgVReg.CurrentCell.RowIndex == entidad.Registros.Count)
             {
                 //primer reg y unico reg 
                 entidad.Dir_Datos = -1;
+                //entidad.Registros.RemoveAt(dgVReg.CurrentCell.RowIndex);
+                archivo.elimina();
             }
-            else if(dgVReg.CurrentCell.RowIndex == 0)
+            else if(dgVReg.CurrentCell.RowIndex == entidad.Dir_Datos)
             {
                 //primer reg 
-                entidad.Dir_Datos = Convert.ToInt64(entidad.Registros[dgVReg.CurrentCell.RowIndex][0]);
-                
+                var reg = entidad.Registros[dgVReg.CurrentCell.RowIndex];
+                entidad.Dir_Datos = Convert.ToInt64(reg[entidad.Registros[0].Count - 1]);
+                reg[entidad.Registros[0].Count - 1] = "-1";
+                //entidad.Registros.RemoveAt(dgVReg.CurrentCell.RowIndex);
             }
+            else if(entidad.Registros.Count > 2)
+            {
+                var regElim = entidad.Registros[dgVReg.CurrentCell.RowIndex]; //registro a eliminar 
+                var regAnt = entidad.Registros[dgVReg.CurrentCell.RowIndex - 1]; //reg anterior al eliminado 
+                //var regSig = entidad.Registros[dgVReg.CurrentCell.RowIndex + 1]; // reg siguiente al eliminado 
+                regAnt[entidad.Registros[0].Count - 1] = regElim[entidad.Registros[0].Count - 1];
+                regElim[entidad.Registros[0].Count - 1] = "-1";
+               
+            } 
+            archivo.sobreescribirArch();
+            entidad.Registros.RemoveAt(dgVReg.CurrentCell.RowIndex);
+            actualiza();
         }
     }
 }

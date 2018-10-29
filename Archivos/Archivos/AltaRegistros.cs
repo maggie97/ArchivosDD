@@ -11,6 +11,7 @@ namespace Archivos
 
         Entidad ent;
         String[] reg;
+        Archivo a;
 
         //List<string> reg;
         //List<List<string>> conjunto;
@@ -27,7 +28,7 @@ namespace Archivos
             lenght = ent.Atrib.Count;
             reg =  new string[lenght + 2];
             DirReg = 0;
-
+            a = r;
 
             foreach (Atributo a in Ent.Atrib)
             {
@@ -112,13 +113,12 @@ namespace Archivos
             }
             else
             {
-                DirReg = (ent.Registros == null) ? 0 : ent.Registros.Count * longitud + 16;
+                DirReg = a.Longitud;//(ent.Registros == null) ? 0 : ent.Registros.Count * longitud + 16;
                 regAct = dgEntidad.CurrentRow.Index;
                 reg[lenght + 1] = "-1" ;
                 reg[0] = DirReg.ToString();
                 ent.nuevoReg(UltimoReg);
-                //DirReg += ent.Peso;
-                //registros.Add(UltimoReg); //añade un nuevo registro
+                
                 reg = new string[lenght + 2];
                 dgEntidad.Rows.Clear();
                 actualizado();

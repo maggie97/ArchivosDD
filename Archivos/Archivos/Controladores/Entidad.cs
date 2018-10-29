@@ -82,11 +82,11 @@ namespace Archivos
         }
 
         public List<Atributo> Atrib { get => atrib; set => atrib = value; }
-        public List<List<string>> Registros { get => registros;  }
+        public List<List<string>> Registros { get => registros; set => registros = value; }
 
         internal void nuevoReg(List<string> atributos)
         {
-            if (Registros == null)
+            if (Registros == null || Registros.Count == 0)
             {
                 registros = new List<List<string>>();
                 dir_Datos = Convert.ToInt64(atributos[0]);
