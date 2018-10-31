@@ -21,9 +21,7 @@ namespace Archivos
             if (!File.Exists(fullname))
                 nuevoArch();
             else
-                leerArch();
-            
-            
+                leerArch(e.Dir_Datos); 
         }
         public void sobreescribirArch()
         {
@@ -35,7 +33,7 @@ namespace Archivos
                     writer.Seek(Convert.ToInt32(var), SeekOrigin.Begin);
                     writer.Write(var);
                     for (int i = 1; i < reg.Count - 1; i++)
-                    {
+                    { 
                         if (entidad.Atrib[i -1].Tipo == 'E')
                         {
                             //while(reg[i].Length < entidad.Atrib[i - 1].Longitud) { reg[i].Insert(0, "0"); }
@@ -44,6 +42,7 @@ namespace Archivos
                         }
                         else
                         {
+                            if (reg[i].Contains("/t")) reg[i].Replace("/t", "");
                             while (reg[i].Length < entidad.Atrib[i - 1].Longitud ) { reg[i] += " "; }
                             string val = reg[i].Substring(0, entidad.Atrib[i - 1].Longitud -1 );
                             writer.Write(val);
@@ -54,16 +53,18 @@ namespace Archivos
                 } 
             }
         }
-        public void leerArch()
+        public void leerArch(long dir)
         {
             entidad.Registros = new List<List<string>>(); 
             using(BinaryReader reader = new BinaryReader(File.Open(base.Fullname, FileMode.Open), Encoding.ASCII))
             {                
                 try
-                {
+                { 
+                    reader.BaseStream.Seek(dir, SeekOrigin.Begin);
                     Console.WriteLine(reader.PeekChar());
                     while (reader.PeekChar() != -1)
                     {
+                        
                         List<string> r = new List<string>();
                         r.Add(reader.ReadInt64().ToString());
                         foreach (var atrib in entidad.Atrib)
@@ -81,6 +82,10 @@ namespace Archivos
                         }
                         r.Add(reader.ReadInt64().ToString());
                         entidad.Registros.Add(r);
+                        dir = Convert.ToInt64(r.Last());
+                        if (dir == -1) break;
+                        reader.BaseStream.Seek(dir, SeekOrigin.Begin);
+                        Console.WriteLine(reader.PeekChar());
                     }
                 }
                 catch { }
