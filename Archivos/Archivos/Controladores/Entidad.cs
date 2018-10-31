@@ -16,6 +16,8 @@ namespace Archivos
         List<Atributo> atrib;
         List<List<string>> registros;
 
+        int cve_busqeda = -1;
+
         public Entidad(char[] nombreEntidad, long dir_Entidad, long dir_Atributos, long dir_Datos)
         {
             //this.nombreEntidad = nombreEntidad;
@@ -89,18 +91,38 @@ namespace Archivos
             if (Registros == null || Registros.Count == 0)
             {
                 registros = new List<List<string>>();
-                dir_Datos = Convert.ToInt64(atributos[0]);
-            }
-            else if (!atrib.Exists(o => o.TipoIndice == 0))
-            {
-                //ordena
-                Console.Write("holi ordena");
-            }
-            else
+                
+            } 
+            /*else
             {
                 registros.Last()[atributos.Count - 1] = atributos.First();
-            }
+            }*/
             registros.Add(atributos);
+            ordenaReg();
+            
+
+        }
+        public void ordenaReg()
+        {
+            if (atrib.Exists(o => o.TipoIndice == 1))
+            {
+                //ordena 
+                int i = atrib.FindIndex(o => o.TipoIndice == 1);
+                registros = registros.OrderBy(o => o[i + 1]).ToList();
+            }
+            for (int i = 0; registros.Count > 0 && i < registros.Count; i++)
+            {
+                if (registros.Count - 1 == i)
+                {
+                    registros[i][atrib.Count + 1] = "-1";
+                    break;
+                }
+                registros[i][atrib.Count + 1] = registros[i + 1].First();
+            }
+            if(registros.Count > 0) 
+                dir_Datos = Convert.ToInt64(registros.First()[0]);
+            else
+                dir_Datos = -1 ;
         }
     }
 }

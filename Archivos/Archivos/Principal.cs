@@ -63,7 +63,7 @@ namespace Archivos
             NuevoAtributo nuevo = new NuevoAtributo(ddd.EntidadesOrden);
             if (nuevo.ShowDialog() == DialogResult.OK)
             {
-                Entidad ent = ddd.nuevoAtributo(nuevo.Nombre_atributo, nuevo.Tipo, nuevo.Long, nuevo.Index);
+                Entidad ent = ddd.nuevoAtributo(nuevo.Nombre_atributo, nuevo.Tipo, nuevo.Long, nuevo.Index, nuevo.TipoIndex);
                 AtribEnt(ent);
                 lblEntidad.Text = ent.sNombre;
                 actualizaEnt();

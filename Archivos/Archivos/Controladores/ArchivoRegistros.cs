@@ -38,14 +38,15 @@ namespace Archivos
                     {
                         if (entidad.Atrib[i -1].Tipo == 'E')
                         {
-                            while(reg[i].Length <= entidad.Atrib[i - 1].Longitud) { reg[i].Insert(0, "0"); }
+                            //while(reg[i].Length < entidad.Atrib[i - 1].Longitud) { reg[i].Insert(0, "0"); }
                             int val = Convert.ToInt32(reg[i]);
                             writer.Write(val);
                         }
                         else
                         {
-                            while (reg[i].Length <= entidad.Atrib[i - 1].Longitud) { reg[i] += " "; }
-                            writer.Write(reg[i]);
+                            while (reg[i].Length < entidad.Atrib[i - 1].Longitud ) { reg[i] += " "; }
+                            string val = reg[i].Substring(0, entidad.Atrib[i - 1].Longitud -1 );
+                            writer.Write(val);
                         }
                     }
                     var = Convert.ToInt64(reg.Last());
@@ -56,7 +57,7 @@ namespace Archivos
         public void leerArch()
         {
             entidad.Registros = new List<List<string>>(); 
-            using(BinaryReader reader = new BinaryReader(File.Open(base.Fullname, FileMode.Open)))
+            using(BinaryReader reader = new BinaryReader(File.Open(base.Fullname, FileMode.Open), Encoding.ASCII))
             {                
                 try
                 {
@@ -66,18 +67,17 @@ namespace Archivos
                         List<string> r = new List<string>();
                         r.Add(reader.ReadInt64().ToString());
                         foreach (var atrib in entidad.Atrib)
-                        {
+                        { 
                             if (atrib.Tipo == 'C')
-                            {
-                                var a = reader.ReadChars(atrib.Longitud);
+                            { 
+                                var a = reader.ReadChars(atrib.Longitud ); 
                                 string s = "";
                                 foreach(char c in a) { s += c; }
                                 r.Add(s);
                             }
-                            else
-                            {
+                            else 
                                 r.Add(reader.ReadInt32().ToString());
-                            }
+                            
                         }
                         r.Add(reader.ReadInt64().ToString());
                         entidad.Registros.Add(r);
@@ -85,6 +85,7 @@ namespace Archivos
                 }
                 catch { }
             }
+            entidad.ordenaReg();
         }
     }
 }

@@ -273,9 +273,9 @@ namespace Archivos
             }
         }
         #region atributos
-        public Entidad nuevoAtributo(string nombre, int tipo, int longi, int iEnt)
+        public Entidad nuevoAtributo(string nombre, int tipo, int longi, int iEnt, int TipoIndice)
         {
-            Atributo nuevo = new Atributo(nombre, Longitud, tipo, longi, 0, -1, -1);
+            Atributo nuevo = new Atributo(nombre, Longitud, tipo, longi, TipoIndice, -1, -1);
             list_entidades[iEnt].nuevoA(nuevo);
             //guardaAtrib(nuevo);
             obj.Add(nuevo);

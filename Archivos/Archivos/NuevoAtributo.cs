@@ -42,5 +42,7 @@ namespace Archivos
         public int Tipo { get => cmbTipo.SelectedIndex; }//cmbTipo.SelectedText[0];}
         public string Entidad { get => cmb_Entidad.SelectedItem.ToString(); }
         public int Index { get => cmb_Entidad.SelectedIndex; }
+
+        public int TipoIndex { get => cmbIndice.SelectedIndex; }
     }
 }
