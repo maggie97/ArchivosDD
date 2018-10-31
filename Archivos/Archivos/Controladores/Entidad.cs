@@ -109,7 +109,7 @@ namespace Archivos
                 //ordena 
                 int i = atrib.FindIndex(o => o.TipoIndice == 1);
                 registros = registros.OrderBy(o => o[i + 1]).ToList();
-                registros.Sort((a, b) => (a[i].CompareTo(b[i])));
+                //registros.Sort((a, b) => (a[i].CompareTo(b[i])));
             }
             for (int i = 0; registros.Count > 0 && i < registros.Count; i++)
             {

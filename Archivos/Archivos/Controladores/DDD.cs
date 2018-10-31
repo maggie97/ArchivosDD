@@ -60,7 +60,7 @@ namespace Archivos
                         
                         dir = reader.ReadInt64();
                         Console.WriteLine(reader.PeekChar()); 
-                        if (reader.PeekChar() > 70 || reader.PeekChar()<60)
+                        if (reader.PeekChar() >= 70 || reader.PeekChar()<60)
                         {
                             list_insercion.Add(leeEntidad(reader, nomb, dir));
                             list_entidades.Add(list_insercion.Last());

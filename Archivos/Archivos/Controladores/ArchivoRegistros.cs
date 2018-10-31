@@ -70,10 +70,13 @@ namespace Archivos
                         foreach (var atrib in entidad.Atrib)
                         { 
                             if (atrib.Tipo == 'C')
-                            { 
-                                var a = reader.ReadChars(atrib.Longitud ); 
+                            {  
+                                var a = reader.ReadChars(atrib.Longitud );
                                 string s = "";
-                                foreach(char c in a) { s += c; }
+                                if (a[0] != '\t' && a[0] != '\u0013')
+                                    foreach (char c in a) { s += c; }
+                                else
+                                    for (int i = 1; i < a.Length; i++) s += a[i];
                                 r.Add(s);
                             }
                             else 
