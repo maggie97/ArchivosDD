@@ -92,15 +92,9 @@ namespace Archivos
             {
                 registros = new List<List<string>>();
                 
-            } 
-            /*else
-            {
-                registros.Last()[atributos.Count - 1] = atributos.First();
-            }*/
+            }  
             registros.Add(atributos);
             ordenaReg();
-            
-
         }
         public void ordenaReg()
         {

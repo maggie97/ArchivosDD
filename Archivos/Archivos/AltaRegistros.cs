@@ -10,7 +10,7 @@ namespace Archivos
         public delegate void Actualiza();
 
         Entidad ent;
-        String[] reg;
+        String[] reg; 
         Archivo a;
 
         //List<string> reg;
@@ -36,7 +36,24 @@ namespace Archivos
             }
             
         }
+        public AltaRegistros(Entidad entidad, Archivo r, List<string> reg)
+        {
+            InitializeComponent();
+            lblNomEntidad.Text = entidad.sNombre;
+            ent = entidad;
+            lenght = ent.Atrib.Count;
+            this.reg = reg.ToArray();
+            entidad.Registros.Remove(reg);
+            DirReg = Convert.ToInt64(reg[0]);
+            a = r;
 
+            foreach (Atributo a in Ent.Atrib)
+            {
+                dgEntidad.Columns.Add("clm_" + a.sNombre, a.sNombre); 
+            }
+            dgEntidad.Rows.Add(reg);
+            btn_Insert.Visible = false;
+        }
         public Entidad Ent { get => ent; /*set => ent = value;*/ }
         public List<string> UltimoReg { get => new List<string>(reg); /*set => reg = value;*/ }
         private int longitud
@@ -99,7 +116,7 @@ namespace Archivos
 
         private void btn_Insert_Click(object sender, EventArgs e)
         {
-            bool cont = true;
+            /*bool cont = true;
 
             for (int i = 1; i < lenght && cont; i++)
             {
@@ -109,9 +126,9 @@ namespace Archivos
             {
                 MessageBox.Show("Faltan Campos por rellenar", "Error", MessageBoxButtons.OK,
                     MessageBoxIcon.Error, MessageBoxDefaultButton.Button1, MessageBoxOptions.ServiceNotification);
-                cont = false;
-            }
-            else
+                //cont = false;
+            }*/
+            if(camposVacios()) 
             {
                 DirReg = a.Longitud;//(ent.Registros == null) ? 0 : ent.Registros.Count * longitud + 16;
                 regAct = dgEntidad.CurrentRow.Index;
@@ -121,6 +138,32 @@ namespace Archivos
                 
                 reg = new string[lenght + 2];
                 dgEntidad.Rows.Clear();
+                actualizado();
+            }
+        }
+
+        private bool camposVacios()
+        {
+            bool cont = true;
+            for (int i = 1; i < lenght && cont; i++)
+            {
+                cont = ((reg[i] != null) && !(reg[i].Equals(""))) ? true : false;
+            }
+            if (cont == false)
+            {
+                MessageBox.Show("Faltan Campos por rellenar", "Error", MessageBoxButtons.OK,
+                    MessageBoxIcon.Error, MessageBoxDefaultButton.Button1, MessageBoxOptions.ServiceNotification);
+                //cont = false;
+            }
+            return cont;
+        }
+
+        private void btnAceptar_Click(object sender, EventArgs e)
+        {
+            if (!camposVacios())
+            { 
+                ent.nuevoReg(UltimoReg); 
+                
                 actualizado();
             }
         }

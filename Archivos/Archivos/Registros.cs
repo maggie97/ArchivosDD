@@ -77,10 +77,23 @@ namespace Archivos
                 regAnt[entidad.Registros[0].Count - 1] = regElim[entidad.Registros[0].Count - 1];
             }
             regElim[entidad.Registros[0].Count - 1] = "-1";
-            entidad.ordenaReg();
+            //entidad.ordenaReg();
+            entidad.Registros.Remove(regElim);
             archivo.sobreescribirArch();
             entidad.Registros.RemoveAt(dgVReg.CurrentCell.RowIndex);
             actualiza();
+        }
+
+        private void modificaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if(dgVReg.CurrentCell.Value.ToString() != "")
+            {
+                int i = dgVReg.CurrentCell.RowIndex;
+                var CurrentReg = entidad.Registros[i];
+                AltaRegistros a = new AltaRegistros(entidad, archivo, CurrentReg);
+                //if()
+            }
+            
         }
     }
 }
