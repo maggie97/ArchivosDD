@@ -80,7 +80,8 @@ namespace Archivos
             //entidad.ordenaReg();
             entidad.Registros.Remove(regElim);
             archivo.sobreescribirArch();
-            entidad.Registros.RemoveAt(dgVReg.CurrentCell.RowIndex);
+            //entidad.Registros.RemoveAt(dgVReg.CurrentCell.RowIndex);
+            archivo.leerArch(entidad.Dir_Datos);
             actualiza();
         }
 
@@ -92,8 +93,7 @@ namespace Archivos
                 var CurrentReg = entidad.Registros[i];
                 AltaRegistros a = new AltaRegistros(entidad, archivo, CurrentReg);
                 //if()
-            }
-            
+            } 
         }
     }
 }

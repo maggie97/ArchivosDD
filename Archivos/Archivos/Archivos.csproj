@@ -51,6 +51,20 @@
     <Compile Include="Controladores\Atributo.cs" />
     <Compile Include="Controladores\DDD.cs" />
     <Compile Include="Controladores\Entidad.cs" />
+    <Compile Include="Controladores\Primario.cs" />
+    <Compile Include="Controladores\Secundario.cs" />
+    <Compile Include="Form1.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form1.Designer.cs">
+      <DependentUpon>Form1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Indices.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Indices.Designer.cs">
+      <DependentUpon>Indices.cs</DependentUpon>
+    </Compile>
     <Compile Include="NuevaEntidad.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -90,6 +104,12 @@
     <Compile Include="Registros.Designer.cs">
       <DependentUpon>Registros.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="Form1.resx">
+      <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Indices.resx">
+      <DependentUpon>Indices.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="NuevaEntidad.resx">
       <DependentUpon>NuevaEntidad.cs</DependentUpon>
     </EmbeddedResource>

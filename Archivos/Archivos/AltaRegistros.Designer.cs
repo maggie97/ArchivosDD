@@ -41,7 +41,7 @@
             // dgEntidad
             // 
             this.dgEntidad.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgEntidad.Location = new System.Drawing.Point(37, 62);
+            this.dgEntidad.Location = new System.Drawing.Point(12, 62);
             this.dgEntidad.Name = "dgEntidad";
             this.dgEntidad.Size = new System.Drawing.Size(658, 80);
             this.dgEntidad.TabIndex = 0;
@@ -51,7 +51,7 @@
             // btnAceptar
             // 
             this.btnAceptar.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.btnAceptar.Location = new System.Drawing.Point(596, 178);
+            this.btnAceptar.Location = new System.Drawing.Point(511, 148);
             this.btnAceptar.Name = "btnAceptar";
             this.btnAceptar.Size = new System.Drawing.Size(75, 23);
             this.btnAceptar.TabIndex = 2;
@@ -62,7 +62,7 @@
             // lblNomEntidad
             // 
             this.lblNomEntidad.AutoSize = true;
-            this.lblNomEntidad.Location = new System.Drawing.Point(354, 23);
+            this.lblNomEntidad.Location = new System.Drawing.Point(208, 31);
             this.lblNomEntidad.Name = "lblNomEntidad";
             this.lblNomEntidad.Size = new System.Drawing.Size(55, 13);
             this.lblNomEntidad.TabIndex = 3;
@@ -71,7 +71,7 @@
             // lblReg
             // 
             this.lblReg.AutoSize = true;
-            this.lblReg.Location = new System.Drawing.Point(217, 23);
+            this.lblReg.Location = new System.Drawing.Point(71, 31);
             this.lblReg.Name = "lblReg";
             this.lblReg.Size = new System.Drawing.Size(119, 13);
             this.lblReg.TabIndex = 4;
@@ -80,7 +80,7 @@
             // btn_Cancelar
             // 
             this.btn_Cancelar.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btn_Cancelar.Location = new System.Drawing.Point(37, 178);
+            this.btn_Cancelar.Location = new System.Drawing.Point(349, 148);
             this.btn_Cancelar.Name = "btn_Cancelar";
             this.btn_Cancelar.Size = new System.Drawing.Size(75, 23);
             this.btn_Cancelar.TabIndex = 5;
@@ -89,7 +89,7 @@
             // 
             // btn_Insert
             // 
-            this.btn_Insert.Location = new System.Drawing.Point(474, 178);
+            this.btn_Insert.Location = new System.Drawing.Point(430, 148);
             this.btn_Insert.Name = "btn_Insert";
             this.btn_Insert.Size = new System.Drawing.Size(75, 23);
             this.btn_Insert.TabIndex = 6;
@@ -100,7 +100,7 @@
             // lblDato
             // 
             this.lblDato.AutoSize = true;
-            this.lblDato.Location = new System.Drawing.Point(448, 23);
+            this.lblDato.Location = new System.Drawing.Point(302, 31);
             this.lblDato.Name = "lblDato";
             this.lblDato.Size = new System.Drawing.Size(42, 13);
             this.lblDato.TabIndex = 7;
@@ -110,7 +110,8 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(737, 213);
+            this.CancelButton = this.btn_Cancelar;
+            this.ClientSize = new System.Drawing.Size(678, 176);
             this.Controls.Add(this.lblDato);
             this.Controls.Add(this.btn_Insert);
             this.Controls.Add(this.btn_Cancelar);

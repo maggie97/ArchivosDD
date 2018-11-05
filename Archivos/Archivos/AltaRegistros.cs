@@ -96,7 +96,7 @@ namespace Archivos
 
         private void dgEntidad_CellEndEdit(object sender, DataGridViewCellEventArgs e)
         {
-            if (dgEntidad.CurrentCell == null) return;
+            if (dgEntidad.CurrentCell == null || dgEntidad.CurrentCell.Value == null) return;
             lblDato.Text = dgEntidad.CurrentCell.Value.ToString(); 
             if ( regAct == dgEntidad.CurrentRow.Index)
             { 
@@ -115,19 +115,7 @@ namespace Archivos
         }
 
         private void btn_Insert_Click(object sender, EventArgs e)
-        {
-            /*bool cont = true;
-
-            for (int i = 1; i < lenght && cont; i++)
-            {
-                cont = ((reg[i] != null) && !(reg[i].Equals(""))) ? true : false;
-            }
-            if (cont == false)
-            {
-                MessageBox.Show("Faltan Campos por rellenar", "Error", MessageBoxButtons.OK,
-                    MessageBoxIcon.Error, MessageBoxDefaultButton.Button1, MessageBoxOptions.ServiceNotification);
-                //cont = false;
-            }*/
+        { 
             if(camposVacios()) 
             {
                 DirReg = a.Longitud;//(ent.Registros == null) ? 0 : ent.Registros.Count * longitud + 16;
@@ -145,7 +133,7 @@ namespace Archivos
         private bool camposVacios()
         {
             bool cont = true;
-            for (int i = 1; i < lenght && cont; i++)
+            for (int i = 1; i <= lenght && cont; i++)
             {
                 cont = ((reg[i] != null) && !(reg[i].Equals(""))) ? true : false;
             }
@@ -160,7 +148,7 @@ namespace Archivos
 
         private void btnAceptar_Click(object sender, EventArgs e)
         {
-            if (!camposVacios())
+            if (camposVacios())
             { 
                 ent.nuevoReg(UltimoReg); 
                 
