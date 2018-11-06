@@ -1,6 +1,6 @@
 ﻿namespace Archivos
 {
-    partial class Registros
+    partial class VistaRegistros
     {
         /// <summary>
         /// Required designer variable.

@@ -85,8 +85,25 @@ namespace Archivos
 
         private void insertaRegistro_Click(object sender, EventArgs e)
         {
-
-            if (Enable_Entidades_Atributos()) 
+            Entidad ent;
+            if(dgEntidades.CurrentCell.Value == null)
+            {
+                MessageBox.Show("Selecciona una entidad", "Sin Entidades", MessageBoxButtons.OK, MessageBoxIcon.Error,
+                   MessageBoxDefaultButton.Button1, MessageBoxOptions.ServiceNotification);
+                return;
+            }
+            else
+            {
+                ent = ddd.EntidadesOrden.Find(o => o.sNombre.Contains(lblEntidad.Text));
+                VistaRegistros ventanaReg = new VistaRegistros(ent);
+                ventanaReg.actualizado += new VistaRegistros.Actualiza(actualizaEnt);
+                ventanaReg.actualizado += new VistaRegistros.Actualiza(ddd.sobreescribe_archivo);
+                ventanaReg.Show();
+                actualizaEnt();
+                AtribEnt(lblEntidad.Text);
+                Enable_Entidades_Atributos(false);
+            }
+            if (Enable_Entidades_Atributos() ) 
             {
                 if (MessageBox.Show("Al ingresar un registro a este Diccionario de Datos " +
                     "ya no podras ingresar ninguna Entidad o Atributo. \n ¿Estas seguro de que deseas continuar?",
@@ -96,9 +113,9 @@ namespace Archivos
                 else
                     Enable_Entidades_Atributos(false);
             }
-            if (lblEntidad.Text != "<Entidad>")
+            /*if (lblEntidad.Text != "<Entidad>")
             {
-                Entidad ent = ddd.EntidadesOrden.Find(o => o.sNombre.Contains(lblEntidad.Text));
+                ent = ddd.EntidadesOrden.Find(o => o.sNombre.Contains(lblEntidad.Text));
                 Registros ventanaReg = new Registros(ent);
                 ventanaReg.actualizado += new Registros.Actualiza(actualizaEnt);
                 ventanaReg.actualizado += new Registros.Actualiza(ddd.sobreescribe_archivo);
@@ -106,11 +123,11 @@ namespace Archivos
                 actualizaEnt();
                 AtribEnt(lblEntidad.Text);
             }
-            else
+           /* else
             {
                 MessageBox.Show("Selecciona una entidad", "Sin Entidades", MessageBoxButtons.OK, MessageBoxIcon.Error,
                     MessageBoxDefaultButton.Button1, MessageBoxOptions.ServiceNotification);
-            }
+            }*/
 
         } 
         #endregion

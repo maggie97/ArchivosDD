@@ -41,9 +41,9 @@
             // dgEntidad
             // 
             this.dgEntidad.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgEntidad.Location = new System.Drawing.Point(12, 62);
+            this.dgEntidad.Location = new System.Drawing.Point(13, 55);
             this.dgEntidad.Name = "dgEntidad";
-            this.dgEntidad.Size = new System.Drawing.Size(658, 80);
+            this.dgEntidad.Size = new System.Drawing.Size(379, 80);
             this.dgEntidad.TabIndex = 0;
             this.dgEntidad.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgEntidad_CellEndEdit);
             this.dgEntidad.RowLeave += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgEntidad_RowLeave);
@@ -51,7 +51,7 @@
             // btnAceptar
             // 
             this.btnAceptar.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.btnAceptar.Location = new System.Drawing.Point(511, 148);
+            this.btnAceptar.Location = new System.Drawing.Point(236, 141);
             this.btnAceptar.Name = "btnAceptar";
             this.btnAceptar.Size = new System.Drawing.Size(75, 23);
             this.btnAceptar.TabIndex = 2;
@@ -80,7 +80,7 @@
             // btn_Cancelar
             // 
             this.btn_Cancelar.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btn_Cancelar.Location = new System.Drawing.Point(349, 148);
+            this.btn_Cancelar.Location = new System.Drawing.Point(317, 141);
             this.btn_Cancelar.Name = "btn_Cancelar";
             this.btn_Cancelar.Size = new System.Drawing.Size(75, 23);
             this.btn_Cancelar.TabIndex = 5;
@@ -89,7 +89,7 @@
             // 
             // btn_Insert
             // 
-            this.btn_Insert.Location = new System.Drawing.Point(430, 148);
+            this.btn_Insert.Location = new System.Drawing.Point(155, 141);
             this.btn_Insert.Name = "btn_Insert";
             this.btn_Insert.Size = new System.Drawing.Size(75, 23);
             this.btn_Insert.TabIndex = 6;
@@ -111,7 +111,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btn_Cancelar;
-            this.ClientSize = new System.Drawing.Size(678, 176);
+            this.ClientSize = new System.Drawing.Size(410, 176);
             this.Controls.Add(this.lblDato);
             this.Controls.Add(this.btn_Insert);
             this.Controls.Add(this.btn_Cancelar);

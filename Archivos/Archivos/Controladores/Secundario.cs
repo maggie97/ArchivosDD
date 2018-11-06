@@ -6,7 +6,11 @@ using System.Threading.Tasks;
 
 namespace Archivos.Controladores
 {
-    class Secundario
+    class Secundario : Indice
     {
+        public Secundario(string nombre): base (nombre)
+        {
+            cajoncitos = new Cajon[50];
+        }
     }
 }

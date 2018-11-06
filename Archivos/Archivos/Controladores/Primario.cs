@@ -6,7 +6,18 @@ using System.Threading.Tasks;
 
 namespace Archivos.Controladores
 {
-    class Primario
+    public class Primario : Indice
     {
+        //Cajon[] primario;
+        Cajon primario;
+        public Primario(bool letras, string Nombre) : base(Nombre)
+        {
+            cajoncitos = new Cajon[100];
+            cajoncitos.Initialize();
+            int inicia = (letras) ? 49 : 65;
+            primario = new Cajon(0); 
+        }
+
+        public Cajon prim { get => primario; set => primario = value; }
     }
 }

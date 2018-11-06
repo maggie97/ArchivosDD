@@ -18,7 +18,7 @@ namespace Archivos
         {
             registros = new List<List<string>>();
             entidad = e;
-            if (!File.Exists(fullname) || e.Dir_sig == -1)
+            if (!File.Exists(fullname) || e.Dir_Datos== -1)
                 nuevoArch();
             else
                 leerArch(e.Dir_Datos); 
@@ -26,7 +26,7 @@ namespace Archivos
         public void sobreescribirArch()
         {
             foreach(List<string> reg in entidad.Registros)
-            { 
+            {
                 using (BinaryWriter writer = new BinaryWriter(File.Open(base.Fullname, FileMode.Open)))
                 {
                     long var = Convert.ToInt64(reg[0]);

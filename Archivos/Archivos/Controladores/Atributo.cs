@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Archivos.Controladores;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,7 +14,7 @@ namespace Archivos
         char tipo;
         int longitud;
         int tipoIndice = 0;
-
+        Indice ind; 
         public Atributo(string nombre, long dirAtributo, int tipo, int longitud, int tipoIndice, long dirIndice, long dirs)
         {
             for (int i = 0; i < 30; i++)
@@ -39,6 +40,7 @@ namespace Archivos
             }
             this.longitud = longitud;
             this.tipoIndice = tipoIndice;
+            
             this.dirIndice = dirIndice;
             dirSig = dirs;
         }
@@ -65,5 +67,18 @@ namespace Archivos
 
         public long DirSig { get => dirSig; set => dirSig = value; }
         public long DirIndice { get => dirIndice; set => dirIndice = value; }
+
+        public void creaIndice()
+        {
+            switch (tipoIndice)
+            {
+                case 1:
+                    ind = new Primario((this.tipo == 'C'), sNombre);
+                    break;
+                case 2:
+                    ind = new Secundario(sNombre);
+                    break;
+            }
+        }
     }
 }

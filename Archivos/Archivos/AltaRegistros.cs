@@ -12,14 +12,10 @@ namespace Archivos
         Entidad ent;
         String[] reg; 
         Archivo a;
-
-        //List<string> reg;
-        //List<List<string>> conjunto;
+         
         int regAct = 0 ;
         int lenght = 0;
-        long DirReg;
-        //Registros registros;
-        //Archivo a;
+        long DirReg; 
         public AltaRegistros(Entidad entidad, Archivo r)
         {
             InitializeComponent();
@@ -29,17 +25,15 @@ namespace Archivos
             reg =  new string[lenght + 2];
             DirReg = 0;
             a = r;
-
-            foreach (Atributo a in Ent.Atrib)
-            {
-                dgEntidad.Columns.Add("clm_" + a.sNombre, a.sNombre);
-            }
-            
+            btnAceptar.Visible = false;
+            foreach (Atributo a in Ent.Atrib) 
+                dgEntidad.Columns.Add("clm_" + a.sNombre, a.sNombre); 
         }
         public AltaRegistros(Entidad entidad, Archivo r, List<string> reg)
         {
             InitializeComponent();
             lblNomEntidad.Text = entidad.sNombre;
+            btn_Insert.Visible = false;
             ent = entidad;
             lenght = ent.Atrib.Count;
             this.reg = reg.ToArray();
@@ -47,35 +41,25 @@ namespace Archivos
             DirReg = Convert.ToInt64(reg[0]);
             a = r;
 
-            foreach (Atributo a in Ent.Atrib)
-            {
+            foreach (Atributo a in Ent.Atrib) 
                 dgEntidad.Columns.Add("clm_" + a.sNombre, a.sNombre); 
-            }
-            dgEntidad.Rows.Add(reg);
+            
+            dgEntidad.Rows.Insert(0, reg.GetRange(1, ent.Atrib.Count).ToArray());
             btn_Insert.Visible = false;
         }
-        public Entidad Ent { get => ent; /*set => ent = value;*/ }
-        public List<string> UltimoReg { get => new List<string>(reg); /*set => reg = value;*/ }
+        public Entidad Ent { get => ent;  }
+        public List<string> UltimoReg { get => new List<string>(reg); }
         private int longitud
         {
-            get
-            {
+            get {
                 int longReg = 0;
-                foreach (Atributo a in ent.Atrib)
-                {
-                    longReg += a.Longitud;
-                }
-
+                foreach (Atributo a in ent.Atrib) longReg += a.Longitud; 
                 return longReg;
             }
-        }
+        } 
 
-        //public List<List<string>> ConjuntoReg { get => conjunto; }
-
-        private void AltaRegistros_Load(object sender, EventArgs e)
-
-        {
-            //dgEntidad.Columns.Add("clm_DirReg", "Direccion del Registro");
+        private void AltaRegistros_Load(object sender, EventArgs e) 
+        { 
             for (int i = 1; i < lenght; i++)
             {
                 for (int j = 0; j < ent.Atrib[i].Longitud; j++)
@@ -89,9 +73,7 @@ namespace Archivos
                             break;
                     }
             }
-            dgEntidad.Rows.Add();
-            //dgEntidad.CurrentCell.Value = reg[0];
-            //dgEntidad.Columns.Add("clm_DirSig", "Direccion del Sig Reg");
+            dgEntidad.Rows.Add(); 
         }
 
         private void dgEntidad_CellEndEdit(object sender, DataGridViewCellEventArgs e)
@@ -100,11 +82,8 @@ namespace Archivos
             lblDato.Text = dgEntidad.CurrentCell.Value.ToString(); 
             if ( regAct == dgEntidad.CurrentRow.Index)
             { 
-                reg[dgEntidad.CurrentCell.ColumnIndex+1] = dgEntidad.CurrentCell.Value.ToString();
-                //reg.Add(dgEntidad.CurrentCell.Value.ToString());
-                //regAct = dgEntidad.CurrentRow.Index;
-                regAct = (dgEntidad.CurrentCell.ColumnIndex == ent.Atrib.Count-1) ?  -1: regAct; 
-                //if (dgEntidad.CurrentCell.ColumnIndex == ent.Atrib.Count) regAct = -1;
+                reg[dgEntidad.CurrentCell.ColumnIndex+1] = dgEntidad.CurrentCell.Value.ToString(); 
+                regAct = (dgEntidad.CurrentCell.ColumnIndex == ent.Atrib.Count-1) ?  -1: regAct;  
             }
             
         }
@@ -118,7 +97,7 @@ namespace Archivos
         { 
             if(camposVacios()) 
             {
-                DirReg = a.Longitud;//(ent.Registros == null) ? 0 : ent.Registros.Count * longitud + 16;
+                DirReg = a.Longitud;
                 regAct = dgEntidad.CurrentRow.Index;
                 reg[lenght + 1] = "-1" ;
                 reg[0] = DirReg.ToString();
@@ -140,8 +119,7 @@ namespace Archivos
             if (cont == false)
             {
                 MessageBox.Show("Faltan Campos por rellenar", "Error", MessageBoxButtons.OK,
-                    MessageBoxIcon.Error, MessageBoxDefaultButton.Button1, MessageBoxOptions.ServiceNotification);
-                //cont = false;
+                    MessageBoxIcon.Error, MessageBoxDefaultButton.Button1, MessageBoxOptions.ServiceNotification); 
             }
             return cont;
         }

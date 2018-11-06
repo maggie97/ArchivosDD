@@ -10,13 +10,13 @@ using System.Windows.Forms;
 
 namespace Archivos
 {
-    public partial class Registros : Form
+    public partial class VistaRegistros : Form
     {
         public event Actualiza actualizado;
         public delegate void Actualiza();
         Entidad entidad;
         ArchivoRegistros archivo;
-        public Registros(Entidad e)
+        public VistaRegistros(Entidad e)
         {
             InitializeComponent();
             
@@ -92,7 +92,8 @@ namespace Archivos
                 int i = dgVReg.CurrentCell.RowIndex;
                 var CurrentReg = entidad.Registros[i];
                 AltaRegistros a = new AltaRegistros(entidad, archivo, CurrentReg);
-                //if()
+                a.actualizado += new AltaRegistros.Actualiza(actualiza);
+                a.ShowDialog();
             } 
         }
     }

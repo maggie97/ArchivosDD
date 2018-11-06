@@ -1,6 +1,6 @@
 ﻿namespace Archivos
 {
-    partial class Indices
+    partial class VistaIndice
     {
         /// <summary>
         /// Required designer variable.
