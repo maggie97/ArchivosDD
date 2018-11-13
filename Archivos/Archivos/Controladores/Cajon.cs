@@ -30,7 +30,7 @@ namespace Archivos.Controladores
             }  
         }
 
-        public Cajon(string claveBusq, long apuntador, int op)
+        public Cajon(string claveBusq, long apuntador)
         {
             this.op = Index.Primario_Cajon;
             longitud = 50;
@@ -40,15 +40,20 @@ namespace Archivos.Controladores
             {
                 cb[i] = "aux";
                 ap[i] = -1;
-            } 
+            }
+            inserta(claveBusq, apuntador);
         }
         public void inserta(string claveBusq, long apuntador)
         {
             int i = 0;
             while (i < longitud)
             {
-                ind[i] = Convert.ToChar("aux");
-                ap[i] = -1;
+                if(cb[i] == "aux")
+                {
+                    cb[i] = claveBusq;
+                    ap[i] = apuntador;
+                    break;
+                }
                 i++;
             }
         }
