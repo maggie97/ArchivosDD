@@ -42,7 +42,7 @@ namespace Archivos
             this.tipoIndice = tipoIndice;
             
             this.dirIndice = dirIndice;
-            dirSig = dirs;
+            dirSig = dirs; 
         }
 
         public char[] Nombre { get => nombre; set => nombre = value; }
@@ -67,18 +67,20 @@ namespace Archivos
 
         public long DirSig { get => dirSig; set => dirSig = value; }
         public long DirIndice { get => dirIndice; set => dirIndice = value; }
+        public Indice Ind { get => ind; set => ind = value; }
 
-        public void creaIndice()
+        public Indice creaIndice(int i )
         {
             switch (tipoIndice)
             {
-                case 1:
-                    ind = new Primario((this.tipo == 'C'), sNombre);
-                    break;
                 case 2:
-                    ind = new Secundario(sNombre);
+                    ind = new Primario((this.tipo == 'C'), sNombre, i);
+                    break;
+                case 3:
+                    ind = new Secundario(sNombre, i);
                     break;
             }
+            return ind;
         }
     }
 }

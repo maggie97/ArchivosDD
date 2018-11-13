@@ -27,36 +27,24 @@ namespace Archivos
         {
 
         }
-
-        public void abreArchivo()
-        {
-            List<Object> obj = new List<object>();
-            List<Entidad> entidades = new List<Entidad>();
-            List<Entidad> entidadesOrden = new List<Entidad>();
-            //long Cab = -1;
-
-            lee();
-        }
+        
         public new void lee()
         {
-            //long cab;
             using (BinaryReader reader = new BinaryReader(File.Open(base.Fullname, FileMode.Open)))
             {
                 cab = reader.ReadInt64();
-                Console.WriteLine(cab);
-                //int i = 0;
+                Console.WriteLine(cab); 
                 try
                 {
                     Console.WriteLine(reader.PeekChar());
                     while (reader.PeekChar() != -1)
                     {
                         string nomb = "";
-                        long dir;//, dir_atr, dir_dat, dir_sig;
+                        long dir;
                         char[] nombre = reader.ReadChars(30);
-                        foreach (char n in nombre)
-                        {
+                        foreach (char n in nombre) 
                             nomb += n;
-                        }
+                        
                         
                         dir = reader.ReadInt64();
                         Console.WriteLine(reader.PeekChar()); 

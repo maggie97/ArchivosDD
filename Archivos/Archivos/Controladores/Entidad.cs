@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Archivos.Controladores;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -17,10 +18,11 @@ namespace Archivos
         List<List<string>> registros;
 
         int cve_busqeda = -1;
+        Primario prim;
+        Secundario sec;
 
         public Entidad(char[] nombreEntidad, long dir_Entidad, long dir_Atributos, long dir_Datos)
-        {
-            //this.nombreEntidad = nombreEntidad;
+        { 
             for (int i = 0; i < 30; i++)
             {
                 if (nombreEntidad.Length > i)
@@ -34,10 +36,7 @@ namespace Archivos
             this.dir_Datos = dir_Datos;
             atrib = new List<Atributo>();
             registros = new List<List<string>>();
-        }
-
-        
-
+        } 
         public Entidad(char[] nombreEntidad, long dir_Entidad, long dir_Atributos, long dir_Datos, long dir_Sig)
         {
             //this.nombreEntidad = nombreEntidad;
@@ -76,7 +75,7 @@ namespace Archivos
                 string nom = "";
                 for (int i = 0; i < 30; i++)
                 {
-                    if (nombreEntidad[i] > -1)
+                    if (nombreEntidad[i] > -1 )
                         nom += nombreEntidad[i].ToString();
                 }
                 return nom;
@@ -91,10 +90,21 @@ namespace Archivos
             if (Registros == null || Registros.Count == 0)
             {
                 registros = new List<List<string>>();
-                
-            }  
+                foreach (var a in Atrib)
+                {
+                    Indice _in = a.creaIndice(Atrib.IndexOf(a)); 
+                    if (_in != null )
+                    {
+                        if (_in.GetType() == Type.GetType("Archivos.Controladores.Primario"))
+                            prim = (Primario)_in;
+                        else if (_in.GetType() == Type.GetType("Archivos.Controladores.Secundario"))
+                            sec = (Secundario)_in; 
+                    }
+                }
+            }
             registros.Add(atributos);
-            ordenaReg();
+            if (prim != null)  prim.inserta(atributos[prim.aux+1], Convert.ToInt64(atributos[0])); 
+             ordenaReg();
         }
         public void ordenaReg()
         {

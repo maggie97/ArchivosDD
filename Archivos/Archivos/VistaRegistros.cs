@@ -96,5 +96,11 @@ namespace Archivos
                 a.ShowDialog();
             } 
         }
+
+        private void indicesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            VistaIndice vInd = new VistaIndice(entidad);
+            vInd.Show();
+        }
     }
 }

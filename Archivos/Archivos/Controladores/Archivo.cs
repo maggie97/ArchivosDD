@@ -23,6 +23,7 @@ namespace Archivos
         public Archivo(string fullname)
         {
             this.fullname = fullname;
+            //nuevoArch();
         }
 
         public void abreArch()

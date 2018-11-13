@@ -15,19 +15,33 @@ namespace Archivos
     {
         Indice indice;
         Primario p;
-        public VistaIndice(Primario ind)
+        Entidad entidad;
+        public VistaIndice(Entidad e)
         {
             InitializeComponent();
-            p = ind;
+            entidad = e;
+            foreach(var a in e.Atrib)
+            {
+                switch (a.TipoIndice)
+                {
+                    case 2:
+                        indice = a.Ind;
+                        p = (Primario)indice;
+                        break;
+                }
+            }
+            
+            carga();
         }
 
         private void carga()
         {
-            //Primario.indice; 
-            foreach(var fila in p.prim.Ind )
+            if (p == null) return;
+            for(int i = 0; p.prim.Ind != null && i < p.prim.Longitud; i++)
             {
-                dataGridView1.Rows.Add(fila);
-            }
+                dataGridView1.Rows.Add(p.prim.Ind[i].ToString(), p.prim.Ap[i].ToString());
+            } 
+            //dataGridView1.Rows.Add(p.prim.Ind);
         }
     }
 }

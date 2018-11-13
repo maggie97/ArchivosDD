@@ -255,6 +255,7 @@ namespace Archivos
                         }
                         aMod.Tipo = (n.Tipo == 0) ? 'C' : 'E';
                         aMod.Longitud = n.Long;
+                        aMod.TipoIndice = n.TipoIndex;
                         ddd.sobreescribAtributo(aMod);
                         AtribEnt(ent);
                     }
