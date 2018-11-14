@@ -10,13 +10,16 @@ namespace Archivos.Controladores
     {
         protected Cajon[] cajoncitos;
         public int aux = 0;
+        public Entidad ent;
 
         public Indice(string Nombre, int i) : base(Nombre + ".idx")
         {
             nuevoArch();
             aux = i;
+            e = ent;
         }
 
         public Cajon[] Cajoncitos { get => cajoncitos; set => cajoncitos = value; }
+        
     }
 }

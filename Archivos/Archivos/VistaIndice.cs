@@ -40,8 +40,7 @@ namespace Archivos
             for(int i = 0; p.prim.Ind != null && i < p.prim.Longitud; i++)
             {
                 dataGridView1.Rows.Add(p.prim.Ind[i].ToString(), p.prim.Ap[i].ToString());
-            } 
-            //dataGridView1.Rows.Add(p.prim.Ind);
+            }  
         }
     }
 }

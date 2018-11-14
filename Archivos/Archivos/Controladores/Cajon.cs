@@ -60,5 +60,6 @@ namespace Archivos.Controladores
         public char[] Ind { get => ind; set => ind = value; }
         public long[] Ap { get => ap; set => ap = value; }
         public int Longitud { get => longitud; set => longitud = value; }
+        public string[] Cb { get => cb; set => cb = value; }
     }
 }

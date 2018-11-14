@@ -13,14 +13,11 @@ namespace Archivos.Controladores
         Cajon primario;
         
         public Primario(bool letras, string Nombre, int i) : base(Nombre, i)
-        {
-            //cajoncitos = new Cajon[100];
-            //cajoncitos.Initialize();
-
+        {  
             int inicia = (letras) ? 49 : 65;
             primario = new Cajon(0);
 
-            sobreescribePrimario();
+            escribePrimario();
         }
 
         public Cajon prim { get => primario; set => primario = value; }
@@ -41,14 +38,15 @@ namespace Archivos.Controladores
                     subCajones.Add(c);
                     prim.Ap[i] = Longitud;
 
-                    sobreescribePrimario();
+                    //sobreescribePrimario();
+                    escribePrimario_Cajon(c);
                     i = prim.Longitud;
                 }
             }
             
         }
 
-        public void sobreescribePrimario(/*Cajon primario, List<Cajon> subCajones*/)
+        public void escribePrimario(/*Cajon primario, List<Cajon> subCajones*/)
         {
             using (BinaryWriter b = new BinaryWriter(File.Open(Fullname, FileMode.Open)))
             { 
@@ -56,6 +54,19 @@ namespace Archivos.Controladores
                 {
                     b.Write(primario.Ind[i]);
                     b.Write(primario.Ap[i]);
+                }
+            }
+        }
+
+        
+        public void escribePrimario_Cajon(Cajon cajon)
+        {
+            using(BinaryWriter b = new BinaryWriter(File.Open(Fullname, FileMode.Append)))
+            {
+                for(int i= 0; i < cajon.Longitud; i++)
+                {
+                    b.Write(cajon.Cb[i]);
+                    b.Write(cajon.Ap[i]);
                 }
             }
         }
