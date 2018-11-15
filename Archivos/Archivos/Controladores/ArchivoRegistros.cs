@@ -12,7 +12,6 @@ namespace Archivos
         public long firstReg = 0;
         List<List<string>> registros;
         Entidad entidad;
-        
 
         public ArchivoRegistros(string fullname, Entidad e ) : base(fullname)
         {
@@ -81,7 +80,6 @@ namespace Archivos
                             }
                             else 
                                 r.Add(reader.ReadInt32().ToString());
-                            
                         }
                         r.Add(reader.ReadInt64().ToString());
                         entidad.Registros.Add(r);

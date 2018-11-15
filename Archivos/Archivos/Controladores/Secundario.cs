@@ -8,7 +8,7 @@ namespace Archivos.Controladores
 {
     class Secundario : Indice
     {
-        public Secundario(string nombre, int i, Entidad e): base (nombre, i, e)
+        public Secundario(string nombre, int i): base (nombre, i)
         {
             cajoncitos = new Cajon[50];
         }

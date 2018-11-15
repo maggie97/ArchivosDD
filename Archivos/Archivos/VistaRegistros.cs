@@ -48,8 +48,24 @@ namespace Archivos
                 dgVReg.Rows.Add(reg.ToArray()); 
             }
             archivo.sobreescribirArch();
+            actualizaindices();
         }
-
+        public void actualizaindices()
+        {
+            if(entidad.Prim != null)
+            {
+                entidad.Prim.escribePrimario();
+                var p = entidad.Prim;
+                for (int i = 0, j = 0 ; i < p.prim.Longitud; i++)
+                {
+                    if(p.prim.Ap[i] != (long)-1)
+                    {
+                        p.escribePrimario_Cajon(p.prim.Ap[i], j);
+                        j++;
+                    }
+                }
+            }
+        }
         private void insertaToolStripMenuItem_Click(object sender, EventArgs e)
         {
             AltaRegistros alta = new AltaRegistros(entidad, archivo);

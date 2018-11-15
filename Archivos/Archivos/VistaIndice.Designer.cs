@@ -28,67 +28,63 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.dataGridView2 = new System.Windows.Forms.DataGridView();
-            this.dataGridView3 = new System.Windows.Forms.DataGridView();
-            this.dataGridView4 = new System.Windows.Forms.DataGridView();
-            this.PrimarioCajon1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.PrimarioCajon2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.SecundarioCajon1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Secundario1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Secundario2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dGVPrimario1 = new System.Windows.Forms.DataGridView();
             this.Primario1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Primario2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
+            this.dGVPrimario2 = new System.Windows.Forms.DataGridView();
+            this.PrimarioCajon1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.PrimarioCajon2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridView3 = new System.Windows.Forms.DataGridView();
+            this.SecundarioCajon1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridView4 = new System.Windows.Forms.DataGridView();
+            this.Secundario1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Secundario2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.label1 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            ((System.ComponentModel.ISupportInitialize)(this.dGVPrimario1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dGVPrimario2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView4)).BeginInit();
             this.SuspendLayout();
             // 
-            // dataGridView1
+            // dGVPrimario1
             // 
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dGVPrimario1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dGVPrimario1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Primario1,
             this.Primario2});
-            this.dataGridView1.Location = new System.Drawing.Point(31, 71);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(176, 326);
-            this.dataGridView1.TabIndex = 0;
+            this.dGVPrimario1.Location = new System.Drawing.Point(31, 71);
+            this.dGVPrimario1.Name = "dGVPrimario1";
+            this.dGVPrimario1.Size = new System.Drawing.Size(176, 326);
+            this.dGVPrimario1.TabIndex = 0;
+            this.dGVPrimario1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             // 
-            // dataGridView2
+            // Primario1
             // 
-            this.dataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView2.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.Primario1.Frozen = true;
+            this.Primario1.HeaderText = "Letra/Num";
+            this.Primario1.Name = "Primario1";
+            this.Primario1.ReadOnly = true;
+            this.Primario1.Width = 70;
+            // 
+            // Primario2
+            // 
+            this.Primario2.Frozen = true;
+            this.Primario2.HeaderText = "Apuntador";
+            this.Primario2.Name = "Primario2";
+            this.Primario2.ReadOnly = true;
+            this.Primario2.Width = 60;
+            // 
+            // dGVPrimario2
+            // 
+            this.dGVPrimario2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dGVPrimario2.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.PrimarioCajon1,
             this.PrimarioCajon2});
-            this.dataGridView2.Location = new System.Drawing.Point(224, 71);
-            this.dataGridView2.Name = "dataGridView2";
-            this.dataGridView2.Size = new System.Drawing.Size(179, 326);
-            this.dataGridView2.TabIndex = 1;
-            // 
-            // dataGridView3
-            // 
-            this.dataGridView3.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView3.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.SecundarioCajon1});
-            this.dataGridView3.Location = new System.Drawing.Point(657, 71);
-            this.dataGridView3.Name = "dataGridView3";
-            this.dataGridView3.Size = new System.Drawing.Size(156, 326);
-            this.dataGridView3.TabIndex = 3;
-            // 
-            // dataGridView4
-            // 
-            this.dataGridView4.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView4.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.Secundario1,
-            this.Secundario2});
-            this.dataGridView4.Location = new System.Drawing.Point(439, 71);
-            this.dataGridView4.Name = "dataGridView4";
-            this.dataGridView4.Size = new System.Drawing.Size(192, 326);
-            this.dataGridView4.TabIndex = 2;
+            this.dGVPrimario2.Location = new System.Drawing.Point(224, 71);
+            this.dGVPrimario2.Name = "dGVPrimario2";
+            this.dGVPrimario2.Size = new System.Drawing.Size(179, 326);
+            this.dGVPrimario2.TabIndex = 1;
             // 
             // PrimarioCajon1
             // 
@@ -102,6 +98,48 @@
             this.PrimarioCajon2.Name = "PrimarioCajon2";
             this.PrimarioCajon2.ReadOnly = true;
             this.PrimarioCajon2.Width = 60;
+            // 
+            // dataGridView3
+            // 
+            this.dataGridView3.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView3.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.SecundarioCajon1});
+            this.dataGridView3.Location = new System.Drawing.Point(657, 71);
+            this.dataGridView3.Name = "dataGridView3";
+            this.dataGridView3.Size = new System.Drawing.Size(156, 326);
+            this.dataGridView3.TabIndex = 3;
+            // 
+            // SecundarioCajon1
+            // 
+            this.SecundarioCajon1.HeaderText = "Ap";
+            this.SecundarioCajon1.Name = "SecundarioCajon1";
+            // 
+            // dataGridView4
+            // 
+            this.dataGridView4.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView4.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.Secundario1,
+            this.Secundario2});
+            this.dataGridView4.Location = new System.Drawing.Point(439, 71);
+            this.dataGridView4.Name = "dataGridView4";
+            this.dataGridView4.Size = new System.Drawing.Size(192, 326);
+            this.dataGridView4.TabIndex = 2;
+            // 
+            // Secundario1
+            // 
+            this.Secundario1.Frozen = true;
+            this.Secundario1.HeaderText = "CB";
+            this.Secundario1.Name = "Secundario1";
+            this.Secundario1.ReadOnly = true;
+            this.Secundario1.Width = 70;
+            // 
+            // Secundario2
+            // 
+            this.Secundario2.Frozen = true;
+            this.Secundario2.HeaderText = "Ap";
+            this.Secundario2.Name = "Secundario2";
+            this.Secundario2.ReadOnly = true;
+            this.Secundario2.Width = 60;
             // 
             // label1
             // 
@@ -123,44 +161,7 @@
             this.label2.TabIndex = 5;
             this.label2.Text = "Secundarios";
             // 
-            // SecundarioCajon1
-            // 
-            this.SecundarioCajon1.HeaderText = "Ap";
-            this.SecundarioCajon1.Name = "SecundarioCajon1";
-            // 
-            // Secundario1
-            // 
-            this.Secundario1.Frozen = true;
-            this.Secundario1.HeaderText = "CB";
-            this.Secundario1.Name = "Secundario1";
-            this.Secundario1.ReadOnly = true;
-            this.Secundario1.Width = 70;
-            // 
-            // Secundario2
-            // 
-            this.Secundario2.Frozen = true;
-            this.Secundario2.HeaderText = "Ap";
-            this.Secundario2.Name = "Secundario2";
-            this.Secundario2.ReadOnly = true;
-            this.Secundario2.Width = 60;
-            // 
-            // Primario1
-            // 
-            this.Primario1.Frozen = true;
-            this.Primario1.HeaderText = "Letra/Num";
-            this.Primario1.Name = "Primario1";
-            this.Primario1.ReadOnly = true;
-            this.Primario1.Width = 70;
-            // 
-            // Primario2
-            // 
-            this.Primario2.Frozen = true;
-            this.Primario2.HeaderText = "Apuntador";
-            this.Primario2.Name = "Primario2";
-            this.Primario2.ReadOnly = true;
-            this.Primario2.Width = 60;
-            // 
-            // Indices
+            // VistaIndice
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -169,12 +170,12 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.dataGridView3);
             this.Controls.Add(this.dataGridView4);
-            this.Controls.Add(this.dataGridView2);
-            this.Controls.Add(this.dataGridView1);
-            this.Name = "Indices";
+            this.Controls.Add(this.dGVPrimario2);
+            this.Controls.Add(this.dGVPrimario1);
+            this.Name = "VistaIndice";
             this.Text = "Indices";
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dGVPrimario1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dGVPrimario2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView4)).EndInit();
             this.ResumeLayout(false);
@@ -184,10 +185,10 @@
 
         #endregion
 
-        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.DataGridView dGVPrimario1;
         private System.Windows.Forms.DataGridViewTextBoxColumn Primario1;
         private System.Windows.Forms.DataGridViewTextBoxColumn Primario2;
-        private System.Windows.Forms.DataGridView dataGridView2;
+        private System.Windows.Forms.DataGridView dGVPrimario2;
         private System.Windows.Forms.DataGridViewTextBoxColumn PrimarioCajon1;
         private System.Windows.Forms.DataGridViewTextBoxColumn PrimarioCajon2;
         private System.Windows.Forms.DataGridView dataGridView3;

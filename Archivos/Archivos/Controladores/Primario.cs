@@ -21,6 +21,7 @@ namespace Archivos.Controladores
         }
 
         public Cajon prim { get => primario; set => primario = value; }
+        public List<Cajon> SubCajones { get => subCajones; set => subCajones = value; }
 
         internal void inserta(string claveBusq, long apuntador)
         {
@@ -36,6 +37,8 @@ namespace Archivos.Controladores
                     Cajon c = new Cajon(claveBusq, apuntador);
                     if (subCajones == null) subCajones = new List<Cajon>();
                     subCajones.Add(c);
+
+                    subCajones = subCajones.OrderBy(o => o.Cb).ToList();
                     prim.Ap[i] = Longitud;
 
                     //sobreescribePrimario();
@@ -64,6 +67,20 @@ namespace Archivos.Controladores
             using(BinaryWriter b = new BinaryWriter(File.Open(Fullname, FileMode.Append)))
             {
                 for(int i= 0; i < cajon.Longitud; i++)
+                {
+                    b.Write(cajon.Cb[i]);
+                    b.Write(cajon.Ap[i]);
+                }
+            }
+        }
+
+        public void escribePrimario_Cajon(long l, int indC)
+        {
+            var cajon = subCajones[indC];
+            using (BinaryWriter b = new BinaryWriter(File.Open(Fullname, FileMode.Open)))
+            {
+                b.Seek((int)l, SeekOrigin.Begin);
+                for (int i = 0; i < cajon.Longitud; i++)
                 {
                     b.Write(cajon.Cb[i]);
                     b.Write(cajon.Ap[i]);

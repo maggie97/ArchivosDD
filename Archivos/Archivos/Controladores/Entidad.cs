@@ -19,7 +19,7 @@ namespace Archivos
 
         int cve_busqeda = -1;
         Primario prim;
-        Secundario[] sec;
+        List<Secundario> sec;
 
         public Entidad(char[] nombreEntidad, long dir_Entidad, long dir_Atributos, long dir_Datos)
         { 
@@ -85,7 +85,6 @@ namespace Archivos
         public List<Atributo> Atrib { get => atrib; set => atrib = value; }
         public List<List<string>> Registros { get => registros; set => registros = value; }
         public Primario Prim { get => prim; set => prim = value; }
-        internal Secundario[] Sec { get => sec; set => sec = value; }
 
         internal void nuevoReg(List<string> atributos)
         {
@@ -100,7 +99,10 @@ namespace Archivos
                         if (_in.GetType() == Type.GetType("Archivos.Controladores.Primario"))
                             prim = (Primario)_in;
                         else if (_in.GetType() == Type.GetType("Archivos.Controladores.Secundario"))
-                            sec = (Secundario)_in; 
+                        {
+                            if (sec == null) sec = new List<Secundario>();
+                            sec.Add((Secundario)_in);
+                        } 
                     }
                 }
             }

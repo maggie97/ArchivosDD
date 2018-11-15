@@ -15,8 +15,7 @@ namespace Archivos.Controladores
         public Indice(string Nombre, int i) : base(Nombre + ".idx")
         {
             nuevoArch();
-            aux = i;
-            e = ent;
+            aux = i; 
         }
 
         public Cajon[] Cajoncitos { get => cajoncitos; set => cajoncitos = value; }

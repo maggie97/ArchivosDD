@@ -39,8 +39,29 @@ namespace Archivos
             if (p == null) return;
             for(int i = 0; p.prim.Ind != null && i < p.prim.Longitud; i++)
             {
-                dataGridView1.Rows.Add(p.prim.Ind[i].ToString(), p.prim.Ap[i].ToString());
-            }  
+                dGVPrimario1.Rows.Add(p.prim.Ind[i].ToString(), p.prim.Ap[i].ToString());
+            }
+        }
+
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if(dGVPrimario1.CurrentCell.Value != null && dGVPrimario1.CurrentCell.ColumnIndex == 1)
+            {
+                int i = dGVPrimario1.CurrentCell.RowIndex;
+                var caracter = p.prim.Ind[i];
+                MessageBox.Show("Celda de Caracter " + caracter);
+                int x = 0;
+                var c = p.SubCajones.Find(o => o.Cb[0][0] == caracter);
+                /*foreach(var var in p.SubCajones)
+                {
+                    if (var == caracter)
+                        c = var;
+                }*/
+                for(int j = 0; c != null && j< c.Longitud; j++)
+                {
+                    dGVPrimario2.Rows.Add(c.Cb[j], c.Ap[j]);
+                }
+            }
         }
     }
 }
