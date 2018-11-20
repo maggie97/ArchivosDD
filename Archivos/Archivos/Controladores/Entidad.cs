@@ -91,24 +91,28 @@ namespace Archivos
             if (Registros == null || Registros.Count == 0)
             {
                 registros = new List<List<string>>();
-                foreach (var a in Atrib)
-                {
-                    Indice _in = a.creaIndice(Atrib.IndexOf(a)); 
-                    if (_in != null )
-                    {
-                        if (_in.GetType() == Type.GetType("Archivos.Controladores.Primario"))
-                            prim = (Primario)_in;
-                        else if (_in.GetType() == Type.GetType("Archivos.Controladores.Secundario"))
-                        {
-                            if (sec == null) sec = new List<Secundario>();
-                            sec.Add((Secundario)_in);
-                        } 
-                    }
-                }
+                Indice();
             }
             registros.Add(atributos);
             if (prim != null)  prim.inserta(atributos[prim.aux+1], Convert.ToInt64(atributos[0])); 
              ordenaReg();
+        }
+        public void Indice()
+        {
+            foreach (var a in Atrib)
+            {
+                Indice _in = a.creaIndice(Atrib.IndexOf(a));
+                if (_in != null)
+                {
+                    if (_in.GetType() == Type.GetType("Archivos.Controladores.Primario"))
+                        prim = (Primario)_in;
+                    else if (_in.GetType() == Type.GetType("Archivos.Controladores.Secundario"))
+                    {
+                        if (sec == null) sec = new List<Secundario>();
+                        sec.Add((Secundario)_in);
+                    }
+                }
+            }
         }
         public void ordenaReg()
         {

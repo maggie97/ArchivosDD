@@ -10,12 +10,9 @@ using System.Windows.Forms;
 
 namespace Archivos
 {
-   
-    
     public partial class Principal : Form
     {
         DDD ddd;
-       
         //List<Archivo> datos;
         public Principal()
         {
@@ -112,23 +109,7 @@ namespace Archivos
                     return;
                 else
                     Enable_Entidades_Atributos(false);
-            }
-            /*if (lblEntidad.Text != "<Entidad>")
-            {
-                ent = ddd.EntidadesOrden.Find(o => o.sNombre.Contains(lblEntidad.Text));
-                Registros ventanaReg = new Registros(ent);
-                ventanaReg.actualizado += new Registros.Actualiza(actualizaEnt);
-                ventanaReg.actualizado += new Registros.Actualiza(ddd.sobreescribe_archivo);
-                ventanaReg.Show();
-                actualizaEnt();
-                AtribEnt(lblEntidad.Text);
-            }
-           /* else
-            {
-                MessageBox.Show("Selecciona una entidad", "Sin Entidades", MessageBoxButtons.OK, MessageBoxIcon.Error,
-                    MessageBoxDefaultButton.Button1, MessageBoxOptions.ServiceNotification);
-            }*/
-
+            } 
         } 
         #endregion
         private void nuevoDD()

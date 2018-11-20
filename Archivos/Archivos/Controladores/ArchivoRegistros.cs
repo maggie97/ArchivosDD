@@ -17,10 +17,26 @@ namespace Archivos
         {
             registros = new List<List<string>>();
             entidad = e;
-            if (!File.Exists(fullname) || e.Dir_Datos== -1)
+            if (!File.Exists(fullname) || e.Dir_Datos == -1)
                 nuevoArch();
             else
-                leerArch(e.Dir_Datos); 
+            {
+                leerArch(e.Dir_Datos);
+                indices();
+            }
+        }
+
+        public void indices()
+        {
+            foreach(var atrib in entidad.Atrib)
+            {
+                if (atrib.TipoIndice == 2)
+                {
+                    atrib.Ind = new Controladores.Primario(atrib, entidad.Atrib.IndexOf(atrib));
+                    entidad.Prim = (Controladores.Primario)atrib.Ind;
+                }
+            }
+            entidad.Indice();
         }
         public void sobreescribirArch()
         {

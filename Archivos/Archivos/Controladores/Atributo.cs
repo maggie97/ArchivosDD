@@ -71,10 +71,11 @@ namespace Archivos
 
         public Indice creaIndice(int i )
         {
+            if (ind != null) return ind;
             switch (tipoIndice)
             {
                 case 2:
-                    ind = new Primario((this.tipo == 'C'), sNombre, i);
+                    ind = new Primario(this, (this.tipo == 'C'), sNombre, i, longitud);
                     break;
                 case 3:
                     ind = new Secundario(sNombre, i);

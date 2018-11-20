@@ -10,9 +10,11 @@ namespace Archivos.Controladores
     public class Cajon
     {
         char[] ind;
+        List<List<char>> cv;
         string[] cb;
         long[] ap;
         int longitud = 0;
+        public char c = '\0';
         Index op;
 
         public Cajon(int op)
@@ -29,28 +31,56 @@ namespace Archivos.Controladores
                 inicia++;
             }  
         }
-
-        public Cajon(string claveBusq, long apuntador)
+        public Cajon(Atributo a)
         {
-            this.op = Index.Primario_Cajon;
+            if(a.TipoIndice == 2)
+            {
+                creaBloqPrimario(a.Longitud);
+            }
+        }
+        public Cajon(string claveBusq, long apuntador, int long_clave)
+        {
+            /*this.op = Index.Primario_Cajon;
             longitud = 50;
+            cv = new List<List<char>>();
             cb = new string[longitud];
             ap = new long[longitud];
             for (int i = 0; i < longitud; i++)
             {
-                cb[i] = "aux";
+                string s = "aux" + i;
+                while (s.Length < long_clave - 1) s += " ";
+                cb[i] = s;
                 ap[i] = -1;
             }
+            c = claveBusq[0];**/
+            creaBloqPrimario(long_clave);
             inserta(claveBusq, apuntador);
+        }
+        public void creaBloqPrimario(int long_clave)
+        {
+            this.op = Index.Primario_Cajon;
+            longitud = 50;
+            cv = new List<List<char>>();
+            cb = new string[longitud];
+            ap = new long[longitud];
+            for (int i = 0; i < longitud; i++)
+            {
+                string s = "aux" + i;
+                while (s.Length < long_clave - 1) s += " ";
+                cb[i] = s;
+                ap[i] = -1;
+            }
         }
         public void inserta(string claveBusq, long apuntador)
         {
             int i = 0;
             while (i < longitud)
             {
-                if(cb[i] == "aux")
+                if (cb[i].Contains("aux" ))
                 {
-                    cb[i] = claveBusq;
+                    string s = claveBusq;
+                    while (s.Length < cb[i].Length) s += " ";
+                    cb[i] = s;
                     ap[i] = apuntador;
                     break;
                 }
