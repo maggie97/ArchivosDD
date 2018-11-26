@@ -26,13 +26,6 @@ namespace Archivos
             //nuevoArch();
         }
 
-        public void abreArch()
-        {
-            using(FileStream a = new FileStream(Fullname, FileMode.Open))
-            {
-
-            }
-        }
 
         public void nuevoArch()
         {

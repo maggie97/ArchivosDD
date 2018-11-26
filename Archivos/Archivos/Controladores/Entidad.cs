@@ -94,7 +94,7 @@ namespace Archivos
                 Indice();
             }
             registros.Add(atributos);
-            if (prim != null)  prim.inserta(atributos[prim.aux+1], Convert.ToInt64(atributos[0])); 
+            if (prim != null)  prim.inserta(atributos[prim.index+1], Convert.ToInt64(atributos[0])); 
              ordenaReg();
         }
         public void Indice()
@@ -120,7 +120,10 @@ namespace Archivos
             {
                 //ordena 
                 int i = atrib.FindIndex(o => o.TipoIndice == 1);
-                registros = registros.OrderBy(o => o[i + 1]).ToList();
+                if (atrib[i].Tipo == 'C')
+                    registros = registros.OrderBy(o => o[i + 1]).ToList();
+                else
+                    registros = registros.OrderBy(o => Convert.ToInt32(o[i + 1])).ToList();
                 //registros.Sort((a, b) => (a[i].CompareTo(b[i])));
             }
             for (int i = 0; registros.Count > 0 && i < registros.Count; i++)
@@ -136,6 +139,21 @@ namespace Archivos
                 dir_Datos = Convert.ToInt64(registros.First()[0]);
             else
                 dir_Datos = -1 ;
+        }
+        public void EliminaRegistro(List<string> reg)
+        {
+            Registros.Remove(reg);
+            if (prim != null)
+            {
+                int i = prim.index;
+                var dat = reg[i+1];
+                prim.elimina(dat);
+            }
+            if (sec != null)
+            {
+
+            }
+
         }
     }
 }

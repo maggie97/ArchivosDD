@@ -56,14 +56,6 @@ namespace Archivos
             {
                 entidad.Prim.escribePrimario();
                 var p = entidad.Prim;
-                /*for (int i = 0, j = 0 ; i < p.prim.Longitud; i++)
-                {
-                    if(p.prim.Ap[i] != (long)-1)
-                    {
-                        p.escribePrimario_Cajon(p.prim.Ap[i], j);
-                        j++;
-                    }
-                }*/
             }
         }
         private void insertaToolStripMenuItem_Click(object sender, EventArgs e)
@@ -89,15 +81,13 @@ namespace Archivos
             }
             else if(entidad.Registros.Count > 1)
             {
-                 //registro a eliminar 
                 var regAnt = entidad.Registros[dgVReg.CurrentCell.RowIndex - 1]; //reg anterior al eliminado 
                 regAnt[entidad.Registros[0].Count - 1] = regElim[entidad.Registros[0].Count - 1];
             }
             regElim[entidad.Registros[0].Count - 1] = "-1";
-            //entidad.ordenaReg();
-            entidad.Registros.Remove(regElim);
+            entidad.EliminaRegistro(regElim);
             archivo.sobreescribirArch();
-            //entidad.Registros.RemoveAt(dgVReg.CurrentCell.RowIndex);
+            
             archivo.leerArch(entidad.Dir_Datos);
             actualiza();
         }

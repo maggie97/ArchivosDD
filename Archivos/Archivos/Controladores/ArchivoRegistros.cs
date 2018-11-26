@@ -79,7 +79,6 @@ namespace Archivos
                     Console.WriteLine(reader.PeekChar());
                     while (reader.PeekChar() != -1)
                     {
-                        
                         List<string> r = new List<string>();
                         r.Add(reader.ReadInt64().ToString());
                         foreach (var atrib in entidad.Atrib)

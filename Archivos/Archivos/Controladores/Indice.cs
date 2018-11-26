@@ -9,12 +9,12 @@ namespace Archivos.Controladores
     public abstract class Indice : Archivo
     {
         protected Cajon[] cajoncitos;
-        public int aux = 0;
+        public int index = 0;
         public Entidad ent;
 
         public Indice(string Nombre, int i) : base(Nombre + ".idx")
         {
-            aux = i; 
+            index = i; 
         }
 
         public Cajon[] Cajoncitos { get => cajoncitos; set => cajoncitos = value; }

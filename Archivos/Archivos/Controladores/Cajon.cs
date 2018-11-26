@@ -40,19 +40,6 @@ namespace Archivos.Controladores
         }
         public Cajon(string claveBusq, long apuntador, int long_clave)
         {
-            /*this.op = Index.Primario_Cajon;
-            longitud = 50;
-            cv = new List<List<char>>();
-            cb = new string[longitud];
-            ap = new long[longitud];
-            for (int i = 0; i < longitud; i++)
-            {
-                string s = "aux" + i;
-                while (s.Length < long_clave - 1) s += " ";
-                cb[i] = s;
-                ap[i] = -1;
-            }
-            c = claveBusq[0];**/
             creaBloqPrimario(long_clave);
             inserta(claveBusq, apuntador);
         }
@@ -65,8 +52,8 @@ namespace Archivos.Controladores
             ap = new long[longitud];
             for (int i = 0; i < longitud; i++)
             {
-                string s = "aux" + i;
-                while (s.Length < long_clave - 1) s += " ";
+                string s = "";//"aux" + i;
+                while (s.Length < long_clave - 1 ) s += " ";
                 cb[i] = s;
                 ap[i] = -1;
             }
@@ -76,7 +63,7 @@ namespace Archivos.Controladores
             int i = 0;
             while (i < longitud)
             {
-                if (cb[i].Contains("aux" ))
+                if (ap[i] == -1)//cb[i].Contains("aux" ))
                 {
                     string s = claveBusq;
                     while (s.Length < cb[i].Length) s += " ";

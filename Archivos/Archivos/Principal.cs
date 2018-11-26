@@ -111,6 +111,7 @@ namespace Archivos
                     Enable_Entidades_Atributos(false);
             } 
         } 
+        
         #endregion
         private void nuevoDD()
         {
@@ -284,8 +285,11 @@ namespace Archivos
             Entidad ent = ddd.EntidadesOrden[e.RowIndex];
             AtribEnt(ent);
             lblEntidad.Text = ent.sNombre;
-        } 
-        
+        }
+
+        private void r2ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+        }
     }
 }
 

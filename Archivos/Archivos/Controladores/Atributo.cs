@@ -75,6 +75,7 @@ namespace Archivos
             switch (tipoIndice)
             {
                 case 2:
+                    dirIndice = 0;
                     ind = new Primario(this, (this.tipo == 'C'), sNombre, i, longitud);
                     break;
                 case 3:
