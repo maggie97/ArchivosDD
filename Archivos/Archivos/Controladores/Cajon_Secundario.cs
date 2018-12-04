@@ -13,8 +13,16 @@ namespace Archivos.Controladores
         int capacidad = 100;
         int tam_Campo;
         List<Elemento> elementos;
-        
+        List<long> ap;
         Atributo atrib;
+
+        public Cajon_Secundario()
+        {
+            for (int i = 0; i < capacidad; i++)
+            {
+                ap.Add(-1);
+            }
+        }
 
         public Cajon_Secundario(Atributo a)
         {
@@ -22,13 +30,13 @@ namespace Archivos.Controladores
             elementos = new List<Elemento>();
             for (int i = 0; i < capacidad; i++)
             {
-                elementos.Add(new Elemento(a.Longitud));
+                elementos.Add(new Elemento(a.Longitud-1));
             }
         }
-        
 
         public int Capacidad { get => capacidad; }
         public int Tam_Campo { get => tam_Campo; }
+        public List<long> Ap { get => ap; set => ap = value; }
         internal List<Elemento> Elementos { get => elementos;}
     }
 

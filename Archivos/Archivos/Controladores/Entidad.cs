@@ -99,6 +99,13 @@ namespace Archivos
             {
                 prim.inserta(atributos[prim.index + 1], Convert.ToInt64(atributos[0]));
             }
+            if(sec != null)
+            {
+                foreach(var s in sec)
+                {
+                    s.inserta(atributos[s.index + 1], Convert.ToInt64(atributos[0]));
+                }
+            }
              ordenaReg();
         }
         public void Indice()
@@ -134,8 +141,11 @@ namespace Archivos
                     {
                         if (prim == null && sec == null)
                             a.DirIndice = 0;
-                        else
+                        else if (prim != null && sec == null)
                             a.DirIndice = prim.Longitud;
+                        else if (sec != null)
+                            a.DirIndice = sec[0].Longitud;
+                            
                         if (sec == null) sec = new List<Secundario>();
                         sec.Add((Secundario)a.Ind);
                     }

@@ -165,6 +165,7 @@
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(146, 32);
             this.comboBox1.TabIndex = 6;
+            this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
             // 
             // label2
             // 
@@ -186,6 +187,7 @@
             this.dgVSecundarios1.Name = "dgVSecundarios1";
             this.dgVSecundarios1.Size = new System.Drawing.Size(260, 407);
             this.dgVSecundarios1.TabIndex = 3;
+            this.dgVSecundarios1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgVSecundarios1_CellContentClick);
             // 
             // dataGridViewTextBoxColumn1
             // 

@@ -11,7 +11,7 @@ namespace Archivos.Controladores
     {
         Cajon_Secundario principal;
         int capacidad = 100;
-        int lng_Campo;
+        int tope = 0;
         public Secundario(Atributo a, string nombre, int i): base (nombre, i, a)
         {
             if(!File.Exists(nombre + ".idx"))
@@ -24,6 +24,31 @@ namespace Archivos.Controladores
         }
 
         internal Cajon_Secundario Principal { get => principal; set => principal = value; }
+
+        public bool inserta(string cb, long reg)
+        {
+            if(tope < capacidad)
+            {
+                if (tope == 0 )
+                {
+                    principal.Elementos[tope] = new Elemento(cb, reg);
+                }
+                else
+                {
+                    var a = principal.Elementos.Find(o => o.Cb == cb);
+                    if(a != null)
+                    {
+                        //Lee el cajon
+                    }
+                    else
+                    {
+                        principal.Elementos[tope] = new Elemento(cb, reg);
+                    }
+
+                }
+            }
+            return true;
+        }
 
         public void escribeSecundario(int l)
         {

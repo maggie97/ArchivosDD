@@ -61,7 +61,7 @@ namespace Archivos
         {
             foreach(Secundario sec in s)
             {
-                comboBox1.Items.Add(sec.Atributo);
+                comboBox1.Items.Add(sec.Atributo.sNombre);
             }
             comboBox1.SelectedIndex = 0;
             muestra(0);
@@ -76,24 +76,48 @@ namespace Archivos
             }
         }
 
+        public void actualiza()
+        {
+            if (p != null)
+                carga();
+            if(s != null)
+                muestra(comboBox1.SelectedIndex);
+        }
+
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
+            int valor = 0;
             dGVPrimario2.Rows.Clear();
-            if (dGVPrimario1.CurrentCell.Value == null || 
-                dGVPrimario1.CurrentCell.Value == Nada )
-                { return; }
-
+            if ((int)dGVPrimario1.CurrentCell.Value == -1 ){ return; }
+            if (!Int32.TryParse(dGVPrimario1.CurrentCell.Value.ToString(), out valor)) return;
             int i = dGVPrimario1.CurrentCell.RowIndex;
-            //var caracter = p.prim.Ind[i];
-            //MessageBox.Show("Celda de Caracter " + caracter);
             int x = 0;
-            //var c = p.SubCajones.Find(o => o.Cb[0][0] == caracter);
             var c = p.ElCajon(Convert.ToInt64(dGVPrimario1.CurrentCell.Value));
             for(int j = 0; c != null && j< c.Longitud; j++)
             {
                 dGVPrimario2.Rows.Add(c.Cb[j], c.Ap[j]);
             }
-            
+        }
+
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            muestra(comboBox1.SelectedIndex);
+        }
+
+        private void dgVSecundarios1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            int valor = 0;
+            dGVSecundarios2.Rows.Clear();
+            if ((int)dGVSecundarios2.CurrentCell.Value == -1) { return; }
+            if (!Int32.TryParse(dGVSecundarios2.CurrentCell.Value.ToString(), out valor)) return;
+            int i = dGVSecundarios2.CurrentCell.RowIndex;
+            int x = 0;
+            Secundario c;
+            /*//var c = p.ElCajon(Convert.ToInt64(dGVSecundarios2.CurrentCell.Value));
+            for (int j = 0; c != null && j < c.Longitud; j++)
+            {
+                dGVSecundarios2.Rows.Add(c.Cb[j], c.Ap[j]);
+            }*/
         }
     }
 }
