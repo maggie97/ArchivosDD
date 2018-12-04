@@ -118,27 +118,26 @@ namespace Archivos
                             prim = (Primario)a.Ind;
                             break;
                         case 3:
-                            a.Ind = new Secundario(sNombre, Atrib.IndexOf(a));
+                            a.DirIndice = (prim == null && sec == null)? 0: prim.Longitud;
+                            //a.Ind = new Secundario(sNombre, Atrib.IndexOf(a));
                             if (sec == null) sec = new List<Secundario>();
+                            a.Ind = new Secundario(a, sNombre, Atrib.IndexOf(a));
                             sec.Add((Secundario)a.Ind);
                             break;
                     }
                 }
                 else
                 {
-                    if (a.Ind != null)
+                    if (a.Ind.GetType() == Type.GetType("Archivos.Controladores.Primario"))
+                        prim = (Primario)a.Ind;
+                    else if (a.Ind.GetType() == Type.GetType("Archivos.Controladores.Secundario"))
                     {
-                        if (a.Ind.GetType() == Type.GetType("Archivos.Controladores.Primario"))
-                            prim = (Primario)a.Ind;
-                        else if (a.Ind.GetType() == Type.GetType("Archivos.Controladores.Secundario"))
-                        {
-                            if (prim == null && sec == null)
-                                a.DirIndice = 0;
-                            else
-                                a.DirIndice = prim.Longitud;
-                            if (sec == null) sec = new List<Secundario>();
-                            sec.Add((Secundario)a.Ind);
-                        }
+                        if (prim == null && sec == null)
+                            a.DirIndice = 0;
+                        else
+                            a.DirIndice = prim.Longitud;
+                        if (sec == null) sec = new List<Secundario>();
+                        sec.Add((Secundario)a.Ind);
                     }
                 }
             }

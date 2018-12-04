@@ -38,20 +38,20 @@
             this.tabCIndices = new System.Windows.Forms.TabControl();
             this.tPPrimarios = new System.Windows.Forms.TabPage();
             this.tPSecundarios = new System.Windows.Forms.TabPage();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.dGVSecundarios1 = new System.Windows.Forms.DataGridView();
+            this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.label2 = new System.Windows.Forms.Label();
+            this.dgVSecundarios1 = new System.Windows.Forms.DataGridView();
             this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dGVSecundarios2 = new System.Windows.Forms.DataGridView();
             this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.dGVPrimario1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dGVPrimario2)).BeginInit();
             this.tabCIndices.SuspendLayout();
             this.tPPrimarios.SuspendLayout();
             this.tPSecundarios.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dGVSecundarios1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgVSecundarios1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dGVSecundarios2)).BeginInit();
             this.SuspendLayout();
             // 
             // dGVPrimario1
@@ -148,8 +148,8 @@
             this.tPSecundarios.BackColor = System.Drawing.SystemColors.Control;
             this.tPSecundarios.Controls.Add(this.comboBox1);
             this.tPSecundarios.Controls.Add(this.label2);
-            this.tPSecundarios.Controls.Add(this.dataGridView1);
-            this.tPSecundarios.Controls.Add(this.dGVSecundarios1);
+            this.tPSecundarios.Controls.Add(this.dgVSecundarios1);
+            this.tPSecundarios.Controls.Add(this.dGVSecundarios2);
             this.tPSecundarios.Location = new System.Drawing.Point(4, 22);
             this.tPSecundarios.Name = "tPSecundarios";
             this.tPSecundarios.Padding = new System.Windows.Forms.Padding(3);
@@ -157,26 +157,14 @@
             this.tPSecundarios.TabIndex = 1;
             this.tPSecundarios.Text = "Indices Secundarios";
             // 
-            // dataGridView1
+            // comboBox1
             // 
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.dataGridViewTextBoxColumn1,
-            this.dataGridViewTextBoxColumn2});
-            this.dataGridView1.Location = new System.Drawing.Point(10, 63);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(260, 407);
-            this.dataGridView1.TabIndex = 3;
-            // 
-            // dGVSecundarios1
-            // 
-            this.dGVSecundarios1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dGVSecundarios1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.dataGridViewTextBoxColumn4});
-            this.dGVSecundarios1.Location = new System.Drawing.Point(276, 63);
-            this.dGVSecundarios1.Name = "dGVSecundarios1";
-            this.dGVSecundarios1.Size = new System.Drawing.Size(148, 407);
-            this.dGVSecundarios1.TabIndex = 2;
+            this.comboBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Location = new System.Drawing.Point(276, 19);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.Size = new System.Drawing.Size(146, 32);
+            this.comboBox1.TabIndex = 6;
             // 
             // label2
             // 
@@ -187,6 +175,17 @@
             this.label2.Size = new System.Drawing.Size(228, 57);
             this.label2.TabIndex = 5;
             this.label2.Text = "Secundario de";
+            // 
+            // dgVSecundarios1
+            // 
+            this.dgVSecundarios1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgVSecundarios1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dataGridViewTextBoxColumn1,
+            this.dataGridViewTextBoxColumn2});
+            this.dgVSecundarios1.Location = new System.Drawing.Point(10, 63);
+            this.dgVSecundarios1.Name = "dgVSecundarios1";
+            this.dgVSecundarios1.Size = new System.Drawing.Size(260, 407);
+            this.dgVSecundarios1.TabIndex = 3;
             // 
             // dataGridViewTextBoxColumn1
             // 
@@ -199,21 +198,22 @@
             this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
             this.dataGridViewTextBoxColumn2.ReadOnly = true;
             // 
+            // dGVSecundarios2
+            // 
+            this.dGVSecundarios2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dGVSecundarios2.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dataGridViewTextBoxColumn4});
+            this.dGVSecundarios2.Location = new System.Drawing.Point(276, 63);
+            this.dGVSecundarios2.Name = "dGVSecundarios2";
+            this.dGVSecundarios2.Size = new System.Drawing.Size(148, 407);
+            this.dGVSecundarios2.TabIndex = 2;
+            // 
             // dataGridViewTextBoxColumn4
             // 
             this.dataGridViewTextBoxColumn4.Frozen = true;
             this.dataGridViewTextBoxColumn4.HeaderText = "Apuntador al registro";
             this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
             this.dataGridViewTextBoxColumn4.ReadOnly = true;
-            // 
-            // comboBox1
-            // 
-            this.comboBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(276, 19);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(146, 32);
-            this.comboBox1.TabIndex = 6;
             // 
             // VistaIndice
             // 
@@ -230,8 +230,8 @@
             this.tPPrimarios.PerformLayout();
             this.tPSecundarios.ResumeLayout(false);
             this.tPSecundarios.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dGVSecundarios1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgVSecundarios1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dGVSecundarios2)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -249,8 +249,8 @@
         private System.Windows.Forms.TabPage tPPrimarios;
         private System.Windows.Forms.TabPage tPSecundarios;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.DataGridView dataGridView1;
-        private System.Windows.Forms.DataGridView dGVSecundarios1;
+        private System.Windows.Forms.DataGridView dgVSecundarios1;
+        private System.Windows.Forms.DataGridView dGVSecundarios2;
         private System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;

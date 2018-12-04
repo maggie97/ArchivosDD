@@ -45,7 +45,7 @@ namespace Archivos
                 carga();
             if(s!= null)
             {
-
+                cargaSec();
             }
         }
         private void carga()
@@ -54,6 +54,25 @@ namespace Archivos
             for(int i = 0; p.prim.Ind != null && i < p.prim.Longitud; i++)
             {
                 dGVPrimario1.Rows.Add(p.prim.Ind[i].ToString(), p.prim.Ap[i].ToString());
+            }
+        }
+
+        private void cargaSec( )
+        {
+            foreach(Secundario sec in s)
+            {
+                comboBox1.Items.Add(sec.Atributo);
+            }
+            comboBox1.SelectedIndex = 0;
+            muestra(0);
+        }
+        private void muestra(int j)
+        {
+            
+            for (int i = 0; s[j].Principal != null && i < s[j].Principal.Capacidad; i++)
+            {
+                var e = s[j].Principal.Elementos[i];
+                dgVSecundarios1.Rows.Add(e.Cb, e.Ap);
             }
         }
 

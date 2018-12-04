@@ -9,38 +9,37 @@ namespace Archivos.Controladores
 {
     public class Primario : Indice
     {
-        List<Cajon> subCajones;
-        Cajon primario;
+        List<Cajon_Primario> subCajones;
+        Cajon_Primario primario;
         int Long_CB;
-        Atributo atrib;
+        //Atributo atrib;
 
         //nuevo arch. 
-        public Primario(Atributo a, bool letras, string Nombre, int i, int long_CB) : base(Nombre, i)
+        public Primario(Atributo a, bool letras, string Nombre, int i, int long_CB) : base(Nombre, i, a)
         {
             nuevoArch();
             int inicia = (letras) ? 49 : 65;
-            if (letras) primario = new Cajon(0);
-            else primario = new Cajon(1);
+            if (letras) primario = new Cajon_Primario(0);
+            else primario = new Cajon_Primario(1);
             Long_CB = long_CB;
-            atrib = a;
+            //atrib = a;
             escribePrimario();
         }
-        public Primario(Atributo a, int i, string Nombre): base(Nombre , i)
+        public Primario(Atributo a, int i, string Nombre): base(Nombre , i, a)
         {
-            atrib = a;
+            //atrib = a;
             if (File.Exists(Fullname))
             {
                 //lee el cajon primario de la A a la Z
                 leePrimario();
-                //lee los cajones 
             }
             else
                 nuevoArch();
             Long_CB = a.Longitud;
 
         }
-        public Cajon prim { get => primario; set => primario = value; }
-        public List<Cajon> SubCajones { get => subCajones; set => subCajones = value; }
+        public Cajon_Primario prim { get => primario; set => primario = value; }
+        public List<Cajon_Primario> SubCajones { get => subCajones; set => subCajones = value; }
         internal void inserta(string claveBusq, long apuntador)
         {
             for(int i = 0; i < prim.Longitud; i++)
@@ -52,7 +51,7 @@ namespace Archivos.Controladores
                         //crea nueva caja tipo primaria 2 (1)
                         //agregaremos la clave de busqueda y el apuntador al registro el tamaño del archivo sera igual a
                         //prim.Ap[i]
-                        Cajon c = new Cajon(claveBusq, apuntador, Long_CB);
+                        Cajon_Primario c = new Cajon_Primario(claveBusq, apuntador, Long_CB);
                         prim.Ap[i] = Longitud;
                         escribePrimario_Cajon(prim.Ap[i], c);
                     }
@@ -81,7 +80,7 @@ namespace Archivos.Controladores
             {
                 if (prim.Ind[i] == char.ToUpper(inicial)) 
                 {
-                    Cajon c = ElCajon(prim.Ap[i]);
+                    Cajon_Primario c = ElCajon(prim.Ap[i]);
                     for(int j = 0; j < c.Longitud; j++)
                     { 
                         if (c.Cb[j].Contains(s))
@@ -101,7 +100,7 @@ namespace Archivos.Controladores
                 }
             }
         }
-        public Cajon ordenaCajon(Cajon c)
+        public Cajon_Primario ordenaCajon(Cajon_Primario c)
         {
             for (int i = 0; i < c.Longitud - 1; i++)
             {
@@ -187,12 +186,12 @@ namespace Archivos.Controladores
                 Console.WriteLine(r.PeekChar());
                 if (r.PeekChar() == 65)
                 {
-                    prim = new Cajon(0);//26;
+                    prim = new Cajon_Primario(0);//26;
                     
                 }
                 else
                 {
-                    prim = new Cajon(1);
+                    prim = new Cajon_Primario(1);
                 }
                 for (int i = 0; i < prim.Longitud; i++)
                 {
@@ -204,9 +203,9 @@ namespace Archivos.Controladores
                 }
             }
         }
-        public Cajon ElCajon(long ind)
+        public Cajon_Primario ElCajon(long ind)
         {
-            Cajon c = new Cajon(atrib);
+            Cajon_Primario c = new Cajon_Primario(atrib);
             using (BinaryReader r = new BinaryReader(File.Open(Fullname, FileMode.Open)))
             {
                 r.BaseStream.Seek(ind, SeekOrigin.Begin);
@@ -239,7 +238,7 @@ namespace Archivos.Controladores
             return c;
         }
 
-        public void escribePrimario_Cajon(long l, Cajon C)
+        public void escribePrimario_Cajon(long l, Cajon_Primario C)
         { 
             using (BinaryWriter b = new BinaryWriter(File.Open(Fullname, FileMode.Open)))
             {

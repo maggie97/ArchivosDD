@@ -68,7 +68,7 @@ namespace Archivos
         public long DirSig { get => dirSig; set => dirSig = value; }
         public long DirIndice { get => dirIndice; set => dirIndice = value; }
         public Indice Ind { get => ind; set => ind = value; }
-
+        /*
         public Indice creaIndice(int i )
         {
             if (ind != null) return ind;
@@ -83,6 +83,6 @@ namespace Archivos
                     break;
             }
             return ind;
-        }
+        }*/
     }
 }

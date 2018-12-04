@@ -8,15 +8,15 @@ namespace Archivos.Controladores
 {
     public abstract class Indice : Archivo
     {
-        protected Cajon[] cajoncitos;
         public int index = 0;
-        public Entidad ent;
+        protected Atributo atrib;
 
-        public Indice(string Nombre, int i) : base(Nombre + ".idx")
+        public Indice(string Nombre, int i, Atributo a) : base(Nombre + ".idx")
         {
-            index = i; 
+            index = i;
+            atrib = a;
         }
 
-        public Cajon[] Cajoncitos { get => cajoncitos; set => cajoncitos = value; }
+        public Atributo Atributo { get => atrib; }
     }
 }

@@ -18,7 +18,10 @@ namespace Archivos
             registros = new List<List<string>>();
             entidad = e;
             if (!File.Exists(fullname) || e.Dir_Datos == -1)
+            {
                 nuevoArch();
+                indices();
+            }
             else
             {
                 leerArch(e.Dir_Datos);

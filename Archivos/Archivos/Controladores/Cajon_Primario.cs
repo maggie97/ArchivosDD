@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace Archivos.Controladores
 {
     enum Index { Primario_Principal, Primario_Cajon,Secundario_Principal, Secundario_Cajon, HashD, Multilistas}
-    public class Cajon
+    public class Cajon_Primario
     {
         char[] ind; //si es cajon principal del primario contien del rango de [A-Z] o [0-9]
         List<List<char>> cv; //sabe 
@@ -18,7 +18,7 @@ namespace Archivos.Controladores
         Index op;
 
         //crea el bloque principal del indice primario
-        public Cajon(int op)
+        public Cajon_Primario(int op)
         {
             this.op = Index.Primario_Principal;
             longitud = (op == 0) ? 26 : (op == 1)? 9: 0;
@@ -33,7 +33,7 @@ namespace Archivos.Controladores
             }  
         }
         //crea el bloque que se enlaza con el bloque principal (todo vacio)
-        public Cajon(Atributo a)
+        public Cajon_Primario(Atributo a)
         {
             if (a.TipoIndice == 2)
             {
@@ -42,7 +42,7 @@ namespace Archivos.Controladores
         }
 
         //crea el bloque primario que se enlaza con el principal del primario pero insertando el primer elemento
-        public Cajon(string claveBusq, long apuntador, int long_clave)
+        public Cajon_Primario(string claveBusq, long apuntador, int long_clave)
         {
             creaBloqPrimario(long_clave, !Int32.TryParse(claveBusq, out int a));
             inserta(claveBusq, apuntador);

@@ -49,7 +49,8 @@
   <ItemGroup>
     <Compile Include="Controladores\Archivo.cs" />
     <Compile Include="Controladores\Atributo.cs" />
-    <Compile Include="Controladores\Cajon.cs" />
+    <Compile Include="Controladores\Cajon_Primario.cs" />
+    <Compile Include="Controladores\Cajon_Secundario.cs" />
     <Compile Include="Controladores\DDD.cs" />
     <Compile Include="Controladores\Entidad.cs" />
     <Compile Include="Controladores\Indice.cs" />
