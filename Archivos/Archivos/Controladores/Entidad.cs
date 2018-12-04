@@ -85,6 +85,7 @@ namespace Archivos
         public List<Atributo> Atrib { get => atrib; set => atrib = value; }
         public List<List<string>> Registros { get => registros; set => registros = value; }
         public Primario Prim { get => prim; set => prim = value; }
+        internal List<Secundario> Sec { get => sec; set => sec = value; }
 
         internal void nuevoReg(List<string> atributos)
         {
@@ -94,22 +95,50 @@ namespace Archivos
                 Indice();
             }
             registros.Add(atributos);
-            if (prim != null)  prim.inserta(atributos[prim.index+1], Convert.ToInt64(atributos[0])); 
+            if (prim != null)
+            {
+                prim.inserta(atributos[prim.index + 1], Convert.ToInt64(atributos[0]));
+            }
              ordenaReg();
         }
         public void Indice()
         {
             foreach (var a in Atrib)
             {
-                Indice _in = a.creaIndice(Atrib.IndexOf(a));
-                if (_in != null)
+                if (a.Ind == null)
                 {
-                    if (_in.GetType() == Type.GetType("Archivos.Controladores.Primario"))
-                        prim = (Primario)_in;
-                    else if (_in.GetType() == Type.GetType("Archivos.Controladores.Secundario"))
+                    switch (a.TipoIndice)
                     {
-                        if (sec == null) sec = new List<Secundario>();
-                        sec.Add((Secundario)_in);
+                        case 2:
+                            if (prim == null && sec == null)
+                                a.DirIndice = 0;
+                            else
+                                a.DirIndice = prim.Longitud;
+                            a.Ind = new Primario(a, (a.Tipo == 'C'), sNombre, Atrib.IndexOf(a), a.Longitud);
+                            prim = (Primario)a.Ind;
+                            break;
+                        case 3:
+                            a.Ind = new Secundario(sNombre, Atrib.IndexOf(a));
+                            if (sec == null) sec = new List<Secundario>();
+                            sec.Add((Secundario)a.Ind);
+                            break;
+                    }
+                }
+                else
+                {
+                    if (a.Ind != null)
+                    {
+                        if (a.Ind.GetType() == Type.GetType("Archivos.Controladores.Primario"))
+                            prim = (Primario)a.Ind;
+                        else if (a.Ind.GetType() == Type.GetType("Archivos.Controladores.Secundario"))
+                        {
+                            if (prim == null && sec == null)
+                                a.DirIndice = 0;
+                            else
+                                a.DirIndice = prim.Longitud;
+                            if (sec == null) sec = new List<Secundario>();
+                            sec.Add((Secundario)a.Ind);
+                        }
                     }
                 }
             }

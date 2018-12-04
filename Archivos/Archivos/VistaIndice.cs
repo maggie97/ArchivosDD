@@ -17,10 +17,14 @@ namespace Archivos
         Indice indice;
         Primario p;
         Entidad entidad;
+        List<Secundario> s;
         public VistaIndice(Entidad e)
         {
             InitializeComponent();
             entidad = e;
+            p = e.Prim;
+            s = e.Sec;
+            /*
             foreach(var a in e.Atrib)
             {
                 switch (a.TipoIndice)
@@ -29,9 +33,20 @@ namespace Archivos
                         indice = a.Ind;
                         p = (Primario)indice;
                         break;
+                    case 3:
+                        indice = a.Ind;
+                        if (s == null)
+                             s = new List<Secundario>();
+                        s.Add((Secundario)indice);
+                        break;
                 }
+            }*/
+            if(p!= null)
+                carga();
+            if(s!= null)
+            {
+
             }
-            carga();
         }
         private void carga()
         {
@@ -50,11 +65,11 @@ namespace Archivos
                 { return; }
 
             int i = dGVPrimario1.CurrentCell.RowIndex;
-            var caracter = p.prim.Ind[i];
+            //var caracter = p.prim.Ind[i];
             //MessageBox.Show("Celda de Caracter " + caracter);
             int x = 0;
-            var c = p.SubCajones.Find(o => o.Cb[0][0] == caracter);
-            c = p.ElCajon(Convert.ToInt64(dGVPrimario1.CurrentCell.Value));
+            //var c = p.SubCajones.Find(o => o.Cb[0][0] == caracter);
+            var c = p.ElCajon(Convert.ToInt64(dGVPrimario1.CurrentCell.Value));
             for(int j = 0; c != null && j< c.Longitud; j++)
             {
                 dGVPrimario2.Rows.Add(c.Cb[j], c.Ap[j]);

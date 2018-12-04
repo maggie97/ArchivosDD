@@ -125,6 +125,7 @@ namespace Archivos
                         writer.Write(ddd.Cab);
                         txtCab.Text = ddd.Cab.ToString();
                         Enable_Entidades_Atributos(true);
+                        btn_Registro.Enabled = true;
                     }
                 }
             }

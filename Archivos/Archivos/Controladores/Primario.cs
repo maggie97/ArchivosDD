@@ -13,29 +13,26 @@ namespace Archivos.Controladores
         Cajon primario;
         int Long_CB;
         Atributo atrib;
-        
+
+        //nuevo arch. 
         public Primario(Atributo a, bool letras, string Nombre, int i, int long_CB) : base(Nombre, i)
         {
             nuevoArch();
             int inicia = (letras) ? 49 : 65;
-            primario = new Cajon(0);
+            if (letras) primario = new Cajon(0);
+            else primario = new Cajon(1);
             Long_CB = long_CB;
             atrib = a;
             escribePrimario();
         }
-        public Primario(Atributo a, int i ): base(a.sNombre , i)
+        public Primario(Atributo a, int i, string Nombre): base(Nombre , i)
         {
             atrib = a;
             if (File.Exists(Fullname))
             {
                 //lee el cajon primario de la A a la Z
                 leePrimario();
-                //lee los cajones   
-                for(int j = 0; j < prim.Longitud; j++)
-                {
-                    if (prim.Ap[j] != -1)
-                        leeCajon(prim.Ap[j]);
-                }
+                //lee los cajones 
             }
             else
                 nuevoArch();
@@ -56,35 +53,30 @@ namespace Archivos.Controladores
                         //agregaremos la clave de busqueda y el apuntador al registro el tamaño del archivo sera igual a
                         //prim.Ap[i]
                         Cajon c = new Cajon(claveBusq, apuntador, Long_CB);
-                        if (subCajones == null) subCajones = new List<Cajon>();
-                        subCajones.Add(c);
-                        if (subCajones.Count > 0)
-                            subCajones = subCajones.OrderBy(o => o.Cb[0]).ToList();
                         prim.Ap[i] = Longitud;
                         escribePrimario_Cajon(prim.Ap[i], c);
-                        //escribePrimario_Cajon(c);
                     }
                     else
                     {
                         var c = ElCajon(prim.Ap[i]);
-                        var ind = subCajones.FindIndex(o => o.c == claveBusq[0]);
+                       
                         c.inserta(claveBusq, apuntador);
                         ordenaCajon(c);
                         escribePrimario_Cajon(prim.Ap[i], c );
                     }
-                    //sobreescribePrimario();
-                    
                     i = prim.Longitud;
                 }
             }
-            
         }
 
         public void elimina(string val)
         {
             char inicial = val.ToList().Find(o => o != '\u001d');
             int fin = val.ToList().FindIndex(o => o == ' ');
-            string s = val.Substring(val.IndexOf(inicial), fin);
+            string s = "";
+            s = (fin < 0)? val.Substring(val.IndexOf(inicial)): val.Substring(val.IndexOf(inicial), fin);
+            
+             
             for (int i = 0; i < prim.Longitud; i++)
             {
                 if (prim.Ind[i] == char.ToUpper(inicial)) 
@@ -95,7 +87,8 @@ namespace Archivos.Controladores
                         if (c.Cb[j].Contains(s))
                         {
                             c.Cb[j] = "";
-                            while (c.Cb[j].Length < Long_CB) c.Cb[j] += " ";
+                            if (atrib.Tipo == 'C') while (c.Cb[j].Length < Long_CB) c.Cb[j] += " ";
+                            else c.Cb[j] = "0";
                             c.Ap[j] = -1;
                             j = c.Longitud;
                         }
@@ -103,8 +96,6 @@ namespace Archivos.Controladores
                     ordenaCajon(c);
             
                     escribePrimario_Cajon(prim.Ap[i], c);
-                    //if (c.Cb[0].All(o => o == ' '));
-                      //  prim.Ap[i] = -1;
                     escribePrimario();
                     i = prim.Longitud;
                 }
@@ -112,23 +103,67 @@ namespace Archivos.Controladores
         }
         public Cajon ordenaCajon(Cajon c)
         {
-            for(int i = 0; i< c.Longitud; i++)
+            for (int i = 0; i < c.Longitud - 1; i++)
             {
-                //if (c.Cb[i].Contains("aux")) break;// i = c.Longitud;
-                for (int j = i; j < c.Longitud - 1; j++)
+                for (int j = 0; j < c.Longitud - 1; j++)
                 {
                     var b = c.Cb[j];
-                    if (c.Cb[j].Contains('\u001d'))
-                        c.Cb[j].Remove('\u001d');
-                    if (c.Cb[i].CompareTo(c.Cb[j]) > 0 && !c.Cb[j].All(o => o == ' '))
+                    if (atrib.Tipo == 'C')
                     {
+                        if (c.Cb[j].Contains('\u001d'))
+                        {
+                            string s = c.Cb[j].Substring(c.Cb[j].LastIndexOf('\u001d') + 1);
+                            while (s.Length < c.Cb[j].Length) s += " ";
+                            c.Cb[j] = s;
 
-                        var a = c.Cb[i];
-                        var ap = c.Ap[i];
-                        c.Cb[i] = c.Cb[j];
-                        c.Ap[i] = c.Ap[j];
-                        c.Cb[j] = a;
-                        c.Ap[j] = ap;
+                            s = c.Cb[j + 1].Substring(c.Cb[j].LastIndexOf('\u001d') + 1);
+                            while (s.Length < c.Cb[j].Length) s += " ";
+                            c.Cb[j+1] = s;
+                        }
+                        string actual = c.Cb[j];
+                        string sig = c.Cb[j + 1];
+                        if(actual.All(o=>o ==' ') && sig.All(o => o == ' ') ) { j = c.Longitud - 1; }
+                        else if(actual.All(o => o == ' ') && !sig.All(o => o == ' '))
+                        {
+                            var a = c.Cb[j + 1];
+                            var p = c.Ap[j + 1];
+                            c.Cb[j + 1] = c.Cb[j];
+                            c.Ap[j + 1] = c.Ap[j];
+                            c.Cb[j] = a;
+                            c.Ap[j] = p;
+                        }
+                        //if (c.Cb[i].CompareTo(c.Cb[j]) > 0 && !c.Cb[j].All(o => o == ' '))
+                        else if(actual.CompareTo(sig) > 0 && !sig.All(o => o == ' '))
+                        {
+
+                            var a = c.Cb[j];
+                            var p = c.Ap[j];
+                            c.Cb[j] = c.Cb[j + 1];
+                            c.Ap[j] = c.Ap[j + 1];
+                            c.Cb[j + 1] = a;
+                            c.Ap[j + 1] = p;
+
+                            /*var a = c.Cb[i];
+                            var ap = c.Ap[i];
+                            c.Cb[i] = c.Cb[j];
+                            c.Ap[i] = c.Ap[j];
+                            c.Cb[j] = a;
+                            c.Ap[j] = ap;*/
+                        }
+                    }
+                    else
+                    {
+                        int actual = Int32.Parse(c.Cb[j]);
+                        int sig = Int32.Parse(c.Cb[j + 1]);
+                        if (sig < actual && sig != 0)
+                        {
+                            var a = c.Cb[j];
+                            var p = c.Ap[j];
+                            c.Cb[j] = c.Cb[j + 1];
+                            c.Ap[j] = c.Ap[j + 1];
+                            c.Cb[j + 1] = a;
+                            c.Ap[j + 1] = p;
+                        }
                     }
                 }
             }
@@ -153,21 +188,21 @@ namespace Archivos.Controladores
                 if (r.PeekChar() == 65)
                 {
                     prim = new Cajon(0);//26;
-                    for (int i = 0; i < prim.Longitud; i++)
-                    {
-                        Console.WriteLine(r.ReadChar());
-                        long ap = r.ReadInt64();
-                        Console.WriteLine(ap);
-                        if (ap != -1)
-                            prim.Ap[i] = ap;
-                    }
+                    
+                }
+                else
+                {
+                    prim = new Cajon(1);
+                }
+                for (int i = 0; i < prim.Longitud; i++)
+                {
+                    Console.WriteLine(r.ReadChar());
+                    long ap = r.ReadInt64();
+                    Console.WriteLine(ap);
+                    if (ap != -1)
+                        prim.Ap[i] = ap;
                 }
             }
-        }
-        private void leeCajon(long ind)
-        {
-            if (subCajones == null) subCajones = new List<Cajon>();
-            subCajones.Add(ElCajon(ind));
         }
         public Cajon ElCajon(long ind)
         {
@@ -179,10 +214,21 @@ namespace Archivos.Controladores
                 char[] var; long d = 0;
                 while (i < 50 && d >= 0)
                 {
-                    var = r.ReadChars(c.Cb.First().Length + 1);
                     string a = "";
-                    while (a.Length < c.Cb.First().Length) a += var[a.Length];
-                    Console.WriteLine(var);
+                    if (atrib.Tipo == 'C')
+                    {
+                        var = r.ReadChars(c.Cb.First().Length+1);
+                        List<char> cb = var.ToList();
+                        cb.RemoveAll(o => o == '\u0003');
+                        while (a.Length < c.Cb.First().Length) a += cb[a.Length];
+                        Console.WriteLine(var);
+                    }
+                    else
+                    {
+                        int entero = r.ReadInt32();
+                        a = entero.ToString();
+                        Console.WriteLine(entero);
+                    }
                     d = r.ReadInt64();
                     Console.WriteLine(d);
                     if (!a.Contains("aux"))
@@ -192,31 +238,6 @@ namespace Archivos.Controladores
             }
             return c;
         }
-        public void escribePrimario_Cajon(Cajon cajon)
-        {
-            using(BinaryWriter b = new BinaryWriter(File.Open(Fullname, FileMode.Append)))
-            {
-                for(int i= 0; i < cajon.Longitud; i++)
-                {
-                    b.Write(cajon.Cb[i].ToCharArray(), 0, atrib.Longitud  - 1 );
-                    b.Write(cajon.Ap[i]);
-                }
-            }
-        }
-
-        public void escribePrimario_Cajon(long l, int indC)
-        {
-            var cajon = subCajones[indC];
-            using (BinaryWriter b = new BinaryWriter(File.Open(Fullname, FileMode.Open)))
-            {
-                b.Seek((int)l, SeekOrigin.Begin);
-                for (int i = 0; i < cajon.Longitud; i++)
-                {
-                    b.Write(cajon.Cb[i]);
-                    b.Write(cajon.Ap[i]);
-                }
-            }
-        }
 
         public void escribePrimario_Cajon(long l, Cajon C)
         { 
@@ -225,7 +246,10 @@ namespace Archivos.Controladores
                 b.Seek((int)l, SeekOrigin.Begin);
                 for (int i = 0; i < C.Longitud; i++)
                 {
-                    b.Write(C.Cb[i]);
+                    if (atrib.Tipo == 'C')
+                        b.Write(C.Cb[i]);
+                    else
+                        b.Write(Int32.Parse(C.Cb[i]));
                     b.Write(C.Ap[i]);
                 }
             }

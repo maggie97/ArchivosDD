@@ -32,7 +32,7 @@ namespace Archivos
             {
                 if (atrib.TipoIndice == 2)
                 {
-                    atrib.Ind = new Controladores.Primario(atrib, entidad.Atrib.IndexOf(atrib));
+                    atrib.Ind = new Controladores.Primario(atrib, entidad.Atrib.IndexOf(atrib), entidad.sNombre);
                     entidad.Prim = (Controladores.Primario)atrib.Ind;
                 }
             }

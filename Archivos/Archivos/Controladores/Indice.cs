@@ -18,8 +18,5 @@ namespace Archivos.Controladores
         }
 
         public Cajon[] Cajoncitos { get => cajoncitos; set => cajoncitos = value; }
-
-
-        
     }
 }

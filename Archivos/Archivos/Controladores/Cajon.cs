@@ -9,14 +9,15 @@ namespace Archivos.Controladores
     enum Index { Primario_Principal, Primario_Cajon,Secundario_Principal, Secundario_Cajon, HashD, Multilistas}
     public class Cajon
     {
-        char[] ind;
-        List<List<char>> cv;
-        string[] cb;
-        long[] ap;
-        int longitud = 0;
+        char[] ind; //si es cajon principal del primario contien del rango de [A-Z] o [0-9]
+        List<List<char>> cv; //sabe 
+        string[] cb; //las claves de busqueda si se llegan a usar 
+        long[] ap;//apuntadores del registro 
+        int longitud = 0;//cantidad  de registros que puede almacenar 
         public char c = '\0';
         Index op;
 
+        //crea el bloque principal del indice primario
         public Cajon(int op)
         {
             this.op = Index.Primario_Principal;
@@ -31,19 +32,22 @@ namespace Archivos.Controladores
                 inicia++;
             }  
         }
+        //crea el bloque que se enlaza con el bloque principal (todo vacio)
         public Cajon(Atributo a)
         {
-            if(a.TipoIndice == 2)
+            if (a.TipoIndice == 2)
             {
-                creaBloqPrimario(a.Longitud);
+                creaBloqPrimario(a.Longitud, (a.Tipo == 'C'));
             }
         }
+
+        //crea el bloque primario que se enlaza con el principal del primario pero insertando el primer elemento
         public Cajon(string claveBusq, long apuntador, int long_clave)
         {
-            creaBloqPrimario(long_clave);
+            creaBloqPrimario(long_clave, !Int32.TryParse(claveBusq, out int a));
             inserta(claveBusq, apuntador);
         }
-        public void creaBloqPrimario(int long_clave)
+        public void creaBloqPrimario(int long_clave, bool cadena)
         {
             this.op = Index.Primario_Cajon;
             longitud = 50;
@@ -52,11 +56,15 @@ namespace Archivos.Controladores
             ap = new long[longitud];
             for (int i = 0; i < longitud; i++)
             {
-                string s = "";//"aux" + i;
-                while (s.Length < long_clave - 1 ) s += " ";
+                string s = "";
+                if (cadena)
+                    while (s.Length < long_clave - 1) s += " ";
+                else
+                    while (s.Length < long_clave - 1) s += '0';
                 cb[i] = s;
                 ap[i] = -1;
             }
+            
         }
         public void inserta(string claveBusq, long apuntador)
         {
