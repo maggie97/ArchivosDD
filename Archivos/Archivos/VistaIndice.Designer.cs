@@ -187,7 +187,7 @@
             this.dgVSecundarios1.Name = "dgVSecundarios1";
             this.dgVSecundarios1.Size = new System.Drawing.Size(260, 407);
             this.dgVSecundarios1.TabIndex = 3;
-            this.dgVSecundarios1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgVSecundarios1_CellContentClick);
+            this.dgVSecundarios1.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgVSecundarios1_CellContentClick);
             // 
             // dataGridViewTextBoxColumn1
             // 

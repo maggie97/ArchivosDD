@@ -16,9 +16,11 @@ namespace Archivos.Controladores
         List<long> ap;
         Atributo atrib;
 
-        public Cajon_Secundario()
+        public Cajon_Secundario(long p)
         {
-            for (int i = 0; i < capacidad; i++)
+            ap = new List<long>();
+            ap.Add(p);
+            for (int i = 1; i < capacidad; i++)
             {
                 ap.Add(-1);
             }

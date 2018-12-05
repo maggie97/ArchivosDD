@@ -92,7 +92,7 @@ namespace Archivos
             if (Registros == null || Registros.Count == 0)
             {
                 registros = new List<List<string>>();
-                Indice();
+                Indice(1);
             }
             registros.Add(atributos);
             if (prim != null)
@@ -103,30 +103,48 @@ namespace Archivos
             {
                 foreach(var s in sec)
                 {
-                    s.inserta(atributos[s.index + 1], Convert.ToInt64(atributos[0]));
+                    s.insertaEscribe(atributos[s.index + 1], Convert.ToInt64(atributos[0]));
                 }
             }
              ordenaReg();
         }
-        public void Indice()
+        public void Indice(int op)
         {
-            foreach (var a in Atrib)
+            bool nuevoArch = false;
+            if(!System.IO.File.Exists(sNombre + ".idx"))
+            {
+                foreach (var b in Atrib)
+                    b.DirIndice = -1;
+            }
+            Atributo a = null;
+            if( (a = Atrib.Find(o => o.TipoIndice == 2)) != null){
+                if (a.Ind == null)
+                {
+                    a.Ind = new Primario(a, (a.Tipo == 'C'), sNombre, Atrib.IndexOf(a), a.Longitud);
+                }
+                prim = (Primario)a.Ind;
+            }
+            if((a = Atrib.Find(o => o.TipoIndice == 3)) != null)
+            {
+                if(a.Ind == null)
+                {
+                    if (sec == null) sec = new List<Secundario>();
+                    a.Ind = new Secundario(a, sNombre, Atrib.IndexOf(a));
+                }
+                sec.Add((Secundario)a.Ind);
+            }
+
+            /*foreach (var a in Atrib)
             {
                 if (a.Ind == null)
                 {
                     switch (a.TipoIndice)
                     {
                         case 2:
-                            if (prim == null && sec == null)
-                                a.DirIndice = 0;
-                            else
-                                a.DirIndice = prim.Longitud;
                             a.Ind = new Primario(a, (a.Tipo == 'C'), sNombre, Atrib.IndexOf(a), a.Longitud);
                             prim = (Primario)a.Ind;
                             break;
                         case 3:
-                            a.DirIndice = (prim == null && sec == null)? 0: prim.Longitud;
-                            //a.Ind = new Secundario(sNombre, Atrib.IndexOf(a));
                             if (sec == null) sec = new List<Secundario>();
                             a.Ind = new Secundario(a, sNombre, Atrib.IndexOf(a));
                             sec.Add((Secundario)a.Ind);
@@ -139,18 +157,11 @@ namespace Archivos
                         prim = (Primario)a.Ind;
                     else if (a.Ind.GetType() == Type.GetType("Archivos.Controladores.Secundario"))
                     {
-                        if (prim == null && sec == null)
-                            a.DirIndice = 0;
-                        else if (prim != null && sec == null)
-                            a.DirIndice = prim.Longitud;
-                        else if (sec != null)
-                            a.DirIndice = sec[0].Longitud;
-                            
                         if (sec == null) sec = new List<Secundario>();
                         sec.Add((Secundario)a.Ind);
                     }
                 }
-            }
+            }*/
         }
         public void ordenaReg()
         {

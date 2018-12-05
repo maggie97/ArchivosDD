@@ -17,24 +17,38 @@ namespace Archivos.Controladores
         //nuevo arch. 
         public Primario(Atributo a, bool letras, string Nombre, int i, int long_CB) : base(Nombre, i, a)
         {
-            nuevoArch();
-            int inicia = (letras) ? 49 : 65;
-            if (letras) primario = new Cajon_Primario(0);
-            else primario = new Cajon_Primario(1);
-            Long_CB = long_CB;
             //atrib = a;
-            escribePrimario();
-        }
-        public Primario(Atributo a, int i, string Nombre): base(Nombre , i, a)
-        {
-            //atrib = a;
-            if (File.Exists(Fullname))
+            if ((File.Exists(Fullname) && Longitud > 0 )|| a.DirAtributo < 0)
             {
                 //lee el cajon primario de la A a la Z
                 leePrimario();
             }
             else
+            {
                 nuevoArch();
+                a.DirIndice = 0;
+                int inicia = (letras) ? 49 : 65;
+                if (letras) primario = new Cajon_Primario(0);
+                else primario = new Cajon_Primario(1);
+                Long_CB = long_CB;
+                //atrib = a;
+                escribePrimario();
+            }
+            Long_CB = a.Longitud;
+        }
+        public Primario(Atributo a, int i, string Nombre): base(Nombre , i, a)
+        {
+            //atrib = a;
+            if (File.Exists(Fullname) && Longitud > 0)
+            {
+                //lee el cajon primario de la A a la Z
+                leePrimario();
+            }
+            else
+            {
+                nuevoArch();
+                a.DirIndice = 0;
+            }
             Long_CB = a.Longitud;
 
         }
@@ -131,7 +145,6 @@ namespace Archivos.Controladores
                             c.Cb[j] = a;
                             c.Ap[j] = p;
                         }
-                        //if (c.Cb[i].CompareTo(c.Cb[j]) > 0 && !c.Cb[j].All(o => o == ' '))
                         else if(actual.CompareTo(sig) > 0 && !sig.All(o => o == ' '))
                         {
 
@@ -141,13 +154,6 @@ namespace Archivos.Controladores
                             c.Ap[j] = c.Ap[j + 1];
                             c.Cb[j + 1] = a;
                             c.Ap[j + 1] = p;
-
-                            /*var a = c.Cb[i];
-                            var ap = c.Ap[i];
-                            c.Cb[i] = c.Cb[j];
-                            c.Ap[i] = c.Ap[j];
-                            c.Cb[j] = a;
-                            c.Ap[j] = ap;*/
                         }
                     }
                     else

@@ -262,7 +262,7 @@ namespace Archivos
         }
         #region atributos
         public Entidad nuevoAtributo(string nombre, int tipo, int longi, int iEnt, int TipoIndice)
-        {
+        { 
             Atributo nuevo = new Atributo(nombre, Longitud, tipo, longi, TipoIndice, -1, -1);
             list_entidades[iEnt].nuevoA(nuevo);
             //guardaAtrib(nuevo);

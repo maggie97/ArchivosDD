@@ -31,15 +31,20 @@ namespace Archivos
 
         public void indices()
         {
-            foreach(var atrib in entidad.Atrib)
+            /*foreach(var atrib in entidad.Atrib)
             {
                 if (atrib.TipoIndice == 2)
                 {
                     atrib.Ind = new Controladores.Primario(atrib, entidad.Atrib.IndexOf(atrib), entidad.sNombre);
                     entidad.Prim = (Controladores.Primario)atrib.Ind;
                 }
-            }
-            entidad.Indice();
+                /*else
+                {
+                    entidad.Sec = new List<Controladores.Secundario>();
+                    atrib.Ind = new Controladores.Secundario(atrib, entidad.sNombre, entidad.Atrib.IndexOf(atrib));
+                }*/
+            //}
+            entidad.Indice(0);
         }
         public void sobreescribirArch()
         {

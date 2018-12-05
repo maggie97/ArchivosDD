@@ -24,7 +24,7 @@ namespace Archivos
             entidad = e;
             p = e.Prim;
             s = e.Sec;
-            /*
+            
             foreach(var a in e.Atrib)
             {
                 switch (a.TipoIndice)
@@ -33,14 +33,14 @@ namespace Archivos
                         indice = a.Ind;
                         p = (Primario)indice;
                         break;
-                    case 3:
+                    /*case 3:
                         indice = a.Ind;
                         if (s == null)
                              s = new List<Secundario>();
                         s.Add((Secundario)indice);
-                        break;
+                        break;*/
                 }
-            }*/
+            }
             if(p!= null)
                 carga();
             if(s!= null)
@@ -68,7 +68,7 @@ namespace Archivos
         }
         private void muestra(int j)
         {
-            
+            dgVSecundarios1.Rows.Clear();
             for (int i = 0; s[j].Principal != null && i < s[j].Principal.Capacidad; i++)
             {
                 var e = s[j].Principal.Elementos[i];
@@ -88,8 +88,8 @@ namespace Archivos
         {
             int valor = 0;
             dGVPrimario2.Rows.Clear();
-            if ((int)dGVPrimario1.CurrentCell.Value == -1 ){ return; }
             if (!Int32.TryParse(dGVPrimario1.CurrentCell.Value.ToString(), out valor)) return;
+            if (valor == -1) return;
             int i = dGVPrimario1.CurrentCell.RowIndex;
             int x = 0;
             var c = p.ElCajon(Convert.ToInt64(dGVPrimario1.CurrentCell.Value));
@@ -108,16 +108,16 @@ namespace Archivos
         {
             int valor = 0;
             dGVSecundarios2.Rows.Clear();
-            if ((int)dGVSecundarios2.CurrentCell.Value == -1) { return; }
-            if (!Int32.TryParse(dGVSecundarios2.CurrentCell.Value.ToString(), out valor)) return;
-            int i = dGVSecundarios2.CurrentCell.RowIndex;
+            if (dgVSecundarios1.CurrentCell.Value == null && (int)dgVSecundarios1.CurrentCell.Value == -1) { return; }
+            if (!Int32.TryParse(dgVSecundarios1.CurrentCell.Value.ToString(), out valor)) return;
+            int i = dgVSecundarios1.CurrentCell.RowIndex;
             int x = 0;
             Secundario c;
-            /*//var c = p.ElCajon(Convert.ToInt64(dGVSecundarios2.CurrentCell.Value));
-            for (int j = 0; c != null && j < c.Longitud; j++)
+            var cS = s[comboBox1.SelectedIndex].leeCajon(Convert.ToInt64(dgVSecundarios1.CurrentCell.Value));
+            for (int j = 0; cS!= null && j < cS.Capacidad; j++)
             {
-                dGVSecundarios2.Rows.Add(c.Cb[j], c.Ap[j]);
-            }*/
+                dGVSecundarios2.Rows.Add(cS.Ap[j]);
+            }
         }
     }
 }
