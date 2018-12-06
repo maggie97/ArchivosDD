@@ -18,6 +18,7 @@ namespace Archivos
         Primario p;
         Entidad entidad;
         List<Secundario> s;
+        HashDinamico h;
         public VistaIndice(Entidad e)
         {
             InitializeComponent();
@@ -40,11 +41,20 @@ namespace Archivos
                         break;*/
                 }
             }
-            if(p!= null)
+            Atributo z = e.Atrib.Find(o => o.TipoIndice == 6);
+            if (z != null && z.DirAtributo != -1)
+            {
+                h = (HashDinamico)z.Ind;
+            }
+            if (p!= null)
                 carga();
             if(s!= null)
             {
                 cargaSec();
+            }
+            if(h != null)
+            {
+                hash();
             }
         }
         private void carga()
@@ -65,14 +75,24 @@ namespace Archivos
             comboBox1.SelectedIndex = 0;
             muestra(0);
         }
+        private void hash()
+        {
+            h.leePrincipal(h.Atributo.DirIndice);
+            for (int i = 0; i < h.Principal.Count; i++)
+            {
+                dgvHashDin1.Rows.Add(h.Principal[i].Cb.ToString(), h.Principal[i].Ap.ToString());
+            }
+        }
+
         private void muestra(int j)
         {
             dgVSecundarios1.Rows.Clear();
-            for (int i = 0; s[j].Principal != null && i < s[j].Principal.Capacidad; i++)
-            {
-                var e = s[j].Principal.Elementos[i];
-                dgVSecundarios1.Rows.Add(e.Cb, e.Ap);
-            }
+            for(int k = 0; k < s[j].Principal.Count; k++ )
+                for (int i = 0; s[j].Principal != null && i < s[j].Principal[k].Capacidad; i++)
+                {
+                    var e = s[j].Principal[k].Elementos[i];
+                    dgVSecundarios1.Rows.Add(e.Cb, e.Ap);
+                }
         }
 
         public void actualiza()

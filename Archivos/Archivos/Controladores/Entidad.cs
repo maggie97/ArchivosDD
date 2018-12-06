@@ -143,8 +143,8 @@ namespace Archivos
                 if(a.Ind == null)
                 {
                     a.Ind = new HashDinamico(a, sNombre, Atrib.IndexOf(a));
-                    
                 }
+
             }
             
         }

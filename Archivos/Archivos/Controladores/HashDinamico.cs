@@ -12,6 +12,8 @@ namespace Archivos.Controladores
         int bit = 1;
         List<Elemento> principal;
 
+        internal List<Elemento> Principal { get => principal; set => principal = value; }
+
         public HashDinamico(Atributo a, string nomb, int ind): base (nomb, ind, a)
         {
             principal = new List<Elemento>();
