@@ -39,7 +39,7 @@ namespace Archivos.Controladores
             var c = inserta(cb, reg);
             if (c[0] != null && (long)c[1] > 0)
             {
-                principal = ordenaPrincipal(principal);
+                principal = ordenaPrincipal();
                 escribeSecundario((int)atrib.DirIndice);
                 escribeCajon((Cajon_Secundario)c[0], (long)c[1]);
             }
@@ -48,7 +48,7 @@ namespace Archivos.Controladores
         {
             Cajon_Secundario c = null;
             long dir = -1;
-            while (cb.Length < atrib.Longitud - 1 ) cb += " ";
+            while (cb.Length < principal.Elementos.Last().Cb.Length) cb += " ";
             if (tope < capacidad)
             {
                 if (tope == 0 )
@@ -80,7 +80,34 @@ namespace Archivos.Controladores
                     }
                 }
             }
-            return new Object[] { c, dir};
+            return new object[] { c, dir};
+        }
+        public void elimina(string dato, long reg)
+        {
+            var a = principal.Elementos.Find(o => o.Cb.Contains(dato));
+            if(a  != null){
+                var c = leeCajon(a.Ap);
+                if (c != null)
+                {
+                    int i = c.Ap.FindIndex(o => o == reg);
+                    if (i >= 0)
+                    {
+                        c.Ap[i] = -1;
+                        c = ordenaCajon(c);
+                        escribeCajon(c, a.Ap);
+                        if (c.Ap[0] == -1 )
+                        {
+                            int j = Principal.Elementos.FindIndex(o => o.Cb == a.Cb);
+                            a = new Elemento(a.Cb.Length);
+
+                            principal.Elementos[j] = a;
+
+                            principal = ordenaPrincipal();
+                            escribeSecundario((int)atrib.DirIndice);
+                        }
+                    }
+                }
+            }
         }
 
         public void escribeSecundario(int l)
@@ -90,7 +117,7 @@ namespace Archivos.Controladores
                 b.Seek(l, SeekOrigin.Begin);
                 for (int i = 0; i < principal.Capacidad; i++)
                 {
-                    b.Write(principal.Elementos[i].Cb);
+                    b.Write(principal.Elementos[i].Cb.ToArray(), 0, atrib.Longitud);
                     b.Write(principal.Elementos[i].Ap);
                 }
             }
@@ -158,9 +185,10 @@ namespace Archivos.Controladores
             return c;
         }
 
-        public Cajon_Secundario ordenaPrincipal(Cajon_Secundario c) // cajon principal
+        public Cajon_Secundario ordenaPrincipal() // cajon principal
         {
-            for(int i = 0; i<c.Capacidad-1; i++)
+            Cajon_Secundario c = principal;
+            for (int i = 0; i<c.Capacidad-1; i++)
             {
                 for(int j = 0; j< c.Capacidad - 1; j++)
                 {
@@ -196,6 +224,30 @@ namespace Archivos.Controladores
                             c.Elementos[j + 1].Cb = a;
                             c.Elementos[j + 1].Ap = p;
                         }
+                    }
+                }
+            }
+            return c;
+        }
+        public Cajon_Secundario ordenaCajon(Cajon_Secundario c)
+        {
+            for (int i = 0; i < c.Capacidad - 1; i++)
+            {
+                for (int j = 0; j < c.Capacidad - 1; j++)
+                {
+                    var act = c.Ap[j];
+                    var sig = c.Ap[j + 1];
+                    if (sig < act && sig > 0)
+                    {
+                        var p = c.Ap[j];
+                        c.Ap[j] = c.Ap[j + 1];
+                        c.Ap[j + 1] = p;
+                    }
+                    else if (sig > act && act == -1)
+                    {
+                        var p = c.Ap[j + 1];
+                        c.Ap[j + 1] = c.Ap[j];
+                        c.Ap[j ] = p;
                     }
                 }
             }

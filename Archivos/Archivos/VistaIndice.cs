@@ -24,7 +24,6 @@ namespace Archivos
             entidad = e;
             p = e.Prim;
             s = e.Sec;
-            
             foreach(var a in e.Atrib)
             {
                 switch (a.TipoIndice)

@@ -200,7 +200,12 @@ namespace Archivos
             }
             if (sec != null)
             {
-
+                foreach(var s in sec)
+                {
+                    var dat = reg[s.index + 1];
+                    dat = dat.Substring(dat.LastIndexOf('\u001d') + 1 );
+                    s.elimina(dat, Int64.Parse(reg[0]));
+                }
             }
 
         }

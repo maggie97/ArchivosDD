@@ -94,23 +94,32 @@ namespace Archivos.Controladores
             {
                 if (prim.Ind[i] == char.ToUpper(inicial)) 
                 {
-                    Cajon_Primario c = ElCajon(prim.Ap[i]);
-                    for(int j = 0; j < c.Longitud; j++)
-                    { 
-                        if (c.Cb[j].Contains(s))
+                    if (prim.Ap[i] != -1)
+                    {
+                        Cajon_Primario c = ElCajon(prim.Ap[i]);
+                        for (int j = 0; j < c.Longitud; j++)
                         {
-                            c.Cb[j] = "";
-                            if (atrib.Tipo == 'C') while (c.Cb[j].Length < Long_CB) c.Cb[j] += " ";
-                            else c.Cb[j] = "0";
-                            c.Ap[j] = -1;
-                            j = c.Longitud;
+                            if (c.Cb[j].Contains(s))
+                            {
+                                c.Cb[j] = "";
+                                if (atrib.Tipo == 'C') while (c.Cb[j].Length < Long_CB) c.Cb[j] += " ";
+                                else c.Cb[j] = "0";
+                                c.Ap[j] = -1;
+                                j = c.Longitud;
+                            }
                         }
+                        c = ordenaCajon(c);
+
+                        escribePrimario_Cajon(prim.Ap[i], c);
+                        if (c.Cb[0].All(o=>o == ' ') || c.Cb[0].First() == '0')
+                        {
+                            prim.Ap[i] = -1;
+                        }
+                        //c = ordenaCajon(c);
+                        escribePrimario();
+                        //c = ordenaCajon(c);
+                        i = prim.Longitud;
                     }
-                    ordenaCajon(c);
-            
-                    escribePrimario_Cajon(prim.Ap[i], c);
-                    escribePrimario();
-                    i = prim.Longitud;
                 }
             }
         }
@@ -168,6 +177,15 @@ namespace Archivos.Controladores
                             c.Ap[j] = c.Ap[j + 1];
                             c.Cb[j + 1] = a;
                             c.Ap[j + 1] = p;
+                        }
+                        else if(sig > actual && sig != 0)
+                        {
+                            var a = c.Cb[j + 1];
+                            var p = c.Ap[j + 1];
+                            c.Cb[j + 1] = c.Cb[j];
+                            c.Ap[j + 1] = c.Ap[j];
+                            c.Cb[j] = a;
+                            c.Ap[j] = p;
                         }
                     }
                 }

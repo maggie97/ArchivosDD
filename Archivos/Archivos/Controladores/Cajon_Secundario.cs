@@ -32,7 +32,7 @@ namespace Archivos.Controladores
             elementos = new List<Elemento>();
             for (int i = 0; i < capacidad; i++)
             {
-                elementos.Add(new Elemento(a.Longitud-1));
+                elementos.Add(new Elemento(a.Longitud));
             }
         }
 
