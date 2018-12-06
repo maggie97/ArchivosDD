@@ -19,8 +19,9 @@ namespace Archivos
             foreach (Entidad e in entidades)
                 cmb_Entidad.Items.Add(e.sNombre);
             cmbTipo.SelectedIndex = 0;
-            txt_Long.Text = "0";
+            txt_Long.Text = "4";
             cmbIndice.SelectedIndex = 0;
+            cmb_Entidad.SelectedIndex = 0;
             //cmbTipo.Items.AddRange(new object[] {"int", "float", "char","string" });
         }
         public NuevoAtributo(string nombre, char tipo, int longit, int indice,Entidad e)

@@ -9,7 +9,7 @@ namespace Archivos.Controladores
 {
     class Secundario : Indice
     {
-        Cajon_Secundario principal;
+        List<Cajon_Secundario> principal;
         int capacidad = 100;
         int tope = 0;
         public Secundario(Atributo a, string nombre, int i): base (nombre, i, a)
@@ -18,13 +18,14 @@ namespace Archivos.Controladores
             {
                 nuevoArch();
                 a.DirIndice = 0;
-                principal = new Cajon_Secundario(a);
+                principal = new List<Cajon_Secundario>();
+                principal.Add(new Cajon_Secundario(a));
                 escribeSecundario((int)a.DirIndice);
             }
             else if(a.DirIndice < 0)
             {
                 a.DirIndice = Longitud;
-                principal = new Cajon_Secundario(a);
+                principal.Add(new Cajon_Secundario(a));
                 escribeSecundario((int)a.DirIndice);
             }
             else
@@ -33,7 +34,7 @@ namespace Archivos.Controladores
             }
         }
 
-        internal Cajon_Secundario Principal { get => principal; set => principal = value; }
+        internal List<Cajon_Secundario> Principal { get => principal; set => principal = value; }
         public void insertaEscribe(string cb, long reg)
         {
             var c = inserta(cb, reg);
@@ -48,20 +49,20 @@ namespace Archivos.Controladores
         {
             Cajon_Secundario c = null;
             long dir = -1;
-            while (cb.Length < principal.Elementos.Last().Cb.Length) cb += " ";
+            while (cb.Length < principal[0].Elementos.Last().Cb.Length) cb += " ";
             if (tope < capacidad)
             {
                 if (tope == 0 )
                 {
                    
-                    principal.Elementos[tope] = new Elemento(cb, Longitud);
+                    principal.Last().Elementos[tope] = new Elemento(cb, Longitud);
                     c = new Cajon_Secundario(reg);
                     dir = Longitud;
                     tope++;
                 }
                 else
                 {
-                    var a = principal.Elementos.Find(o => o.Cb == cb);
+                    var a = principal.Last().Elementos.Find(o => o.Cb == cb);
                     if(a != null)
                     {
                         //Lee el cajon
@@ -73,18 +74,22 @@ namespace Archivos.Controladores
                     }
                     else
                     {
-                        principal.Elementos[tope] = new Elemento(cb, Longitud);
+                        principal.Last().Elementos[tope] = new Elemento(cb, Longitud);
                         c = new Cajon_Secundario(reg);
                         dir = Longitud;
                         tope++;
                     }
                 }
             }
+            else
+            {
+
+            }
             return new object[] { c, dir};
         }
         public void elimina(string dato, long reg)
         {
-            var a = principal.Elementos.Find(o => o.Cb.Contains(dato));
+            var a = principal.Last().Elementos.Find(o => o.Cb.Contains(dato));
             if(a  != null){
                 var c = leeCajon(a.Ap);
                 if (c != null)
@@ -97,10 +102,10 @@ namespace Archivos.Controladores
                         escribeCajon(c, a.Ap);
                         if (c.Ap[0] == -1 )
                         {
-                            int j = Principal.Elementos.FindIndex(o => o.Cb == a.Cb);
+                            int j = Principal.Last().Elementos.FindIndex(o => o.Cb == a.Cb);
                             a = new Elemento(a.Cb.Length);
 
-                            principal.Elementos[j] = a;
+                            principal.Last().Elementos[j] = a;
 
                             principal = ordenaPrincipal();
                             escribeSecundario((int)atrib.DirIndice);
@@ -115,10 +120,14 @@ namespace Archivos.Controladores
             using (BinaryWriter b = new BinaryWriter(File.Open(Fullname, FileMode.Open)))
             {
                 b.Seek(l, SeekOrigin.Begin);
-                for (int i = 0; i < principal.Capacidad; i++)
+                for (int i = 0; i < principal.Count; i++)
                 {
-                    b.Write(principal.Elementos[i].Cb.ToArray(), 0, atrib.Longitud);
-                    b.Write(principal.Elementos[i].Ap);
+                    for(int j = 0; j < principal[i].Capacidad; j++)
+                    {
+                        b.Write(principal[i].Elementos[i].Cb.ToArray(), 0, atrib.Longitud);
+                        b.Write(principal[i].Elementos[i].Ap);
+                    }
+                    b.Write(principal[i].Sig);
                 }
             }
         }
@@ -136,13 +145,44 @@ namespace Archivos.Controladores
 
         public void leeBloquePrincipal(long l)
         {
-            principal = new Cajon_Secundario(atrib);
+            principal = new List<Cajon_Secundario>();
+            principal.Add(new Cajon_Secundario(atrib));
             //escribeSecundario((int)atrib.DirIndice);
             using (BinaryReader r = new BinaryReader(File.Open(Fullname, FileMode.Open)))
             {
                 r.BaseStream.Seek(l, SeekOrigin.Begin);
                 Console.WriteLine(r.PeekChar());
-                for (int i = 0; i < principal.Capacidad; i++)
+                while (r.PeekChar() > 0)
+                {
+                    for (int i = 0; i < principal.Count; i++)
+                    {
+                        for (int j = 0; j < principal[i].Capacidad; j++)
+                        {
+                            char[] cb = r.ReadChars(atrib.Longitud);
+                            Console.WriteLine(cb.ToArray());
+                            string s = "";
+                            while (s.Length < cb.Length) s += cb[s.Length];
+                            //Console.WriteLine(r.PeekChar());
+                            //List<char> ap = r.ReadChars(8).ToList();
+                            long ap = r.ReadInt64();
+                            Console.WriteLine(ap);
+                            if (ap != -1)
+                            {
+                                //inserta(s, ap);
+                                principal[i].Elementos[j].Cb = s;
+                                principal[i].Elementos[j].Ap = ap;
+                                tope++;
+                            }
+                        }
+                        long p = r.ReadInt64();
+                        if(p != -1)
+                        {
+                            principal[i].Sig = p;
+                            principal.Add(new Cajon_Secundario(atrib));
+                        }
+                    }
+                }
+                /*for (int i = 0; i < principal.Capacidad; i++)
                 {
                     //Console.WriteLine(r.PeekChar());
                     char[] cb = r.ReadChars(atrib.Longitud );
@@ -160,7 +200,7 @@ namespace Archivos.Controladores
                         principal.Elementos[i].Ap = ap;
                         tope++;
                     }
-                }
+                }*/
             }
         }
         public Cajon_Secundario leeCajon(long ap)
@@ -170,7 +210,7 @@ namespace Archivos.Controladores
             {
                 r.BaseStream.Seek(ap, SeekOrigin.Begin);
                 //Console.WriteLine(r.PeekChar());
-                for (int i = 0; i < principal.Capacidad; i++)
+                for (int i = 0; i < 100; i++)
                 {
                     long p = r.ReadInt64();
                    //List<char> p = r.ReadChars(8).ToList();
@@ -185,49 +225,53 @@ namespace Archivos.Controladores
             return c;
         }
 
-        public Cajon_Secundario ordenaPrincipal() // cajon principal
+        public List<Cajon_Secundario> ordenaPrincipal() // cajon principal
         {
-            Cajon_Secundario c = principal;
-            for (int i = 0; i<c.Capacidad-1; i++)
-            {
-                for(int j = 0; j< c.Capacidad - 1; j++)
+            List<Cajon_Secundario> list = new List<Cajon_Secundario>();
+            for (int k = 0; k < principal.Count; k++) {
+                Cajon_Secundario c = principal[k];
+                for (int i = 0; i < c.Capacidad - 1; i++)
                 {
-                    if(atrib.Tipo == 'C')
+                    for (int j = 0; j < c.Capacidad - 1; j++)
                     {
-                        if (c.Elementos[j].Cb.Contains('\u001d'))
+                        if (atrib.Tipo == 'C')
                         {
-                            string s = c.Elementos[j].Cb.Substring(c.Elementos[j].Cb.LastIndexOf('\u001d') + 1);
-                            while (s.Length < c.Elementos[j].Cb.Length) s += " ";
-                            c.Elementos[j].Cb = s;
+                            if (c.Elementos[j].Cb.Contains('\u001d'))
+                            {
+                                string s = c.Elementos[j].Cb.Substring(c.Elementos[j].Cb.LastIndexOf('\u001d') + 1);
+                                while (s.Length < c.Elementos[j].Cb.Length) s += " ";
+                                c.Elementos[j].Cb = s;
 
-                            s = c.Elementos[j + 1].Cb.Substring(c.Elementos[j].Cb.LastIndexOf('\u001d') + 1);
-                            while (s.Length < c.Elementos[j].Cb.Length) s += " ";
-                            c.Elementos[j + 1].Cb = s;
-                        }
-                        var act = c.Elementos[j].Cb;
-                        var sig = c.Elementos[j +1 ].Cb;
-                        if (act.All(o => o == ' ') && sig.All(o => o == ' ')) {j = c.Capacidad - 1; }
-                        else if (act.All(o => o == ' ') && !sig.All(o => o == ' '))
-                        {
-                            var a = c.Elementos[j + 1].Cb;
-                            var p = c.Elementos[j + 1].Ap;
-                            c.Elementos[j + 1].Cb = c.Elementos[j].Cb;
-                            c.Elementos[j + 1].Ap = c.Elementos[j].Ap;
-                            c.Elementos[j].Cb = a;
-                            c.Elementos[j].Ap = p;
-                        }
-                        else if (act.CompareTo(sig) > 0 && !sig.All(o => o == ' ')){
-                            var a = c.Elementos[j].Cb;
-                            var p = c.Elementos[j].Ap;
-                            c.Elementos[j].Cb = c.Elementos[j + 1].Cb;
-                            c.Elementos[j].Ap = c.Elementos[j + 1].Ap;
-                            c.Elementos[j + 1].Cb = a;
-                            c.Elementos[j + 1].Ap = p;
+                                s = c.Elementos[j + 1].Cb.Substring(c.Elementos[j].Cb.LastIndexOf('\u001d') + 1);
+                                while (s.Length < c.Elementos[j].Cb.Length) s += " ";
+                                c.Elementos[j + 1].Cb = s;
+                            }
+                            var act = c.Elementos[j].Cb;
+                            var sig = c.Elementos[j + 1].Cb;
+                            if (act.All(o => o == ' ') && sig.All(o => o == ' ')) { j = c.Capacidad - 1; }
+                            else if (act.All(o => o == ' ') && !sig.All(o => o == ' '))
+                            {
+                                var a = c.Elementos[j + 1].Cb;
+                                var p = c.Elementos[j + 1].Ap;
+                                c.Elementos[j + 1].Cb = c.Elementos[j].Cb;
+                                c.Elementos[j + 1].Ap = c.Elementos[j].Ap;
+                                c.Elementos[j].Cb = a;
+                                c.Elementos[j].Ap = p;
+                            }
+                            else if (act.CompareTo(sig) > 0 && !sig.All(o => o == ' ')) {
+                                var a = c.Elementos[j].Cb;
+                                var p = c.Elementos[j].Ap;
+                                c.Elementos[j].Cb = c.Elementos[j + 1].Cb;
+                                c.Elementos[j].Ap = c.Elementos[j + 1].Ap;
+                                c.Elementos[j + 1].Cb = a;
+                                c.Elementos[j + 1].Ap = p;
+                            }
                         }
                     }
                 }
+                list.Add(c);
             }
-            return c;
+            return list;
         }
         public Cajon_Secundario ordenaCajon(Cajon_Secundario c)
         {

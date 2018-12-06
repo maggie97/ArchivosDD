@@ -15,6 +15,8 @@ namespace Archivos.Controladores
         List<Elemento> elementos;
         List<long> ap;
         Atributo atrib;
+        long sig = -1;
+        int tope = 0;
 
         public Cajon_Secundario(long p)
         {
@@ -39,6 +41,8 @@ namespace Archivos.Controladores
         public int Capacidad { get => capacidad; }
         public int Tam_Campo { get => tam_Campo; }
         public List<long> Ap { get => ap; set => ap = value; }
+        public long Sig { get => sig; set => sig = value; }
+        public int Tope { get => tope; set => tope = value; }
         internal List<Elemento> Elementos { get => elementos;}
     }
 

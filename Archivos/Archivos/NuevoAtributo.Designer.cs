@@ -143,7 +143,10 @@
             "0",
             "1",
             "2",
-            "3"});
+            "3",
+            "4",
+            "5",
+            "6"});
             this.cmbIndice.Location = new System.Drawing.Point(158, 127);
             this.cmbIndice.Name = "cmbIndice";
             this.cmbIndice.Size = new System.Drawing.Size(257, 21);

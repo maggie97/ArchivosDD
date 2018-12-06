@@ -45,6 +45,14 @@
             this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dGVSecundarios2 = new System.Windows.Forms.DataGridView();
             this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.dgvHashDin2 = new System.Windows.Forms.DataGridView();
+            this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.label3 = new System.Windows.Forms.Label();
+            this.dgvHashDin1 = new System.Windows.Forms.DataGridView();
+            this.dataGridViewTextBoxColumn6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dGVPrimario1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dGVPrimario2)).BeginInit();
             this.tabCIndices.SuspendLayout();
@@ -52,6 +60,9 @@
             this.tPSecundarios.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgVSecundarios1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dGVSecundarios2)).BeginInit();
+            this.tabPage1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvHashDin2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvHashDin1)).BeginInit();
             this.SuspendLayout();
             // 
             // dGVPrimario1
@@ -121,6 +132,7 @@
             // 
             this.tabCIndices.Controls.Add(this.tPPrimarios);
             this.tabCIndices.Controls.Add(this.tPSecundarios);
+            this.tabCIndices.Controls.Add(this.tabPage1);
             this.tabCIndices.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabCIndices.Location = new System.Drawing.Point(0, 0);
             this.tabCIndices.Multiline = true;
@@ -217,6 +229,80 @@
             this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
             this.dataGridViewTextBoxColumn4.ReadOnly = true;
             // 
+            // tabPage1
+            // 
+            this.tabPage1.BackColor = System.Drawing.SystemColors.Control;
+            this.tabPage1.Controls.Add(this.dgvHashDin2);
+            this.tabPage1.Controls.Add(this.label3);
+            this.tabPage1.Controls.Add(this.dgvHashDin1);
+            this.tabPage1.Location = new System.Drawing.Point(4, 22);
+            this.tabPage1.Name = "tabPage1";
+            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage1.Size = new System.Drawing.Size(430, 478);
+            this.tabPage1.TabIndex = 2;
+            this.tabPage1.Text = "Hash Dinamico";
+            // 
+            // dgvHashDin2
+            // 
+            this.dgvHashDin2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvHashDin2.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dataGridViewTextBoxColumn3,
+            this.dataGridViewTextBoxColumn5});
+            this.dgvHashDin2.Location = new System.Drawing.Point(220, 75);
+            this.dgvHashDin2.Name = "dgvHashDin2";
+            this.dgvHashDin2.Size = new System.Drawing.Size(202, 389);
+            this.dgvHashDin2.TabIndex = 6;
+            // 
+            // dataGridViewTextBoxColumn3
+            // 
+            this.dataGridViewTextBoxColumn3.HeaderText = "CB";
+            this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
+            this.dataGridViewTextBoxColumn3.Width = 60;
+            // 
+            // dataGridViewTextBoxColumn5
+            // 
+            this.dataGridViewTextBoxColumn5.HeaderText = "Ap";
+            this.dataGridViewTextBoxColumn5.Name = "dataGridViewTextBoxColumn5";
+            this.dataGridViewTextBoxColumn5.ReadOnly = true;
+            this.dataGridViewTextBoxColumn5.Width = 60;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Microsoft Uighur", 27.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.Location = new System.Drawing.Point(139, 15);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(192, 45);
+            this.label3.TabIndex = 7;
+            this.label3.Text = "Hash Dinamico";
+            // 
+            // dgvHashDin1
+            // 
+            this.dgvHashDin1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvHashDin1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dataGridViewTextBoxColumn6,
+            this.dataGridViewTextBoxColumn7});
+            this.dgvHashDin1.Location = new System.Drawing.Point(8, 75);
+            this.dgvHashDin1.Name = "dgvHashDin1";
+            this.dgvHashDin1.Size = new System.Drawing.Size(206, 389);
+            this.dgvHashDin1.TabIndex = 5;
+            // 
+            // dataGridViewTextBoxColumn6
+            // 
+            this.dataGridViewTextBoxColumn6.Frozen = true;
+            this.dataGridViewTextBoxColumn6.HeaderText = "Letra/Num";
+            this.dataGridViewTextBoxColumn6.Name = "dataGridViewTextBoxColumn6";
+            this.dataGridViewTextBoxColumn6.ReadOnly = true;
+            this.dataGridViewTextBoxColumn6.Width = 70;
+            // 
+            // dataGridViewTextBoxColumn7
+            // 
+            this.dataGridViewTextBoxColumn7.Frozen = true;
+            this.dataGridViewTextBoxColumn7.HeaderText = "Apuntador";
+            this.dataGridViewTextBoxColumn7.Name = "dataGridViewTextBoxColumn7";
+            this.dataGridViewTextBoxColumn7.ReadOnly = true;
+            this.dataGridViewTextBoxColumn7.Width = 60;
+            // 
             // VistaIndice
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -234,6 +320,10 @@
             this.tPSecundarios.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgVSecundarios1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dGVSecundarios2)).EndInit();
+            this.tabPage1.ResumeLayout(false);
+            this.tabPage1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvHashDin2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvHashDin1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -257,5 +347,13 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
+        private System.Windows.Forms.TabPage tabPage1;
+        private System.Windows.Forms.DataGridView dgvHashDin2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn5;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.DataGridView dgvHashDin1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn6;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn7;
     }
 }

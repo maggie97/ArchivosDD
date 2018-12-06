@@ -106,7 +106,13 @@ namespace Archivos
                     s.insertaEscribe(atributos[s.index + 1], Convert.ToInt64(atributos[0]));
                 }
             }
-             ordenaReg();
+            Atributo a = atrib.Find(o => o.TipoIndice == 6);
+            if (a != null && a.DirAtributo != -1)
+            {
+                HashDinamico h = (HashDinamico)a.Ind;
+                h.inserta(Convert.ToInt32(atributos[h.index + 1]), Convert.ToInt64(atributos[0]));
+            }
+            ordenaReg();
         }
         public void Indice(int op)
         {
@@ -133,35 +139,14 @@ namespace Archivos
                 }
                 sec.Add((Secundario)a.Ind);
             }
-
-            /*foreach (var a in Atrib)
-            {
-                if (a.Ind == null)
+            if((a = Atrib.Find(o => o.TipoIndice == 6)) != null) { 
+                if(a.Ind == null)
                 {
-                    switch (a.TipoIndice)
-                    {
-                        case 2:
-                            a.Ind = new Primario(a, (a.Tipo == 'C'), sNombre, Atrib.IndexOf(a), a.Longitud);
-                            prim = (Primario)a.Ind;
-                            break;
-                        case 3:
-                            if (sec == null) sec = new List<Secundario>();
-                            a.Ind = new Secundario(a, sNombre, Atrib.IndexOf(a));
-                            sec.Add((Secundario)a.Ind);
-                            break;
-                    }
+                    a.Ind = new HashDinamico(a, sNombre, Atrib.IndexOf(a));
+                    
                 }
-                else
-                {
-                    if (a.Ind.GetType() == Type.GetType("Archivos.Controladores.Primario"))
-                        prim = (Primario)a.Ind;
-                    else if (a.Ind.GetType() == Type.GetType("Archivos.Controladores.Secundario"))
-                    {
-                        if (sec == null) sec = new List<Secundario>();
-                        sec.Add((Secundario)a.Ind);
-                    }
-                }
-            }*/
+            }
+            
         }
         public void ordenaReg()
         {
