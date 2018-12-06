@@ -25,6 +25,7 @@ namespace Archivos.Controladores
             else if(a.DirIndice < 0)
             {
                 a.DirIndice = Longitud;
+                principal = new List<Cajon_Secundario>();
                 principal.Add(new Cajon_Secundario(a));
                 escribeSecundario((int)a.DirIndice);
             }
@@ -124,8 +125,8 @@ namespace Archivos.Controladores
                 {
                     for(int j = 0; j < principal[i].Capacidad; j++)
                     {
-                        b.Write(principal[i].Elementos[i].Cb.ToArray(), 0, atrib.Longitud);
-                        b.Write(principal[i].Elementos[i].Ap);
+                        b.Write(principal[i].Elementos[j].Cb.ToArray(), 0, atrib.Longitud);
+                        b.Write(principal[i].Elementos[j].Ap);
                     }
                     b.Write(principal[i].Sig);
                 }
@@ -152,19 +153,22 @@ namespace Archivos.Controladores
             {
                 r.BaseStream.Seek(l, SeekOrigin.Begin);
                 Console.WriteLine(r.PeekChar());
-                while (r.PeekChar() > 0)
+                //while (r.PeekChar() > 0)
                 {
                     for (int i = 0; i < principal.Count; i++)
                     {
                         for (int j = 0; j < principal[i].Capacidad; j++)
                         {
-                            char[] cb = r.ReadChars(atrib.Longitud);
+                            char[] cb = r.ReadChars(atrib.Longitud );
                             Console.WriteLine(cb.ToArray());
                             string s = "";
                             while (s.Length < cb.Length) s += cb[s.Length];
                             //Console.WriteLine(r.PeekChar());
                             //List<char> ap = r.ReadChars(8).ToList();
                             long ap = r.ReadInt64();
+                            //int ap = r.PeekChar();
+                            
+                            Console.WriteLine(r.BaseStream.Position);
                             Console.WriteLine(ap);
                             if (ap != -1)
                             {
@@ -174,12 +178,14 @@ namespace Archivos.Controladores
                                 tope++;
                             }
                         }
-                        long p = r.ReadInt64();
-                        if(p != -1)
+                        long p = r.ReadInt64();//r.PeekChar();//r.ReadInt64();
+                        if (p != -1)
                         {
                             principal[i].Sig = p;
                             principal.Add(new Cajon_Secundario(atrib));
                         }
+                        else
+                            break;
                     }
                 }
                 /*for (int i = 0; i < principal.Capacidad; i++)
@@ -228,6 +234,7 @@ namespace Archivos.Controladores
         public List<Cajon_Secundario> ordenaPrincipal() // cajon principal
         {
             List<Cajon_Secundario> list = new List<Cajon_Secundario>();
+            tope = 0;
             for (int k = 0; k < principal.Count; k++) {
                 Cajon_Secundario c = principal[k];
                 for (int i = 0; i < c.Capacidad - 1; i++)

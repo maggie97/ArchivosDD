@@ -59,7 +59,7 @@ namespace Archivos
         }
         private void carga()
         {
-            if (p == null) return;
+            p.leePrimario();
             for(int i = 0; p.prim.Ind != null && i < p.prim.Longitud; i++)
             {
                 dGVPrimario1.Rows.Add(p.prim.Ind[i].ToString(), p.prim.Ap[i].ToString());
@@ -87,6 +87,7 @@ namespace Archivos
         private void muestra(int j)
         {
             dgVSecundarios1.Rows.Clear();
+            s[j].leeBloquePrincipal(s[j].Atributo.DirIndice);
             for(int k = 0; k < s[j].Principal.Count; k++ )
                 for (int i = 0; s[j].Principal != null && i < s[j].Principal[k].Capacidad; i++)
                 {

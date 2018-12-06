@@ -110,7 +110,7 @@ namespace Archivos
             if (a != null && a.DirAtributo != -1)
             {
                 HashDinamico h = (HashDinamico)a.Ind;
-                h.inserta(Convert.ToInt32(atributos[h.index + 1]), Convert.ToInt64(atributos[0]));
+                h.inserta(atributos[h.index + 1], Convert.ToInt64(atributos[0]));
             }
             ordenaReg();
         }
@@ -119,8 +119,8 @@ namespace Archivos
             bool nuevoArch = false;
             if(!System.IO.File.Exists(sNombre + ".idx"))
             {
-                foreach (var b in Atrib)
-                    b.DirIndice = -1;
+                for(int i = 0; i< atrib.Count; i++) 
+                    atrib[i].DirIndice = -1;
             }
             Atributo a = null;
             if( (a = Atrib.Find(o => o.TipoIndice == 2)) != null){

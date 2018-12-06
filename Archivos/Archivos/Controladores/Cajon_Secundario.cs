@@ -37,7 +37,15 @@ namespace Archivos.Controladores
                 elementos.Add(new Elemento(a.Longitud));
             }
         }
-
+        public Cajon_Secundario(Atributo a, int n)
+        {
+            this.tam_Campo = a.Longitud;
+            elementos = new List<Elemento>();
+            for (int i = 0; i < capacidad; i++)
+            {
+                elementos.Add(new Elemento("0", -1));
+            }
+        }
         public int Capacidad { get => capacidad; }
         public int Tam_Campo { get => tam_Campo; }
         public List<long> Ap { get => ap; set => ap = value; }

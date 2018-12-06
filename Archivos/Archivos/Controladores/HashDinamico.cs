@@ -42,40 +42,59 @@ namespace Archivos.Controladores
             }
         }
 
-        public void inserta(int cb, long reg)
+        public void inserta(string cb, long reg)
         {
-            var sCB = Convert.ToString(cb, 2);
-            while (sCB.Length < 6) sCB = '0' + sCB;
-            
+            var s =  cb[0];
+            var sCB = Convert.ToString(Int32.Parse(s.ToString()), 2);
+            while (sCB.Length < 4) sCB = '0' + sCB;
+            if (bit < 4)
+            {
+                while (sCB.Length < 6) sCB += '0';
+            }
+            else
+            {
+                s = cb[1];
+                var s2 = Convert.ToString(Int32.Parse(s.ToString()), 2);
+                sCB += s2.Substring(0, 2);
+            }
             var nuevos = sCB.Substring(0, bit);
             long dir = -1;
             Cajon_Secundario c =null;
 
-            if (c.Tope < c.Capacidad)
+            //if (c.Tope < c.Capacidad)
+            
+            var a = principal.Find(o => o.Cb.Substring(0, bit)== nuevos);
+            if (a.Ap != -1)
             {
-                var a = principal.Find(o => o.Cb.Substring(0, bit)== nuevos);
-                if (a != null)
+                //Lee el cajon
+                c = leeCajon(a.Ap);
+                dir = a.Ap;
+                if (c != null)
                 {
-                    //Lee el cajon
-                    c = leeCajon(a.Ap);
-                    dir = a.Ap;
-                    int ind = c.Ap.FindIndex(o => o == -1);
-                    if (c.Ap.FindIndex(o => o == reg) < 0)
+                    int ind = c.Elementos.FindIndex(o => o.Ap == -1);
+                    //if (c.Elementos.FindIndex(o => o.Cb == reg) < 0)
+                    if(c.Tope < c.Capacidad)
                     {
-                        c.Ap[ind] = reg;
+                        c.Elementos[c.Tope] = new Elemento(cb, reg);
                         c.Tope++;
                     }
-                }
-                else
-                {
-                    //principal[tope] = new Elemento(cb, Longitud);
-                    c = new Cajon_Secundario(atrib);
-                    dir = Longitud;
-                    c.Elementos[0] = new Elemento(cb.ToString(), reg);
-                    c.Tope++;
+                    else if(bit <= 6)
+                    {
+                        bit++;
+                        //duplicamos el cajon y dividimos valores segun correspondan 
+                        dir = Longitud;
+                    }
                 }
             }
-
+            else
+            {
+                //principal[tope] = new Elemento(cb, Longitud);
+                c = new Cajon_Secundario(atrib, 0);
+                dir = Longitud;
+                c.Elementos[0] = new Elemento(cb, reg);
+                c.Tope++;
+            }
+            
              
             for(int i = 0; i< principal.Count; i++)
             {
@@ -108,15 +127,12 @@ namespace Archivos.Controladores
             using (BinaryWriter b = new BinaryWriter(File.Open(Fullname, FileMode.Open)))
             {
                 b.Seek(l, SeekOrigin.Begin);
-                for (int i = 0; i < principal.Count; i++)
+                for (int j = 0; j < c.Capacidad; j++)
                 {
-                    for (int j = 0; j < c.Capacidad; j++)
-                    {
-                        b.Write(c.Elementos[i].Cb.ToArray(), 0, atrib.Longitud);
-                        b.Write(c.Elementos[i].Ap);
-                    }
-                    b.Write(c.Sig);
+                    b.Write(Int32.Parse(c.Elementos[j].Cb));
+                    b.Write(c.Elementos[j].Ap);
                 }
+                b.Write(c.Sig);
             }
         }
         public void leePrincipal(long l)
@@ -156,19 +172,19 @@ namespace Archivos.Controladores
             {
                 r.BaseStream.Seek(l, SeekOrigin.Begin);
                 Console.WriteLine(r.PeekChar());  
-                for (int i = 0; i < c.Capacidad; i++)
+                for (int i = 0; i < 100; i++)
                 {
-                    char[] cb = r.ReadChars(atrib.Longitud );
-                    Console.WriteLine(cb.ToArray());
-                    string s = "";
-                    while (s.Length < cb.Length) s += cb[s.Length];
+                    //char[] cb =//r.ReadChars(atrib.Longitud );
+                    int cb = r.ReadInt32();
+                    Console.WriteLine(cb);
+                   // string s = "";
+                   // while (s.Length < cb.Length) c;
                     long ap = r.ReadInt64();
                     Console.WriteLine(ap);
                     if (ap != -1)
                     {
                         //inserta(s, ap);
-                        if (i == 0) c = new Cajon_Secundario(atrib); 
-                        c.Elementos[i].Cb = s;
+                        if (i == 0) c = new Cajon_Secundario(atrib, 0); 
                         c.Elementos[i].Ap = ap;
                         c.Tope++;
                     }

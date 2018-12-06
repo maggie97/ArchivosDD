@@ -37,7 +37,13 @@ namespace Archivos
             ent = entidad;
             lenght = ent.Atrib.Count;
             this.reg = reg.ToArray();
-            entidad.Registros.Remove(reg);
+            //elimino el reg
+            entidad.EliminaRegistro(reg);
+            //entidad.Registros.Remove(reg);
+
+
+
+
             DirReg = Convert.ToInt64(reg[0]);
             a = r;
 
