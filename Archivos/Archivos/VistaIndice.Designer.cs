@@ -53,6 +53,11 @@
             this.dgvHashDin1 = new System.Windows.Forms.DataGridView();
             this.dataGridViewTextBoxColumn6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.txtSig = new System.Windows.Forms.TextBox();
+            this.txtBIt = new System.Windows.Forms.TextBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.txtbitPrincipal = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.dGVPrimario1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dGVPrimario2)).BeginInit();
             this.tabCIndices.SuspendLayout();
@@ -76,7 +81,6 @@
             this.dGVPrimario1.Size = new System.Drawing.Size(206, 389);
             this.dGVPrimario1.TabIndex = 0;
             this.dGVPrimario1.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
-            this.dGVPrimario1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             // 
             // Primario1
             // 
@@ -232,6 +236,11 @@
             // tabPage1
             // 
             this.tabPage1.BackColor = System.Drawing.SystemColors.Control;
+            this.tabPage1.Controls.Add(this.txtbitPrincipal);
+            this.tabPage1.Controls.Add(this.label5);
+            this.tabPage1.Controls.Add(this.label4);
+            this.tabPage1.Controls.Add(this.txtBIt);
+            this.tabPage1.Controls.Add(this.txtSig);
             this.tabPage1.Controls.Add(this.dgvHashDin2);
             this.tabPage1.Controls.Add(this.label3);
             this.tabPage1.Controls.Add(this.dgvHashDin1);
@@ -241,6 +250,7 @@
             this.tabPage1.Size = new System.Drawing.Size(430, 478);
             this.tabPage1.TabIndex = 2;
             this.tabPage1.Text = "Hash Dinamico";
+            this.tabPage1.Click += new System.EventHandler(this.tabPage1_Click);
             // 
             // dgvHashDin2
             // 
@@ -248,7 +258,7 @@
             this.dgvHashDin2.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.dataGridViewTextBoxColumn3,
             this.dataGridViewTextBoxColumn5});
-            this.dgvHashDin2.Location = new System.Drawing.Point(220, 75);
+            this.dgvHashDin2.Location = new System.Drawing.Point(224, 75);
             this.dgvHashDin2.Name = "dgvHashDin2";
             this.dgvHashDin2.Size = new System.Drawing.Size(202, 389);
             this.dgvHashDin2.TabIndex = 6;
@@ -270,7 +280,7 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Microsoft Uighur", 27.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(139, 15);
+            this.label3.Location = new System.Drawing.Point(8, 11);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(192, 45);
             this.label3.TabIndex = 7;
@@ -286,6 +296,7 @@
             this.dgvHashDin1.Name = "dgvHashDin1";
             this.dgvHashDin1.Size = new System.Drawing.Size(206, 389);
             this.dgvHashDin1.TabIndex = 5;
+            this.dgvHashDin1.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvHashDin1_CellClick);
             // 
             // dataGridViewTextBoxColumn6
             // 
@@ -302,6 +313,45 @@
             this.dataGridViewTextBoxColumn7.Name = "dataGridViewTextBoxColumn7";
             this.dataGridViewTextBoxColumn7.ReadOnly = true;
             this.dataGridViewTextBoxColumn7.Width = 60;
+            // 
+            // txtSig
+            // 
+            this.txtSig.Location = new System.Drawing.Point(321, 24);
+            this.txtSig.Name = "txtSig";
+            this.txtSig.Size = new System.Drawing.Size(95, 20);
+            this.txtSig.TabIndex = 8;
+            // 
+            // txtBIt
+            // 
+            this.txtBIt.Location = new System.Drawing.Point(321, 49);
+            this.txtBIt.Name = "txtBIt";
+            this.txtBIt.Size = new System.Drawing.Size(95, 20);
+            this.txtBIt.TabIndex = 9;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(221, 30);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(81, 13);
+            this.label4.TabIndex = 10;
+            this.label4.Text = "Siguiente Cajon";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(254, 52);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(48, 13);
+            this.label5.TabIndex = 11;
+            this.label5.Text = "bit Cajon";
+            // 
+            // txtbitPrincipal
+            // 
+            this.txtbitPrincipal.Location = new System.Drawing.Point(8, 52);
+            this.txtbitPrincipal.Name = "txtbitPrincipal";
+            this.txtbitPrincipal.Size = new System.Drawing.Size(95, 20);
+            this.txtbitPrincipal.TabIndex = 12;
             // 
             // VistaIndice
             // 
@@ -355,5 +405,10 @@
         private System.Windows.Forms.DataGridView dgvHashDin1;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn6;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn7;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.TextBox txtBIt;
+        private System.Windows.Forms.TextBox txtSig;
+        private System.Windows.Forms.TextBox txtbitPrincipal;
     }
 }

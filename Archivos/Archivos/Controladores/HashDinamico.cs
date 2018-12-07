@@ -9,10 +9,11 @@ namespace Archivos.Controladores
 {
     class HashDinamico : Indice
     {
-        int bit = 1;
+        int bit = 0;
         List<Elemento> principal;
 
         internal List<Elemento> Principal { get => principal; set => principal = value; }
+        public int Bit { get => bit; set => bit = value; }
 
         public HashDinamico(Atributo a, string nomb, int ind): base (nomb, ind, a)
         {
@@ -44,70 +45,140 @@ namespace Archivos.Controladores
 
         public void inserta(string cb, long reg)
         {
-            var s =  cb[0];
+            var nuevos = bin(cb);//sCB.Substring(0, bit);
+            long dir = -1;
+            Cajon_Secundario c = null;
+            bool insertado = false;
+            while (!insertado)
+            {
+                nuevos = bin(cb);
+                var a = principal.Find(o => o.Cb.Substring(0, Bit) == nuevos);
+                if (a != null && a.Ap != -1)
+                {
+                    //Lee el cajon
+                    c = leeCajon(a.Ap);
+                    dir = a.Ap;
+                    if (c != null)
+                    {
+                        if (c.Tope < c.Capacidad)
+                        {
+                            c.Elementos[c.Tope] = new Elemento(cb, reg);
+                            c.Tope++;
+                            insertado = true;
+                        }
+                        else if (c.Bit < 6)
+                        {
+
+                            Bit++;
+                            c.Bit++;
+                            var b = a.Cb.Substring(0, c.Bit);
+                            //duplicamos el cajon y dividimos valores segun correspondan 
+                            Cajon_Secundario copia = divideValores(c, b);
+                            var v = principal.FindAll(o => o.Ap == a.Ap);
+                            var x = v.Find(o => o.Cb.Substring(0, c.Bit) != b);
+                            b = x.Cb.Substring(0, c.Bit);
+                            //dir = Longitud;
+                            for (int i = 0; i < principal.Count; i++)
+                            {
+                                var bits = principal[i].Cb.Substring(0, c.Bit);
+                                if (bits == b)
+                                {
+                                    principal[i].Ap = Longitud;
+                                }
+                            }
+                            escribePrincipal((int)atrib.DirIndice);
+                            escribeCajon((int)Longitud, copia);
+                            escribeCajon((int)dir, c);
+                        }
+                        else if(c.Sig == -1)
+                        {
+                            c.Sig = Longitud;
+                            escribeCajon((int)dir, c);
+                            c = new Cajon_Secundario(atrib, 0);
+                            dir = Longitud;
+                            c.Elementos[0] = new Elemento(cb, reg);
+                            c.Tope++;
+                            insertado = true;
+                        }
+                        else
+                        {
+                            a.Ap = c.Sig;
+                        }
+                    }
+                }
+                else
+                {
+                    //principal[tope] = new Elemento(cb, Longitud);
+                    c = new Cajon_Secundario(atrib, 0);
+                    dir = Longitud;
+                    c.Elementos[0] = new Elemento(cb, reg);
+                    c.Tope++;
+                    insertado = true;
+                    for (int i = 0; i < principal.Count; i++)
+                    {
+                        var bits = principal[i].Cb.Substring(0, Bit);
+                        if (bits == nuevos)
+                        {
+                            principal[i].Ap = Longitud;
+                        }
+                    }
+                    escribePrincipal((int)atrib.DirIndice);
+
+                }
+            }
+            escribeCajon((int)dir, c);
+        }
+        public string bin(string cb)
+        {
+            var s = cb[0];
             var sCB = Convert.ToString(Int32.Parse(s.ToString()), 2);
             while (sCB.Length < 4) sCB = '0' + sCB;
-            if (bit < 4)
+            if (Bit < 4)
             {
                 while (sCB.Length < 6) sCB += '0';
             }
             else
             {
-                s = cb[1];
+                if (cb == "0")
+                    s = '0';
+                else 
+                    s = cb[1];
                 var s2 = Convert.ToString(Int32.Parse(s.ToString()), 2);
+
+                //sCB += s2.Substring(0, 2);
+                while (s2.Length < 4) s2 = '0' + s2;
                 sCB += s2.Substring(0, 2);
             }
-            var nuevos = sCB.Substring(0, bit);
-            long dir = -1;
-            Cajon_Secundario c =null;
-
-            //if (c.Tope < c.Capacidad)
-            
-            var a = principal.Find(o => o.Cb.Substring(0, bit)== nuevos);
-            if (a.Ap != -1)
-            {
-                //Lee el cajon
-                c = leeCajon(a.Ap);
-                dir = a.Ap;
-                if (c != null)
-                {
-                    int ind = c.Elementos.FindIndex(o => o.Ap == -1);
-                    //if (c.Elementos.FindIndex(o => o.Cb == reg) < 0)
-                    if(c.Tope < c.Capacidad)
-                    {
-                        c.Elementos[c.Tope] = new Elemento(cb, reg);
-                        c.Tope++;
-                    }
-                    else if(bit <= 6)
-                    {
-                        bit++;
-                        //duplicamos el cajon y dividimos valores segun correspondan 
-                        dir = Longitud;
-                    }
-                }
-            }
-            else
-            {
-                //principal[tope] = new Elemento(cb, Longitud);
-                c = new Cajon_Secundario(atrib, 0);
-                dir = Longitud;
-                c.Elementos[0] = new Elemento(cb, reg);
-                c.Tope++;
-            }
-            
-             
-            for(int i = 0; i< principal.Count; i++)
-            {
-                var bits = principal[i].Cb.Substring(0, bit);
-                if(bits == nuevos)
-                {
-                    principal[i].Ap = Longitud;
-                }
-            }
-            escribePrincipal((int)atrib.DirIndice);
-            escribeCajon((int)dir, c);
-
+            return sCB.Substring(0, Bit);
         }
+
+        public Cajon_Secundario divideValores(Cajon_Secundario c, string div)
+        {
+            Cajon_Secundario _d = new Cajon_Secundario(atrib, 0);
+            _d.Bit = c.Bit;
+            //_d.Elementos.CopyTo(c.Elementos.ToArray());
+            for (int i = 0; i< c.Capacidad; i++)
+            {
+                if(c.Elementos[i].Ap != -1)
+                {
+                    var num = bin(c.Elementos[i].Cb);
+                    
+                    if(num != div)
+                    {
+                        _d.Elementos.RemoveAt(_d.Tope);
+                        _d.Elementos.Insert(_d.Tope, c.Elementos[i]);
+                        
+                        c.Elementos.RemoveAt(i);
+                        c.Elementos.Add(new Elemento("0", -1));
+                        _d.Tope++;
+                        c.Tope--;
+                        i--;
+                    }
+                }
+            }
+            return _d ;
+        }
+
 
         public void escribePrincipal(int l)
         {
@@ -119,6 +190,7 @@ namespace Archivos.Controladores
                     b.Write(principal[i].Cb.ToArray(), 0, 6);
                     b.Write(principal[i].Ap);
                 }
+                b.Write(bit);
             }
         }
 
@@ -133,6 +205,7 @@ namespace Archivos.Controladores
                     b.Write(c.Elementos[j].Ap);
                 }
                 b.Write(c.Sig);
+                b.Write(c.Bit);
             }
         }
         public void leePrincipal(long l)
@@ -163,20 +236,22 @@ namespace Archivos.Controladores
                         principal[i].Ap = ap;
                     }
                 }
+                bit = r.ReadInt32();
             }
         }
         public Cajon_Secundario leeCajon(long l)
         {
-            Cajon_Secundario c = null;
+            Cajon_Secundario c = new Cajon_Secundario(atrib, 0);
             using (BinaryReader r = new BinaryReader(File.Open(Fullname, FileMode.Open)))
             {
                 r.BaseStream.Seek(l, SeekOrigin.Begin);
-                Console.WriteLine(r.PeekChar());  
-                for (int i = 0; i < 100; i++)
+                //Console.WriteLine(r.PeekChar());  
+                for (int i = 0; i < 5; i++)
                 {
                     //char[] cb =//r.ReadChars(atrib.Longitud );
                     int cb = r.ReadInt32();
                     Console.WriteLine(cb);
+                    string s = cb.ToString();
                    // string s = "";
                    // while (s.Length < cb.Length) c;
                     long ap = r.ReadInt64();
@@ -184,10 +259,16 @@ namespace Archivos.Controladores
                     if (ap != -1)
                     {
                         //inserta(s, ap);
-                        if (i == 0) c = new Cajon_Secundario(atrib, 0); 
+                        //if (i == 0) c = new Cajon_Secundario(atrib, 0);
+                        c.Elementos[i].Cb =  s;
                         c.Elementos[i].Ap = ap;
                         c.Tope++;
                     }
+                }
+                if(c!= null)
+                {
+                    c.Sig = r.ReadInt64();
+                    c.Bit = r.ReadInt32();
                 }
             }
             return c;

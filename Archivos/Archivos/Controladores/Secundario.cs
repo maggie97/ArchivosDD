@@ -146,6 +146,7 @@ namespace Archivos.Controladores
 
         public void leeBloquePrincipal(long l)
         {
+            tope = 0;
             principal = new List<Cajon_Secundario>();
             principal.Add(new Cajon_Secundario(atrib));
             //escribeSecundario((int)atrib.DirIndice);
@@ -234,7 +235,7 @@ namespace Archivos.Controladores
         public List<Cajon_Secundario> ordenaPrincipal() // cajon principal
         {
             List<Cajon_Secundario> list = new List<Cajon_Secundario>();
-            tope = 0;
+            
             for (int k = 0; k < principal.Count; k++) {
                 Cajon_Secundario c = principal[k];
                 for (int i = 0; i < c.Capacidad - 1; i++)

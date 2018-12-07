@@ -78,6 +78,7 @@ namespace Archivos
         private void hash()
         {
             h.leePrincipal(h.Atributo.DirIndice);
+            txtbitPrincipal.Text = h.Bit.ToString();
             for (int i = 0; i < h.Principal.Count; i++)
             {
                 dgvHashDin1.Rows.Add(h.Principal[i].Cb.ToString(), h.Principal[i].Ap.ToString());
@@ -138,6 +139,32 @@ namespace Archivos
             {
                 dGVSecundarios2.Rows.Add(cS.Ap[j]);
             }
+        }
+
+        private void dgvHashDin1_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            int valor = 0;
+            dgvHashDin2.Rows.Clear();
+            txtBIt.Text = "-1";
+            txtSig.Text = "-1";
+            if (dgvHashDin1.CurrentCell.Value == null && (int)dgvHashDin1.CurrentCell.Value == -1) { return; }
+            if (!Int32.TryParse(dgvHashDin1.CurrentCell.Value.ToString(), out valor)) return;
+            int i = dgvHashDin1.CurrentCell.RowIndex;
+            var cS = h.leeCajon(Convert.ToInt64(dgvHashDin1.CurrentCell.Value));
+            for (int j = 0; cS != null && j < cS.Capacidad; j++)
+            {
+                dgvHashDin2.Rows.Add(cS.Elementos[j].Cb, cS.Elementos[j].Ap);
+            }
+            if (cS != null)
+            {
+                txtBIt.Text = cS.Bit.ToString();
+                txtSig.Text = cS.Sig.ToString();
+            }
+        }
+
+        private void tabPage1_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

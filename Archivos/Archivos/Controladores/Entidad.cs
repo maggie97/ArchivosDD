@@ -135,7 +135,9 @@ namespace Archivos
                 if(a.Ind == null)
                 {
                     if (sec == null) sec = new List<Secundario>();
-                    a.Ind = new Secundario(a, sNombre, Atrib.IndexOf(a));
+                    //if ()
+                    if( sec.FindIndex(o=>o.Atributo == a) < 0)
+                        a.Ind = new Secundario(a, sNombre, Atrib.IndexOf(a));
                 }
                 sec.Add((Secundario)a.Ind);
             }

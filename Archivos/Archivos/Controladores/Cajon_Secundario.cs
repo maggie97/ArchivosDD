@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace Archivos.Controladores
 {
     
-    class Cajon_Secundario
+    class Cajon_Secundario 
     {
         int capacidad = 100;
         int tam_Campo;
@@ -17,6 +17,7 @@ namespace Archivos.Controladores
         Atributo atrib;
         long sig = -1;
         int tope = 0;
+        int bit = 0;
 
         public Cajon_Secundario(long p)
         {
@@ -41,6 +42,7 @@ namespace Archivos.Controladores
         {
             this.tam_Campo = a.Longitud;
             elementos = new List<Elemento>();
+            capacidad = 5;
             for (int i = 0; i < capacidad; i++)
             {
                 elementos.Add(new Elemento("0", -1));
@@ -51,7 +53,9 @@ namespace Archivos.Controladores
         public List<long> Ap { get => ap; set => ap = value; }
         public long Sig { get => sig; set => sig = value; }
         public int Tope { get => tope; set => tope = value; }
+        public int Bit { get => bit; set => bit = value; }
         internal List<Elemento> Elementos { get => elementos;}
+
     }
 
     class Elemento
