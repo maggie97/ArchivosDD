@@ -42,10 +42,10 @@ namespace Archivos.Controladores
         {
             this.tam_Campo = a.Longitud;
             elementos = new List<Elemento>();
-            capacidad = 5;
+            capacidad = 20;
             for (int i = 0; i < capacidad; i++)
             {
-                elementos.Add(new Elemento("0", -1));
+                elementos.Add(new Elemento("-1", -1));
             }
         }
         public int Capacidad { get => capacidad; }
@@ -54,7 +54,7 @@ namespace Archivos.Controladores
         public long Sig { get => sig; set => sig = value; }
         public int Tope { get => tope; set => tope = value; }
         public int Bit { get => bit; set => bit = value; }
-        internal List<Elemento> Elementos { get => elementos;}
+        internal List<Elemento> Elementos { get => elementos; set => elementos = value; }
 
     }
 

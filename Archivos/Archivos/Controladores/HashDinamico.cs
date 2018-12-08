@@ -64,26 +64,44 @@ namespace Archivos.Controladores
                         {
                             c.Elementos[c.Tope] = new Elemento(cb, reg);
                             c.Tope++;
+                            //c.Elementos = c.Elementos.OrderBy(o => o.Cb).ToList();
+                            c.Elementos.Sort(delegate (Elemento x, Elemento y)
+                            {
+                                // Sort by total in descending order
+                                int res = 1;
+                                if (x.Cb != "-1")
+                                    res = y.Cb.CompareTo(x.Cb);
+                                return res;
+                            });
+                            //c.Elementos.Sort((a, b)=>  Int32.Parse(o.Cb)).ToList();
                             insertado = true;
                         }
                         else if (c.Bit < 6)
                         {
-
-                            Bit++;
+                            //nuevo cajon
+                            if(bit< 6)
+                                Bit++;
                             c.Bit++;
                             var b = a.Cb.Substring(0, c.Bit);
+                            var v = principal.FindAll(o => o.Ap == a.Ap);
+                            var col = v.FindAll(o => v.IndexOf(o) < v.Count / 2);
+                            var comparat = v[col.Count];
+                            b = comparat.Cb.Substring(0, c.Bit);
                             //duplicamos el cajon y dividimos valores segun correspondan 
                             Cajon_Secundario copia = divideValores(c, b);
-                            var v = principal.FindAll(o => o.Ap == a.Ap);
+                            
                             var x = v.Find(o => o.Cb.Substring(0, c.Bit) != b);
                             b = x.Cb.Substring(0, c.Bit);
                             //dir = Longitud;
-                            for (int i = 0; i < principal.Count; i++)
+
+                            //direccion de el nuevo cajon 
+                            for (int i = 0; i < v.Count; i++)
                             {
-                                var bits = principal[i].Cb.Substring(0, c.Bit);
-                                if (bits == b)
+                                var bits = v[i].Cb.Substring(0, c.Bit);
+                                //if (bits == b)
+                                if(col.FindIndex(o=>o.Cb == v[i].Cb)< 0)
                                 {
-                                    principal[i].Ap = Longitud;
+                                    v[i].Ap = Longitud;
                                 }
                             }
                             escribePrincipal((int)atrib.DirIndice);
@@ -95,6 +113,7 @@ namespace Archivos.Controladores
                             c.Sig = Longitud;
                             escribeCajon((int)dir, c);
                             c = new Cajon_Secundario(atrib, 0);
+                            c.Bit = 6;
                             dir = Longitud;
                             c.Elementos[0] = new Elemento(cb, reg);
                             c.Tope++;
@@ -161,9 +180,9 @@ namespace Archivos.Controladores
             {
                 if(c.Elementos[i].Ap != -1)
                 {
-                    var num = bin(c.Elementos[i].Cb);
+                    var num = bin(c.Elementos[i].Cb).Substring(0, c.Bit);
                     
-                    if(num != div)
+                    if(num == div)
                     {
                         _d.Elementos.RemoveAt(_d.Tope);
                         _d.Elementos.Insert(_d.Tope, c.Elementos[i]);
@@ -246,7 +265,7 @@ namespace Archivos.Controladores
             {
                 r.BaseStream.Seek(l, SeekOrigin.Begin);
                 //Console.WriteLine(r.PeekChar());  
-                for (int i = 0; i < 5; i++)
+                for (int i = 0; i < 20; i++)
                 {
                     //char[] cb =//r.ReadChars(atrib.Longitud );
                     int cb = r.ReadInt32();

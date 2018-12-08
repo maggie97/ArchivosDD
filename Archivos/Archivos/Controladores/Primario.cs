@@ -58,7 +58,8 @@ namespace Archivos.Controladores
         {
             for(int i = 0; i < prim.Longitud; i++)
             {
-                if(prim.Ind[i] == char.ToUpper(claveBusq[0]))
+                var cha = claveBusq.ToList().Find(o => o != '0');
+                if(prim.Ind[i] == char.ToUpper(cha))
                 {
                     if (prim.Ap[i] == -1)
                     {

@@ -109,5 +109,50 @@ namespace Archivos
             VistaIndice vInd = new VistaIndice(entidad);
             vInd.Show();
         }
+
+        private void importarRegistrosToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            using (OpenFileDialog open = new OpenFileDialog())
+            {
+                //open.Filter = "Diccionario de Datos (*.dd)| *.dd";
+                //open.Title = "Seleciona un Diccionario de datos";
+                if (open.ShowDialog() == DialogResult.OK)
+                {
+                    string nombre = open.FileName;
+                    using (System.IO.StreamReader sr = new System.IO.StreamReader(nombre))
+                    {
+                        while (sr.Peek() != -1)
+                        {
+                            string todo = sr.ReadLine();
+                            var a = todo.Split(',');
+                            Console.WriteLine(a);
+                            List<string> nuevo = new List<string>();
+                            nuevo.Add(archivo.Longitud.ToString());
+                            a[0].ToList().Remove('0');
+                            Console.WriteLine(a);
+                            int i = a[0].ToList().FindIndex(o => o != '0');
+                            string s = a[0].Substring(i);
+                            nuevo.Add(s);
+                            nuevo.Add(a[1]);
+                            nuevo.Add("-1");
+                            entidad.nuevoReg(nuevo);
+                            actualiza();
+                        }
+                    }
+                    //actualiza();
+                    actualizado();
+                   /* ddd = new DDD(open.FileName);
+                    ddd.lee();
+
+                    //Actualiza DataGrid
+                    actualizaEnt();
+                    dgAtributos.Rows.Clear();
+                    txtCab.Text = ddd.Cab.ToString();
+                    Enable_Entidades_Atributos(true);
+                    btn_Registro.Enabled = true;*/
+
+                }
+            }
+        }
     }
 }

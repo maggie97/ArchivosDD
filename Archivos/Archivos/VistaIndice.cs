@@ -79,9 +79,14 @@ namespace Archivos
         {
             h.leePrincipal(h.Atributo.DirIndice);
             txtbitPrincipal.Text = h.Bit.ToString();
+            long a = 0;
             for (int i = 0; i < h.Principal.Count; i++)
             {
-                dgvHashDin1.Rows.Add(h.Principal[i].Cb.ToString(), h.Principal[i].Ap.ToString());
+                //if (a != h.Principal[i].Ap)
+                {
+                    dgvHashDin1.Rows.Add(h.Principal[i].Cb.ToString(), h.Principal[i].Ap.ToString());
+                    a = h.Principal[i].Ap;
+                }
             }
         }
 
@@ -151,9 +156,11 @@ namespace Archivos
             if (!Int32.TryParse(dgvHashDin1.CurrentCell.Value.ToString(), out valor)) return;
             int i = dgvHashDin1.CurrentCell.RowIndex;
             var cS = h.leeCajon(Convert.ToInt64(dgvHashDin1.CurrentCell.Value));
+            long a = 0;
             for (int j = 0; cS != null && j < cS.Capacidad; j++)
             {
                 dgvHashDin2.Rows.Add(cS.Elementos[j].Cb, cS.Elementos[j].Ap);
+                a = cS.Elementos[j].Ap;
             }
             if (cS != null)
             {
@@ -165,6 +172,28 @@ namespace Archivos
         private void tabPage1_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void txtSig_MouseClick(object sender, MouseEventArgs e)
+        {
+            int valor = 0;
+            dgvHashDin2.Rows.Clear();
+            if (txtSig.Text == "" || txtSig.Text == "-1") { return; }
+            if (!Int32.TryParse(txtSig.Text, out valor)) return;
+            txtBIt.Text = "-1";
+            txtSig.Text = "-1";
+            var cS = h.leeCajon(valor);
+            long a = 0;
+            for (int j = 0; cS != null && j < cS.Capacidad; j++)
+            {
+                dgvHashDin2.Rows.Add(cS.Elementos[j].Cb, cS.Elementos[j].Ap);
+                a = cS.Elementos[j].Ap;
+            }
+            if (cS != null)
+            {
+                txtBIt.Text = cS.Bit.ToString();
+                txtSig.Text = cS.Sig.ToString();
+            }
         }
     }
 }

@@ -32,8 +32,9 @@
             this.insertaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.eliminaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.modificaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.dgVReg = new System.Windows.Forms.DataGridView();
             this.indicesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.dgVReg = new System.Windows.Forms.DataGridView();
+            this.importarRegistrosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgVReg)).BeginInit();
             this.SuspendLayout();
@@ -44,7 +45,8 @@
             this.insertaToolStripMenuItem,
             this.eliminaToolStripMenuItem,
             this.modificaToolStripMenuItem,
-            this.indicesToolStripMenuItem});
+            this.indicesToolStripMenuItem,
+            this.importarRegistrosToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(556, 24);
@@ -72,6 +74,13 @@
             this.modificaToolStripMenuItem.Text = "Modifica";
             this.modificaToolStripMenuItem.Click += new System.EventHandler(this.modificaToolStripMenuItem_Click);
             // 
+            // indicesToolStripMenuItem
+            // 
+            this.indicesToolStripMenuItem.Name = "indicesToolStripMenuItem";
+            this.indicesToolStripMenuItem.Size = new System.Drawing.Size(56, 20);
+            this.indicesToolStripMenuItem.Text = "Indices";
+            this.indicesToolStripMenuItem.Click += new System.EventHandler(this.indicesToolStripMenuItem_Click);
+            // 
             // dgVReg
             // 
             this.dgVReg.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
@@ -84,12 +93,12 @@
             this.dgVReg.Size = new System.Drawing.Size(556, 355);
             this.dgVReg.TabIndex = 1;
             // 
-            // indicesToolStripMenuItem
+            // importarRegistrosToolStripMenuItem
             // 
-            this.indicesToolStripMenuItem.Name = "indicesToolStripMenuItem";
-            this.indicesToolStripMenuItem.Size = new System.Drawing.Size(56, 20);
-            this.indicesToolStripMenuItem.Text = "Indices";
-            this.indicesToolStripMenuItem.Click += new System.EventHandler(this.indicesToolStripMenuItem_Click);
+            this.importarRegistrosToolStripMenuItem.Name = "importarRegistrosToolStripMenuItem";
+            this.importarRegistrosToolStripMenuItem.Size = new System.Drawing.Size(116, 20);
+            this.importarRegistrosToolStripMenuItem.Text = "Importar Registros";
+            this.importarRegistrosToolStripMenuItem.Click += new System.EventHandler(this.importarRegistrosToolStripMenuItem_Click);
             // 
             // VistaRegistros
             // 
@@ -117,5 +126,6 @@
         private System.Windows.Forms.DataGridView dgVReg;
         private System.Windows.Forms.ToolStripMenuItem modificaToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem indicesToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem importarRegistrosToolStripMenuItem;
     }
 }
