@@ -79,13 +79,13 @@ namespace Archivos
         {
             h.leePrincipal(h.Atributo.DirIndice);
             txtbitPrincipal.Text = h.Bit.ToString();
-            long a = 0;
+            string a = "";
             for (int i = 0; i < h.Principal.Count; i++)
             {
-                //if (a != h.Principal[i].Ap)
+                if (a != h.Principal[i].Cb.Substring(0, h.Bit))
                 {
                     dgvHashDin1.Rows.Add(h.Principal[i].Cb.ToString(), h.Principal[i].Ap.ToString());
-                    a = h.Principal[i].Ap;
+                    a = h.Principal[i].Cb.Substring(0, h.Bit);
                 }
             }
         }

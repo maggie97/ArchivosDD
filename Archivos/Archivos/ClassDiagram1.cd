@@ -9,12 +9,12 @@
         </TypeIdentifier>
       </Delegate>
     </NestedTypes>
-    <InheritanceLine Type="System.Windows.Forms.Form" ManuallyRouted="true" FixedFromPoint="true">
+    <InheritanceLine Type="System.Windows.Forms.Form" ManuallyRouted="true" FixedFromPoint="true" FixedToPoint="true">
       <Path>
         <Point X="12.125" Y="2.25" />
-        <Point X="12.125" Y="1.572" />
-        <Point X="11.625" Y="1.572" />
-        <Point X="11.625" Y="1.191" />
+        <Point X="12.125" Y="1.317" />
+        <Point X="12.125" Y="1.317" />
+        <Point X="12.125" Y="1.191" />
       </Path>
     </InheritanceLine>
     <TypeIdentifier>
@@ -39,7 +39,7 @@
       <Field Name="entidad" />
     </ShowAsAssociation>
   </Class>
-  <Class Name="Archivos.Atributo">
+  <Class Name="Archivos.Atributo" Collapsed="true">
     <Position X="3.25" Y="5.5" Width="1.5" />
     <AssociationLine Name="Ind" Type="Archivos.Controladores.Indice" ManuallyRouted="true" FixedFromPoint="true" FixedToPoint="true">
       <Path>
@@ -72,13 +72,13 @@
     </ShowAsCollectionAssociation>
   </Class>
   <Class Name="Archivos.Entidad" Collapsed="true">
-    <Position X="2.75" Y="3.5" Width="1.5" />
+    <Position X="2.25" Y="3.75" Width="1.5" />
     <AssociationLine Name="Sec" Type="Archivos.Controladores.Secundario" ManuallyRouted="true">
       <Path>
-        <Point X="3.312" Y="3.5" />
-        <Point X="3.312" Y="3.323" />
-        <Point X="3.76" Y="3.323" Type="JumpStart" />
-        <Point X="3.927" Y="3.323" Type="JumpEnd" />
+        <Point X="2.812" Y="3.75" />
+        <Point X="2.812" Y="3.323" />
+        <Point X="3.26" Y="3.323" Type="JumpStart" />
+        <Point X="3.427" Y="3.323" Type="JumpEnd" />
         <Point X="4.382" Y="3.323" Type="JumpStart" />
         <Point X="4.583" Y="3.323" Type="JumpEnd" />
         <Point X="6.167" Y="3.323" Type="JumpStart" />
@@ -149,8 +149,8 @@
     <InheritanceLine Type="System.Windows.Forms.Form" FixedFromPoint="true">
       <Path>
         <Point X="12.125" Y="2.25" />
-        <Point X="12.125" Y="1.572" />
-        <Point X="9.25" Y="1.572" />
+        <Point X="12.125" Y="1.566" />
+        <Point X="9.25" Y="1.566" />
         <Point X="9.25" Y="1.191" />
       </Path>
     </InheritanceLine>
@@ -168,20 +168,23 @@
       <Path>
         <Point X="10.562" Y="2.691" />
         <Point X="10.562" Y="5.121" />
-        <Point X="8.372" Y="5.121" Type="JumpStart" />
-        <Point X="8.206" Y="5.121" Type="JumpEnd" />
-        <Point X="7.849" Y="5.121" Type="JumpStart" />
-        <Point X="7.682" Y="5.121" Type="JumpEnd" />
-        <Point X="6.529" Y="5.121" Type="JumpStart" />
-        <Point X="6.362" Y="5.121" Type="JumpEnd" />
-        <Point X="5.993" Y="5.121" Type="JumpStart" />
-        <Point X="5.827" Y="5.121" Type="JumpEnd" />
+        <Point X="8.998" Y="5.121" Type="JumpStart" />
+        <Point X="8.832" Y="5.121" Type="JumpEnd" />
+        <Point X="7.786" Y="5.121" Type="JumpStart" />
+        <Point X="7.62" Y="5.121" Type="JumpEnd" />
+        <Point X="6.445" Y="5.121" Type="JumpStart" />
+        <Point X="6.278" Y="5.121" Type="JumpEnd" />
+        <Point X="5.951" Y="5.121" Type="JumpStart" />
+        <Point X="5.785" Y="5.121" Type="JumpEnd" />
         <Point X="4.625" Y="5.121" />
-        <Point X="4.625" Y="3.953" />
-        <Point X="4.583" Y="3.953" Type="JumpStart" />
-        <Point X="4.382" Y="3.953" Type="JumpEnd" />
-        <Point X="4.25" Y="3.953" />
+        <Point X="4.625" Y="4.203" />
+        <Point X="4.583" Y="4.203" Type="JumpStart" />
+        <Point X="4.382" Y="4.203" Type="JumpEnd" />
+        <Point X="3.75" Y="4.203" />
       </Path>
+      <MemberNameLabel ManuallyPlaced="true">
+        <Position X="-0.025" Y="0.304" />
+      </MemberNameLabel>
     </AssociationLine>
     <AssociationLine Name="h" Type="Archivos.Controladores.HashDinamico">
       <MemberNameLabel ManuallyPlaced="true">
@@ -202,7 +205,7 @@
     </ShowAsCollectionAssociation>
   </Class>
   <Class Name="Archivos.VistaRegistros" Collapsed="true">
-    <Position X="9.75" Y="6" Width="1.5" />
+    <Position X="9.75" Y="5.75" Width="1.5" />
     <NestedTypes>
       <Delegate Name="Archivos.VistaRegistros.Actualiza" Collapsed="true">
         <TypeIdentifier>
@@ -213,10 +216,15 @@
     <InheritanceLine Type="System.Windows.Forms.Form" ManuallyRouted="true" FixedFromPoint="true" FixedToPoint="true">
       <Path>
         <Point X="11.812" Y="2.941" />
-        <Point X="11.812" Y="6.437" />
-        <Point X="11.25" Y="6.437" />
+        <Point X="11.812" Y="6.187" />
+        <Point X="11.25" Y="6.187" />
       </Path>
     </InheritanceLine>
+    <AssociationLine Name="entidad" Type="Archivos.Entidad">
+      <MemberNameLabel ManuallyPlaced="true">
+        <Position X="-0.001" Y="-0.29" />
+      </MemberNameLabel>
+    </AssociationLine>
     <TypeIdentifier>
       <HashCode>AQBRAAABgCAAAEBCAACAIAAKAAAAAAhAAgAAACQAAAA=</HashCode>
       <FileName>VistaRegistros.cs</FileName>
