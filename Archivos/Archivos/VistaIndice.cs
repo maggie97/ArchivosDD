@@ -79,7 +79,8 @@ namespace Archivos
         {
             h.leePrincipal(h.Atributo.DirIndice);
             txtbitPrincipal.Text = h.Bit.ToString();
-            string a = "";
+            //dgvHashDin1.Rows.Add(h.Principal[0].Cb.ToString(), h.Principal[0].Ap.ToString());
+            string a = "-1";
             for (int i = 0; i < h.Principal.Count; i++)
             {
                 if (a != h.Principal[i].Cb.Substring(0, h.Bit))
